@@ -1,0 +1,13 @@
+.profile__user-name {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 48px;
+  min-width: 294px;
+  color: #ffffff;
+  grid-area: name;
+  max-height: 39px;
+}
