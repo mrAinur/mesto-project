@@ -1,0 +1,18 @@
+.popup__user-name {
+  margin: 54px auto 0 auto;
+  padding: 0 0 10px 0;
+  display: flex;
+  min-width: 358px;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  font-family: inherit;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+.popup__user-name:focus {
+  outline: none;
+}

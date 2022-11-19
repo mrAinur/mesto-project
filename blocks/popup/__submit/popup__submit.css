@@ -1,0 +1,18 @@
+.popup__submit {
+  margin: 48px auto 37px auto;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 358px;
+  max-height: 50px;
+  border: 0;
+  background-color: #000;
+  transition: 0.3s;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.popup__submit:hover {
+  opacity: 0.8;
+}
