@@ -2,7 +2,7 @@
   margin: 30px auto 0 auto;
   padding: 0 0 13px 0;
   display: flex;
-  max-width: 358px;
+  min-width: 358px;
   border: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   font-family: "Inter", "Arial", "Helvetica", sans-serif;
@@ -17,8 +17,15 @@
   outline: none;
 }
 
+@media screen and (max-width: 1023px) {
+  .popup__user-job {
+    min-width: 290px;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .popup__user-job {
     padding-bottom: 10px;
+    min-width: 238px;
   }
 }

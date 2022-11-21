@@ -8,10 +8,12 @@
   line-height: 22px;
   text-align: center;
   color: #ffffff;
+  background-color: rgba(255, 255, 255, 0);
+  border: 0;
 }
 
 @media screen and (max-width: 1023px) {
-  .popup__submit {
+  .popup__paragraph {
     font-size: 16px;
     line-height: 20px;
   }

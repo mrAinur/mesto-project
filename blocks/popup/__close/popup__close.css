@@ -9,7 +9,7 @@
   background-image: url(../../../images/Close-Icon.svg);
   background-size: contain;
   background-repeat: none;
-  background-color: #000;
+  background-color: rgba(0, 0, 0, 0);
   transition: 0.3s;
   cursor: pointer;
   z-index: 1;

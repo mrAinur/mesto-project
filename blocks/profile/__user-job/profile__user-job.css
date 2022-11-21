@@ -7,8 +7,10 @@
   font-size: 18px;
   line-height: 22px;
   color: #ffffff;
-  max-height: 18px;
   grid-area: job;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 1023px) {
@@ -22,7 +24,6 @@
   .profile__user-job {
     font-size: 14px;
     line-height: 17px;
-    max-height: 14px;
     text-align: center;
   }
 }

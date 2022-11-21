@@ -9,9 +9,11 @@
 @import url(../blocks/element/element.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/cards/cards.css);
 /*Импорт элементов*/
 @import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__user/profile__user.css);
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__user-name/profile__user-name.css);
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
@@ -25,6 +27,7 @@
 @import url(../blocks/element/__text/element__text.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__paragraph/popup__paragraph.css);
 @import url(../blocks/popup/__submit/popup__submit.css);
 @import url(../blocks/popup/__title/popup__title.css);

@@ -3,9 +3,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 25px 15px 31px 21px;
+  padding: 22px 15px 28px 21px;
   max-width: 246px;
-  max-height: 23px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
