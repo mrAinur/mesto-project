@@ -1,6 +1,6 @@
 .profile__info {
-  margin: 0;
-  padding: 0 0 0 30px;
+  margin: 0 0 0 30px;
+  padding: 0;
   min-width: 336px;
   display: grid;
   grid-template-columns: repeat(2, fit-content(400px));
@@ -8,6 +8,22 @@
   grid-template-areas:
     "name button"
     "job job";
-    gap: 16px 18px;
-    align-items: end;
+  gap: 16px 18px;
+  align-items: end;
+}
+
+@media screen and (max-width: 1023px) {
+  .profile__info {
+    min-width: 300px;
+    margin-left: 20px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .profile__info {
+    margin: 26px 0 0 0;
+    min-width: 282px;
+    gap: 14px 10px;
+    justify-content: center;
+  }
 }

@@ -11,3 +11,22 @@
   grid-area: name;
   max-height: 39px;
 }
+
+@media screen and (max-width: 1023px) {
+  .profile__user-name {
+    font-size: 34px;
+    line-height: 40px;
+    min-width: 180px;
+    max-height: 32px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .profile__user-name {
+    font-size: 27px;
+    line-height: 33px;
+    min-width: 189px;
+    max-height: 26px;
+    margin-left: 25px;
+  }
+}

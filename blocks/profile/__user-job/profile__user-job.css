@@ -10,3 +10,19 @@
   max-height: 18px;
   grid-area: job;
 }
+
+@media screen and (max-width: 1023px) {
+  .profile__user-job {
+    font-size: 16px;
+    line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .profile__user-job {
+    font-size: 14px;
+    line-height: 17px;
+    max-height: 14px;
+    text-align: center;
+  }
+}

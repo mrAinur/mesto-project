@@ -16,6 +16,6 @@
   opacity: 0.5;
 }
 
-.element__heart:active{
-    background-image: url('../../../images/heart-active.svg');
+.element__heart:active {
+  background-image: url("../../../images/heart-active.svg");
 }

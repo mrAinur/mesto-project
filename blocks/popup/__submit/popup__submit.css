@@ -16,3 +16,16 @@
 .popup__submit:hover {
   opacity: 0.8;
 }
+
+@media screen and (max-width: 1023px) {
+  .popup__submit {
+    min-width: 290px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .popup__submit {
+    margin-top: 45px;
+    min-width: 238px;
+  }
+}
