@@ -1,28 +1,5 @@
 .popup {
   margin: 0;
   padding: 0;
-  position: fixed;
-  top: 0;
-  min-width: 1280px;
-  min-height: 100%;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-}
-
-.popup::before {
-  content: "";
-  opacity: 0.5;
-  display: flex;
-  min-width: 100%;
-  min-height: 100%;
-  position: absolute;
-  background-color: #000;
-}
-
-@media screen and (max-width: 1279px) {
-  .popup {
-    min-width: 100%;
-  }
+  opacity: 0;
 }

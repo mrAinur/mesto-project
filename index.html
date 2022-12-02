@@ -28,62 +28,20 @@
             </section>
             <section class="cards">
                 <ul class="elements">
-                    <li class="element">
-                        <img src="./images/karachaevsk.jpg" alt="Фотография пользователя" class="element__place-img">
-                        <div class="element__text">
-                            <h2 class="element__place-name">Карачаевск</h2>
-                            <button type="button" class="element__heart"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img src="./images/elbrus.jpg" alt="Фотография пользователя" class="element__place-img">
-                        <div class="element__text">
-                            <h2 class="element__place-name">Гора Эльбрус</h2>
-                            <button type="button" class="element__heart"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img src="./images/dombay.jpg" alt="Фотография пользователя" class="element__place-img">
-                        <div class="element__text">
-                            <h2 class="element__place-name">Домбай</h2>
-                            <button type="button" class="element__heart"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img src="./images/elbrus.jpg" alt="Фотография пользователя" class="element__place-img">
-                        <div class="element__text">
-                            <h2 class="element__place-name">Гора Эльбрус</h2>
-                            <button type="button" class="element__heart"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img src="./images/dombay.jpg" alt="Фотография пользователя" class="element__place-img">
-                        <div class="element__text">
-                            <h2 class="element__place-name">Домбай</h2>
-                            <button type="button" class="element__heart"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img src="./images/karachaevsk.jpg" alt="Фотография пользователя" class="element__place-img">
-                        <div class="element__text">
-                            <h2 class="element__place-name">Карачаево-Черкесская Республика</h2>
-                            <button type="button" class="element__heart"></button>
-                        </div>
-                    </li>
                 </ul>
             </section>
         </main>
         <footer class="footer">
             <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
         </footer>
-        <div class="popup popup_opened">
+        <div class="popup popup__edit-profile">
             <div class="popup__container">
-                <form name="edit-form" class="popup__form">
+                <form name="edit-form" class="popup__form-profile">
                     <h2 class="popup__title">Редактировать профиль</h2>
                     <fieldset class="popup__item">
-                        <input type="text" name="user-name" placeholder="Имя" class="popup__user-info"
+                        <input type="text" name="user-name" placeholder="Имя" class="popup__name-info"
                             value="Жак-Ив Кусто">
-                        <input type="text" name="user-job" placeholder="О себе" class="popup__user-info"
+                        <input type="text" name="user-job" placeholder="О себе" class="popup__job-info"
                             value="Исследователь океана">
                     </fieldset>
                     <fieldset class="popup__submit">
@@ -93,7 +51,32 @@
                 <button type="button" class="popup__close"></button>
             </div>
         </div>
+        <div class="popup popup__new-place">
+            <div class="popup__container">
+                <form name="edit-form" class="popup__form-place">
+                    <h2 class="popup__title">Новое место</h2>
+                    <fieldset class="popup__item">
+                        <input type="text" name="user-name" placeholder="Название" class="popup__place-info"
+                            value="">
+                        <input type="text" name="user-job" placeholder="Ссылка на картинку" class="popup__place-link"
+                            value="">
+                    </fieldset>
+                    <fieldset class="popup__submit">
+                        <button type="submit" class="popup__paragraph">Создать</button>
+                    </fieldset>
+                </form>
+                <button type="button" class="popup__close"></button>
+            </div>
+        </div>
+        <div class="popup popup__view-card">
+            <div class="popup__place-card">
+                <button type="button" class="popup__close"></button>
+                <img src="" alt="фото с фотокарточки" class="popup__image">
+                <p class="popup__place-name"></p>
+            </div>
+        </div>
     </div>
+    <script src="./index.js"></script>
 </body>
 
 </html>
