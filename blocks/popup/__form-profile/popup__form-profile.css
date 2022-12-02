@@ -11,13 +11,13 @@
 }
 
 @media screen and (max-width: 1023px) {
-  .popup__form {
+  .popup__form-profile {
     min-width: 350px;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .popup__form {
+  .popup__form-profile {
     min-width: 282px;
   }
 }

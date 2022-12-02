@@ -1,4 +1,4 @@
-let initialCards = [
+const initialCards = [
   {
     name: "Архыз",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
@@ -109,7 +109,7 @@ addCards(initialCards);
 /*Реализация добавления новых карточек*/
 const newCardForm = document.querySelector(".popup__form-place");
 const namePlaceInput = newCardForm.querySelector(".popup__place-info");
-const linkPlaceInput = newCardForm.querySelector(".popup__place-link");
+const linkPlaceInput = newCardForm.querySelector(".popup__place-link"); //сделать обязательные поля ввода 
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет

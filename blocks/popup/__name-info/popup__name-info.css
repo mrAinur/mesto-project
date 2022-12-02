@@ -16,8 +16,8 @@
   outline: none;
 }
 
-.popup__name-info:last-of-type{
-    padding-top: 30px;
+.popup__name-info:last-of-type {
+  padding-top: 30px;
 }
 
 @media screen and (max-width: 1023px) {
@@ -32,7 +32,7 @@
     padding-bottom: 10px;
     min-width: 238px;
   }
-  .popup__name-info:last-of-type{
+  .popup__name-info:last-of-type {
     padding-top: 30px;
-}
+  }
 }
