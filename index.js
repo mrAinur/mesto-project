@@ -185,16 +185,8 @@ function NewCard(evt) {
   card
     .querySelector(".element__place-img")
     .addEventListener("click", function (evt) {
-      const cardInfo = evt.target; //Записываем элемент по которому произошёл клик
-      console.log(cardInfo); //проверяем верность записи
-      const popupCard = document.querySelector(".popup__card");
-      popupCard.classList.add("popup_opened"); //открываем попап
-      const popupImg = popupCard.querySelector(".popup__image"); //находим в попапе нужный нам класс
-      popupImg.src = cardInfo.src; //присваиваем значение картинки в попап
-      const cardDiv = cardInfo.parentElement;
-      const cardName =  cardDiv.querySelector(".element__place-name")//находим у ближайшего соседа от кликнутого элемента нужный нам элемент по классу;
-      const popupName = popupCard.querySelector(".popup__place-name"); //находим в попапе элемент для записи названия
-      popupName.textContent = cardName.textContent;
+      const cardInfo = evt.target; 
+      openCard(cardInfo);
     });
   /*Реализация лайка*/
   card
@@ -210,16 +202,20 @@ function NewCard(evt) {
     cardItem.remove();
   });
 
-  cardsOpen();
-
   popupNewCard.classList.remove("popup_opened");
 }
 
 // Прикрепляем обработчик к форме
 // он будет следить за событием “submit” - «отправка»
 newCardForm.addEventListener("submit", NewCard);
-
-function cardsOpen() {
-  cardsPlace = document.querySelectorAll(".element");
-  return cardsPlace;
+function openCard(evt) {
+  const cardInfo = evt; //проверяем верность записи
+  const popupCard = document.querySelector(".popup__card");
+  const popupImg = popupCard.querySelector(".popup__image"); //находим в попапе нужный нам класс
+  popupImg.src = cardInfo.src; //присваиваем значение картинки в попап
+  const cardDiv = cardInfo.parentElement;
+  const cardName =  cardDiv.querySelector(".element__place-name")//находим у ближайшего соседа от кликнутого элемента нужный нам элемент по классу;
+  const popupName = popupCard.querySelector(".popup__place-name"); //находим в попапе элемент для записи названия
+  popupName.textContent = cardName.textContent;
+  openPopup(popupCard); //открываем попап
 }
