@@ -107,7 +107,7 @@ function handleFormSubmit(evt) {
   userName.textContent = nameValue;
   userJob.textContent = jobValue;
   // Вставьте новые значения с помощью textContent
-  popupProfile.classList.remove("popup__edit-profile_opened");
+  popupProfile.classList.remove("popup_opened");
 }
 
 // Прикрепляем обработчик к форме:
