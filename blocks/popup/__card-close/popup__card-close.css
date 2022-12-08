@@ -1,0 +1,39 @@
+.popup__card-close {
+  margin: 0;
+  padding: 0;
+  min-width: 32px;
+  min-height: 32px;
+  background-image: url(../../../images/Close-Icon.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0);
+  transition: 0.3s;
+  cursor: pointer;
+  z-index: 1;
+  border: 0;
+  position: absolute;
+  top: -40px;
+  right: -40px;
+}
+
+.popup__card-close:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 1023px) {
+  .popup__card-close {
+    min-width: 25px;
+    min-height: 25px;
+    top: -33px;
+    right: -33px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .popup__card-close {
+    min-width: 20px;
+    min-height: 20px;
+    top: -36px;
+    right: 0;
+  }
+}

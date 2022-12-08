@@ -12,4 +12,9 @@
   background-repeat: no-repeat;
   border: none;
   cursor: pointer;
+  transition: 0.3s;
+}
+
+.element__delete:hover{
+  opacity: 0.6;
 }
