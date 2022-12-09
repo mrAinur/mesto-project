@@ -22,16 +22,18 @@
 
 @media screen and (max-width: 1023px) {
   .popup__close {
-    margin: -35px 0 0 3px;
     min-width: 25px;
     min-height: 25px;
+    top: -33px;
+    right: -33px;
   }
 }
 
 @media screen and (max-width: 767px) {
   .popup__close {
-    margin: -36px 0 0 -20px;
     min-width: 20px;
     min-height: 20px;
+    top: -36px;
+    right: 0;
   }
 }

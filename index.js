@@ -34,8 +34,8 @@ const popupNewCard = document.querySelector(".popup__new-place");
 
 const popupProfileOpen = document.querySelector(".profile__edit-button"); //Конпка для открытия попапа профиля
 const popupProfileClose = popupProfile.querySelector(".popup__close"); //Кнопка закрытия попапа профиля
-let userName = popupProfile.querySelector(".popup__name-info"); //Находим инпуты
-let userJob = popupProfile.querySelector(".popup__job-info");
+const userName = popupProfile.querySelector(".popup__name-info"); //Находим инпуты
+const userJob = popupProfile.querySelector(".popup__job-info");
 
 const popupCardAddOpen = document.querySelector(".profile__add-button"); //Конпка для открытия попапа добавления элемента
 const popupCardClose = popupNewCard.querySelector(".popup__close"); //Кнопка закрытия попапа добавления элемента
@@ -54,7 +54,7 @@ const jobValue = formElement.querySelector(".popup__job-info");
 
 //Получите значение полей jobInput и nameInput из свойства value
 const userNameProfile = document.querySelector(".profile__user-name");
-const Profile = document.querySelector(".profile__user-job");
+const userJobProfile = document.querySelector(".profile__user-job");
 
 //Находим форму карточек и копируем в переменную
 let cards = document.querySelector(".elements");
@@ -67,8 +67,7 @@ const popupCard = document.querySelector(".popup__card");
 /*Реализация добавления новых карточек*/
 const newCardForm = document.querySelector(".popup__form-place");
 const namePlaceInput = newCardForm.querySelector(".popup__place-info");
-const linkPlaceInput = newCardForm.querySelector(".popup__place-link"); 
-
+const linkPlaceInput = newCardForm.querySelector(".popup__place-link");
 
 /*Реализация всех функций*/
 
@@ -79,8 +78,8 @@ function openPopup(item) {
 
 /*Добавляем работу кнопки для открытия попапа профиля*/
 popupProfileOpen.addEventListener("click", function () {
-  userName = userName.value;
-  userJob = userJob.value;
+  userName.value = userNameProfile.textContent;
+  userJob.value = userJobProfile.textContent;
   openPopup(popupProfile);
 });
 
@@ -106,7 +105,6 @@ popups.forEach((popup) => {
   });
 });
 
-
 // Обработчик «отправки» формы, хотя пока она никуда отправляться не будет
 // редактирование профиля
 function handleFormSubmit(evt) {
@@ -114,7 +112,7 @@ function handleFormSubmit(evt) {
   // Выберите элементы, куда должны быть вставлены значения полей
 
   userNameProfile.textContent = nameValue.value;
-  Profile.textContent = jobValue.value;
+  userJobProfile.textContent = jobValue.value;
   // Вставьте новые значения с помощью textContent
 
   closePopup(popupProfile);
@@ -131,11 +129,11 @@ initialCards.forEach(function (item) {
 
 /*Создание новой карточки*/
 function createCard(item) {
-    const card = cardElement.querySelector(".element").cloneNode(true);
-    card.querySelector(".element__place-img").src = item.link;
-    card.querySelector(".element__place-img").alt = item.name;
-    card.querySelector(".element__place-name").textContent = item.name;
-    cards.prepend(card);
+  const card = cardElement.querySelector(".element").cloneNode(true);
+  card.querySelector(".element__place-img").src = item.link;
+  card.querySelector(".element__place-img").alt = item.name;
+  card.querySelector(".element__place-name").textContent = item.name;
+  cards.prepend(card);
   /*Реализация кнопки лайка*/
   card
     .querySelector(".element__heart")
@@ -154,9 +152,10 @@ function createCard(item) {
   card
     .querySelector(".element__place-img")
     .addEventListener("click", function () {
-      placeCard.classList.add("popup_opened");
       popupImg.src = item.link;
+      popupImg.alt = item.name;
       popupName.textContent = item.name;
+      openPopup(placeCard);
     });
   return cardElement;
 }
@@ -172,16 +171,5 @@ newCardForm.addEventListener("submit", function (evt) {
   };
   createCard(newCard);
   closePopup(popupNewCard);
-  namePlaceInput.value = "";
-  linkPlaceInput.value = "";
+  evt.target.reset();
 });
-
-//Открытие карточек в попапе
-function openCard(evt) {
-  const cardInfo = evt; 
-  popupImg.src = cardInfo.src; //присваиваем значение картинки в попап
-  const cardDiv = cardInfo.closest;
-  const cardName = cardDiv.querySelector(".element__place-name"); //находим у ближайшего соседа от кликнутого элемента нужный нам элемент по классу;
-  popupName.textContent = cardName.textContent;
-  openPopup(placeCard); //открываем попап
-}
