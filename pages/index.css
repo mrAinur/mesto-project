@@ -45,8 +45,6 @@
 @import url(../blocks/popup/__place-link/popup__place-link.css);
 @import url(../blocks/popup/__place-info/popup__place-info.css);
 @import url(../blocks/popup/__card/popup__card.css);
-@import url(../blocks/popup/__card-close/popup__card-close.css);
 /*импорт модификаторов*/
-@import url(../blocks/popup/__edit-profile/_opened/popup__edit-profile_opened.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/element/__heart/_active/element__heart_active.css);
