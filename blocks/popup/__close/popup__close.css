@@ -1,8 +1,8 @@
 .popup__close {
-  margin: -40px 0 0 8px;
+  margin: 0;
   padding: 0;
   min-width: 32px;
-  max-height: 32px;
+  min-height: 32px;
   background-image: url(../../../images/Close-Icon.svg);
   background-size: contain;
   background-repeat: no-repeat;
@@ -11,6 +11,9 @@
   cursor: pointer;
   z-index: 1;
   border: 0;
+  position: absolute;
+  top: -40px;
+  right: -40px;
 }
 
 .popup__close:hover {
@@ -21,7 +24,7 @@
   .popup__close {
     margin: -35px 0 0 3px;
     min-width: 25px;
-    max-height: 25px;
+    min-height: 25px;
   }
 }
 
@@ -29,6 +32,6 @@
   .popup__close {
     margin: -36px 0 0 -20px;
     min-width: 20px;
-    max-height: 20px;
+    min-height: 20px;
   }
 }
