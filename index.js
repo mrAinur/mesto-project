@@ -57,11 +57,11 @@ const userNameProfile = document.querySelector(".profile__user-name");
 const userJobProfile = document.querySelector(".profile__user-job");
 
 //Находим форму карточек и копируем в переменную
-let cards = document.querySelector(".elements");
+const cards = document.querySelector(".elements");
 const cardElement = document.querySelector("#element").content;
 
 /*Поиск всех карт*/
-let cardsPlace = document.querySelectorAll(".element");
+const cardsPlace = document.querySelectorAll(".element");
 const popupCard = document.querySelector(".popup__card");
 
 /*Реализация добавления новых карточек*/
@@ -122,18 +122,13 @@ function handleFormSubmit(evt) {
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener("submit", handleFormSubmit);
 
-/*Добавление карточек*/
-initialCards.forEach(function (item) {
-  createCard(item);
-});
-
 /*Создание новой карточки*/
 function createCard(item) {
   const card = cardElement.querySelector(".element").cloneNode(true);
   card.querySelector(".element__place-img").src = item.link;
   card.querySelector(".element__place-img").alt = item.name;
   card.querySelector(".element__place-name").textContent = item.name;
-  cards.prepend(card);
+  
   /*Реализация кнопки лайка*/
   card
     .querySelector(".element__heart")
@@ -157,19 +152,32 @@ function createCard(item) {
       popupName.textContent = item.name;
       openPopup(placeCard);
     });
-  return cardElement;
+  return card;
 }
+
+/*Добавление карточек*/
+function makeCards(){
+  initialCards.forEach(function (item) {
+    cards.prepend(createCard(item))
+  });
+  }
+  makeCards();
 
 // Обработчик «отправки» формы, хотя пока она никуда отправляться не будет, Новая карта
 // Прикрепляем обработчик к форме
 // он будет следить за событием “submit” - «отправка»
 newCardForm.addEventListener("submit", function (evt) {
   evt.preventDefault();
-  let newCard = {
+  const newCard = {
     name: namePlaceInput.value,
     link: linkPlaceInput.value,
   };
-  createCard(newCard);
+  renderCard(newCard);
   closePopup(popupNewCard);
   evt.target.reset();
 });
+
+/*Вставка новой карточки в Дом*/
+function renderCard(item) {
+  cards.prepend(createCard(item));
+}
