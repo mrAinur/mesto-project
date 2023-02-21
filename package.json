@@ -1,0 +1,19 @@
+{
+  "name": "mesto-project",
+  "version": "0.0.1",
+  "description": "Здесь вы можете выкладывать свои фотографии красивых мест. Также можете\r поделиться впечатлениями и мечтами.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrAinur/mesto-project.git"
+  },
+  "author": "Ainur Zaripov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrAinur/mesto-project/issues"
+  },
+  "homepage": "https://github.com/mrAinur/mesto-project#readme"
+}
