@@ -45,6 +45,12 @@
 @import url(../src/blocks/popup/__place-link/popup__place-link.css);
 @import url(../src/blocks/popup/__place-info/popup__place-info.css);
 @import url(../src/blocks/popup/__card/popup__card.css);
+@import url(../src/blocks/popup/__error/popup__error.css);
+@import url(../src/blocks/popup/__input/popup__input.css);
 /*импорт модификаторов*/
 @import url(../src/blocks/popup/_opened/popup_opened.css);
 @import url(../src/blocks/element/__heart/_active/element__heart_active.css);
+@import url(../src/blocks/popup/__error/_active/popup__error_active.css);
+@import url(../src/blocks/popup/__input/_type/popup__input_type_error.css);
+@import url(../src/blocks/popup/__paragraph/_inactive/popup__paragraph_inactive.css);
+@import url(../src/blocks/popup/__submit/_inactive/popup__submit_inactive.css);

@@ -36,11 +36,31 @@
         </footer>
         <div class="popup popup__edit-profile">
             <div class="popup__container">
-                <form name="edit-profile" class="popup__form-profile">
+                <form name="edit-profile" class="form popup__form-profile" novalidate>
                     <h2 class="popup__title">Редактировать профиль</h2>
                     <fieldset class="popup__item">
-                        <input type="text" name="user-name" placeholder="Имя" class="popup__name-info" required>
-                        <input type="text" name="user-job" placeholder="О себе" class="popup__job-info" required>
+                        <input 
+                        id="user-name"
+                        pattern="^[a-zA-Zа-яА-ЯёЁ0-9\s\-]+$"
+                        data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+                        minlength="2"
+                        maxlength="40"
+                        type="text" 
+                        name="user-name" 
+                        placeholder="Имя" 
+                        class="popup__name-info popup__input" 
+                        required>
+                        <span class="user-name-error popup__error"></span>
+                        <input 
+                        id="user-job"
+                        type="text" 
+                        minlength="2"
+                        maxlength="200"
+                        name="user-job" 
+                        placeholder="О себе" 
+                        class="popup__job-info popup__input" 
+                        required>
+                        <span class="user-job-error popup__error"></span>
                     </fieldset>
                     <fieldset class="popup__submit">
                         <button type="submit" class="popup__paragraph">Сохранить</button>
@@ -51,13 +71,30 @@
         </div>
         <div class="popup popup__new-place">
             <div class="popup__container">
-                <form name="add-place" class="popup__form-place">
+                <form name="add-place" class="form popup__form-place" novalidate>
                     <h2 class="popup__title">Новое место</h2>
                     <fieldset class="popup__item">
-                        <input type="text" name="user-name" placeholder="Название" class="popup__place-info" value=""
-                            required>
-                        <input type="text" name="user-job" placeholder="Ссылка на картинку" class="popup__place-link"
-                            value="" required>
+                        <input 
+                        id="user-name"
+                        pattern="^[a-zA-Zа-яА-ЯёЁ0-9\s\-]+$"
+                        data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+                        minlength="2"
+                        maxlength="30"
+                        type="text" 
+                        name="user-name" 
+                        placeholder="Название" 
+                        class="popup__place-info popup__input" 
+                        value=""
+                        required>
+                        <span class="user-name-error popup__error"></span>
+                        <input 
+                        type="url" 
+                        name="user-job" 
+                        placeholder="Ссылка на картинку" 
+                        class="popup__place-link popup__input"
+                        value="" 
+                        required>
+                        <span class="user-job-error popup__error"></span>
                     </fieldset>
                     <fieldset class="popup__submit">
                         <button type="submit" class="popup__paragraph">Создать</button>
