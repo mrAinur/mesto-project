@@ -9,7 +9,7 @@ const infoForValidate = {
 
 const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.add(infoForValidate["inputErrorClass"]);
+    inputElement.classList.add(infoForValidate["inputErrorClass"]); //не понял ошибки, я же беру здесь селектор из объекта валидации
     errorElement.textContent = errorMessage;
     errorElement.classList.add("popup__error_active");
 };
@@ -65,6 +65,11 @@ const setEventListeners = (formElement) => {
             toggleButtonState(inputList, buttonElement);
         });
     });
+    formElement.addEventListener('reset', () => { 
+        setTimeout(() => {  
+            toggleButtonState(inputList, buttonElement), 0
+        })
+    })
 };
 
 const enableValidation = () => {
