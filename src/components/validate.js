@@ -11,16 +11,16 @@ const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(infoForValidate["inputErrorClass"]);
     errorElement.textContent = errorMessage;
-    errorElement.classList.add('popup__error_active');
-  };
-  
-  const hideInputError = (formElement, inputElement) => {
+    errorElement.classList.add("popup__error_active");
+};
+
+const hideInputError = (formElement, inputElement) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.remove(infoForValidate["inputErrorClass"]);
-    errorElement.classList.remove('popup__error_active');
-    errorElement.textContent = '';
-  };
-  
+    errorElement.classList.remove("popup__error_active");
+    errorElement.textContent = "";
+};
+
 
 const checkInputValidity = (formElement, inputElement) => {
     if (inputElement.validity.patternMismatch) {
@@ -77,4 +77,4 @@ const enableValidation = () => {
     });
 };
 
-enableValidation();
+export { enableValidation }

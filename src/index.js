@@ -1,7 +1,11 @@
-import {popups, popupNewCard, popupProfile, popupProfileOpen, userName, userJob, popupCardAddOpen, formElement, userNameProfile, userJobProfile, openPopup, closePopup, handleFormSubmit} from "./components/modal.js";
-import {newCardForm, namePlaceInput, linkPlaceInput, makeCards, renderCard} from "./components/card.js";
+import "./index.css";
+
+import { popups, popupNewCard, popupProfile, popupProfileOpen, userName, userJob, popupCardAddOpen, formElement, userNameProfile, userJobProfile, openPopup, closePopup, handleFormSubmit } from "./components/modal.js";
+import { newCardForm, namePlaceInput, linkPlaceInput, makeCards, renderCard } from "./components/card.js";
+import { enableValidation } from "./components/validate.js";
 
 makeCards();
+enableValidation();
 
 /*Добавляем работу кнопки для открытия попапа профиля*/
 popupProfileOpen.addEventListener("click", function () {
@@ -19,21 +23,26 @@ formElement.addEventListener("submit", handleFormSubmit);
 
 /*Добавляем реализацию закрытия попапов (и вправду удобно)*/
 popups.forEach((popup) => {
-  popup.addEventListener("mousedown", (evt) => {
-      if (evt.target.classList.contains("popup_opened")) {
-          closePopup(popup);
-      }
-      if (evt.target.classList.contains("popup__close")) {
-          closePopup(popup);
-      }
+  popup.addEventListener("click", (evt) => {
+    if (evt.target.classList.contains("popup_opened")) {
+      closePopup(popup);
+    }
+    if (evt.target.classList.contains("popup__close")) {
+      closePopup(popup);
+    }
+  });
+  document.addEventListener("keydown", (evt) => {
+    if (evt.key === "Escape") {
+      closePopup(popup);
+    }
   });
 });
 
 newCardForm.addEventListener("submit", function (evt) {
   evt.preventDefault();
   const newCard = {
-      name: namePlaceInput.value,
-      link: linkPlaceInput.value,
+    name: namePlaceInput.value,
+    link: linkPlaceInput.value,
   };
   renderCard(newCard);
   closePopup(popupNewCard);

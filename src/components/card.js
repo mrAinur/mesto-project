@@ -1,27 +1,37 @@
+import { openPopup } from "./modal.js";
+
+import Arxyz from "../images/arkhyz.jpg";
+import Elbrus from "../images/elbrus.jpg";
+import Dombay from "../images/dombay.jpg";
+import Ivanovo from "../images/ivanovo.jpg";
+import Karachaevsk from "../images/karachaevsk.jpg";
+import Baikal from "../images/baikal.jpg";
+
+
 const initialCards = [
     {
         name: "Архыз",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
+        link: Arxyz,
     },
     {
-        name: "В ожидании нового года",
-        link: "https://images.unsplash.com/photo-1577046848358-4623c0859b8a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+        name: "Эльбрус",
+        link: Elbrus,
+    },
+    {
+        name: "Домбай",
+        link: Dombay,
     },
     {
         name: "Иваново",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+        link: Ivanovo,
     },
     {
-        name: "Камчатка",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-    },
-    {
-        name: "Космос",
-        link: "https://images.unsplash.com/photo-1669824137550-7bb7e1a55c9f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1998&q=80",
+        name: "Карачаевск",
+        link: Karachaevsk,
     },
     {
         name: "Байкал",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+        link: Baikal,
     },
 ];
 

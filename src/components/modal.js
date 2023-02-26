@@ -1,3 +1,4 @@
+import { enableValidation } from "./validate.js";
 /*Реализация открытия попапов*/
 const popups = document.querySelectorAll(".popup");
 const popupProfile = document.querySelector(".popup__edit-profile");
@@ -22,12 +23,17 @@ const userJobProfile = document.querySelector(".profile__user-job");
 
 /*Открытие попапов*/
 function openPopup(item) {
+    enableValidation();
     item.classList.add("popup_opened");
 }
 
 /*Закртыие попапов*/
 function closePopup(item) {
     item.classList.remove("popup_opened");
+    if (item.key === 27) {
+        console.log(item.key);
+        item.classList.remove("popup_opened");
+    }
 }
 
 // Обработчик «отправки» формы, хотя пока она никуда отправляться не будет
@@ -43,4 +49,4 @@ function handleFormSubmit(evt) {
     closePopup(popupProfile);
 }
 
-export {popups, popupNewCard, popupProfile, popupProfileOpen, userName, userJob, popupCardAddOpen, formElement, userNameProfile, userJobProfile, openPopup, closePopup, handleFormSubmit};
+export { popups, popupNewCard, popupProfile, popupProfileOpen, userName, userJob, popupCardAddOpen, formElement, userNameProfile, userJobProfile, openPopup, closePopup, handleFormSubmit };
