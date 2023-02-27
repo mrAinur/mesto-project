@@ -2,10 +2,10 @@ import "./index.css";
 
 import { popups, popupNewCard, popupProfile, popupProfileOpen, userName, userJob, popupCardAddOpen, formElement, userNameProfile, userJobProfile, openPopup, closePopup, handleFormSubmit, closeByEscape } from "./components/modal.js";
 import { newCardForm, namePlaceInput, linkPlaceInput, makeCards, renderCard } from "./components/card.js";
-import { enableValidation } from "./components/validate.js";
+import { enableValidation, settings } from "./components/validate.js";
 
 makeCards();
-enableValidation();
+enableValidation(settings);
 
 /*Добавляем работу кнопки для открытия попапа профиля*/
 popupProfileOpen.addEventListener("click", function () {
@@ -32,8 +32,6 @@ popups.forEach((popup) => {
     }
   });
 });
-
-document.addEventListener("keydown", closeByEscape);
 
 newCardForm.addEventListener("submit", function (evt) {
   evt.preventDefault();

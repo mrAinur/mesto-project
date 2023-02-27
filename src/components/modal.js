@@ -23,11 +23,13 @@ const userJobProfile = document.querySelector(".profile__user-job");
 /*Открытие попапов*/
 function openPopup(item) {
     item.classList.add("popup_opened");
+    document.addEventListener("keydown", closeByEscape);
 }
 
 /*Закртыие попапов*/
 function closePopup(item) {
     item.classList.remove("popup_opened");
+    document.removeEventListener("keydown", closeByEscape);
 }
 
 function closeByEscape(evt) {
