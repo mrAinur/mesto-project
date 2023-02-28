@@ -3,8 +3,10 @@ import "./index.css";
 import { popups, popupNewCard, popupProfile, popupProfileOpen, userName, userJob, popupCardAddOpen, formElement, userNameProfile, userJobProfile, openPopup, closePopup, handleFormSubmit, closeByEscape } from "./components/modal.js";
 import { newCardForm, namePlaceInput, linkPlaceInput, makeCards, renderCard } from "./components/card.js";
 import { enableValidation, settings } from "./components/validate.js";
+import { getUserInfo } from "./components/utils.js";
 
 makeCards();
+getUserInfo();
 enableValidation(settings);
 
 /*Добавляем работу кнопки для открытия попапа профиля*/

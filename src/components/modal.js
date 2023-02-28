@@ -19,6 +19,7 @@ const jobValue = formElement.querySelector(".popup__job-info");
 //Получите значение полей jobInput и nameInput из свойства value
 const userNameProfile = document.querySelector(".profile__user-name");
 const userJobProfile = document.querySelector(".profile__user-job");
+const userAvatar = document.querySelector(".profile__avatar");
 
 /*Открытие попапов*/
 function openPopup(item) {
@@ -52,4 +53,4 @@ function handleFormSubmit(evt) {
     closePopup(popupProfile);
 }
 
-export { popups, popupNewCard, popupProfile, popupProfileOpen, userName, userJob, popupCardAddOpen, formElement, userNameProfile, userJobProfile, openPopup, closePopup, handleFormSubmit, closeByEscape };
+export { popups, popupNewCard, popupProfile, popupProfileOpen, userName, userJob, popupCardAddOpen, formElement, userNameProfile, userJobProfile, userAvatar, openPopup, closePopup, handleFormSubmit, closeByEscape };
