@@ -1,6 +1,7 @@
 .profile__avatar {
   margin: 0 12px 0 0;
   padding: 0;
+  max-height: 120px;
   max-width: 120px;
   border-radius: 50%;
   grid-area: photo;
