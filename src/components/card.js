@@ -1,4 +1,5 @@
 import { openPopup } from "./modal.js";
+import { makeNewCard } from "./api.js";
 
 import Arxyz from "../images/arkhyz.jpg";
 import Elbrus from "../images/elbrus.jpg";
@@ -53,6 +54,7 @@ function createCard(item) {
     card.querySelector(".element__place-img").src = item.link;
     card.querySelector(".element__place-img").alt = item.name;
     card.querySelector(".element__place-name").textContent = item.name;
+    card.querySelector(".element__num-likes").textContent = item.likes.length;
 
     /*Реализация кнопки лайка*/
     card
@@ -81,15 +83,19 @@ function createCard(item) {
 }
 
 /*Добавление карточек*/
-function makeCards() {
-    initialCards.forEach(function (item) {
-        cards.prepend(createCard(item))
+function makeCards(obj) {
+    obj.forEach(function (item) {
+        cards.append(createCard(item))
     });
 }
 
 /*Вставка новой карточки в Дом*/
 function renderCard(item) {
-    cards.prepend(createCard(item));
+    const cards = Array.from(document.querySelectorAll(".element"));
+    cards.forEach((item) => {
+        item.remove();
+    });
+    makeNewCard(item);
 }
 
-export {newCardForm, namePlaceInput, linkPlaceInput, makeCards, renderCard};
+export { newCardForm, namePlaceInput, linkPlaceInput, makeCards, renderCard };

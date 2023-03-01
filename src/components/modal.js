@@ -1,3 +1,5 @@
+import { editUserInfo } from "./api.js";
+
 /*Реализация открытия попапов*/
 const popups = document.querySelectorAll(".popup");
 const popupProfile = document.querySelector(".popup__edit-profile");
@@ -34,7 +36,7 @@ function closePopup(item) {
 }
 
 function closeByEscape(evt) {
-    if(evt.key==="Escape"){
+    if (evt.key === "Escape") {
         const openPopup = document.querySelector(".popup_opened");
         closePopup(openPopup);
     }
@@ -45,12 +47,13 @@ function closeByEscape(evt) {
 function handleFormSubmit(evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
     // Выберите элементы, куда должны быть вставлены значения полей
-
-    userNameProfile.textContent = nameValue.value;
-    userJobProfile.textContent = jobValue.value;
-    // Вставьте новые значения с помощью textContent
-
+    const userInfo = {
+        name: nameValue.value,
+        about: jobValue.value
+    }
+    editUserInfo(userInfo);
     closePopup(popupProfile);
+
 }
 
 export { popups, popupNewCard, popupProfile, popupProfileOpen, userName, userJob, popupCardAddOpen, formElement, userNameProfile, userJobProfile, userAvatar, openPopup, closePopup, handleFormSubmit, closeByEscape };

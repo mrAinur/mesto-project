@@ -1,12 +1,12 @@
 import "./index.css";
 
 import { popups, popupNewCard, popupProfile, popupProfileOpen, userName, userJob, popupCardAddOpen, formElement, userNameProfile, userJobProfile, openPopup, closePopup, handleFormSubmit, closeByEscape } from "./components/modal.js";
-import { newCardForm, namePlaceInput, linkPlaceInput, makeCards, renderCard } from "./components/card.js";
+import { newCardForm, namePlaceInput, linkPlaceInput, renderCard } from "./components/card.js";
 import { enableValidation, settings } from "./components/validate.js";
-import { getUserInfo } from "./components/api.js";
+import { getUserProfile, getCards } from "./components/api.js";
 
-makeCards();
-getUserInfo();
+getUserProfile();
+getCards();
 enableValidation(settings);
 
 /*Добавляем работу кнопки для открытия попапа профиля*/
@@ -38,8 +38,8 @@ popups.forEach((popup) => {
 newCardForm.addEventListener("submit", function (evt) {
   evt.preventDefault();
   const newCard = {
-    name: namePlaceInput.value,
-    link: linkPlaceInput.value,
+    name: `${namePlaceInput.value}`,
+    link: `${linkPlaceInput.value}`
   };
   renderCard(newCard);
   closePopup(popupNewCard);
