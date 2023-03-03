@@ -19,7 +19,8 @@ function createCard(item) {
     card.querySelector(".element__place-img").src = item.link;
     card.querySelector(".element__place-img").alt = item.name;
     card.querySelector(".element__place-name").textContent = item.name;
-    card.querySelector(".element__num-likes").textContent = item.likes.length;
+    const numLikes = card.querySelector(".element__num-likes");
+    numLikes.textContent = item.likes.length;
 
     /*Реализация кнопки лайка*/
     card
@@ -29,7 +30,7 @@ function createCard(item) {
             if (evt.target.classList === `element__heart_active`) {
                 deleteLike(idCard)
                     .then((res) => {
-                        console.log(res => res.json());
+                        console.log(res);
                     })
                     .then((obj) => {
                         console.log(obj);
@@ -42,12 +43,13 @@ function createCard(item) {
             } else {
                 addLike(idCard)
                     .then((res) => {
-                        res = res.json();
-                        console.log(res);
+                        res = res.json
                     })
                     .then((obj) => {
+                        console.log(obj);
                         createCard(obj);
                         evt.target.classList.toggle("element__heart_active");
+                        numLikes.textContent = obj.likes.length;
                     })
                     .catch((rej) => {
                         console.log(`Ошибка вот такая ${rej.status}`);
