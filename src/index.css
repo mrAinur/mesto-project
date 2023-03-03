@@ -12,7 +12,9 @@
 @import url(../src/blocks/cards/cards.css);
 /*Импорт элементов*/
 @import url(../src/blocks/header/__logo/header__logo.css);
+@import url(../src/blocks/profile/__avatar-img/profile__avatar-img.css);
 @import url(../src/blocks/profile/__avatar/profile__avatar.css);
+@import url(../src/blocks/profile/__avatar-btn/profile__avatar-btn.css);
 @import url(../src/blocks/profile/__user/profile__user.css);
 @import url(../src/blocks/profile/__info/profile__info.css);
 @import url(../src/blocks/profile/__user-name/profile__user-name.css);
@@ -49,6 +51,9 @@
 @import url(../src/blocks/popup/__card/popup__card.css);
 @import url(../src/blocks/popup/__error/popup__error.css);
 @import url(../src/blocks/popup/__input/popup__input.css);
+@import url(../src/blocks/popup/__avatar/popup__avatar.css);
+@import url(../src/blocks/profile/__avatar-btn/profile__avatar-btn.css);
+@import url(../src/blocks/popup/__error-avatar/popup__error-avatar.css);
 /*импорт модификаторов*/
 @import url(../src/blocks/popup/_opened/popup_opened.css);
 @import url(../src/blocks/element/__heart/_active/element__heart_active.css);

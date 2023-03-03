@@ -16,7 +16,10 @@
         <main>
             <section class="profile">
                 <div class="profile__user">
-                    <img alt="Фотография вашего профиля" class="profile__avatar">
+                    <div class="profile__avatar">
+                        <img alt="Фотография вашего профиля" class="profile__avatar-img">
+                        <button type="submit" class="profile__avatar-btn"></button>
+                    </div>
                     <div class="profile__info">
                         <h1 class="profile__user-name"></h1>
                         <button type="button" class="profile__edit-button"></button>
@@ -79,6 +82,22 @@
             <div class="popup__place-card">
                 <img src="" alt="фото с фотокарточки" class="popup__image">
                 <p class="popup__place-name"></p>
+                <button type="button" class="popup__close"></button>
+            </div>
+        </div>
+        <div class="popup popup__avatar">
+            <div class="popup__container">
+                <form name="add-place" class="form popup__form-place" novalidate>
+                    <h2 class="popup__title">Обновить аватар</h2>
+                    <fieldset class="popup__item">
+                        <input type="url" id="user-avatar" name="user-avatar" placeholder="Ссылка на картинку"
+                            class="popup__place-link popup__input" value="" required>
+                        <span class="user-avatar-error popup__error popup__error-avatar"></span>
+                    </fieldset>
+                    <fieldset class="popup__submit">
+                        <button type="submit" class="popup__paragraph">Создать</button>
+                    </fieldset>
+                </form>
                 <button type="button" class="popup__close"></button>
             </div>
         </div>

@@ -3,6 +3,7 @@ import { makeCards } from "./card.js";
 
 const cohortId = "plus-cohort-20";
 const token = "a6c9ce5b-7a95-47f3-900e-0e9cffd9e4f4";
+let userId = "id";
 
 function getUserProfile() {
     fetch(`https://nomoreparties.co/v1/${cohortId}/users/me`, {
@@ -15,6 +16,7 @@ function getUserProfile() {
             userNameProfile.textContent = obj.name;
             userJobProfile.textContent = obj.about;
             userAvatar.src = `${obj.avatar}`;
+            userId = `${obj._id}`;
         })
         .catch((rej) => {
             console.log(`Ошибка ${rej.status}`);
@@ -37,27 +39,61 @@ function getCards() {
 }
 
 function editUserInfo(userInfo) {
-    fetch(`https://nomoreparties.co/v1/${cohortId}/users/me`, {
+    return fetch(`https://nomoreparties.co/v1/${cohortId}/users/me`, {
         method: 'PATCH',
         headers: {
             authorization: `${token}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(userInfo)
-    });
-    getUserProfile()
+    })
 }
 
 function makeNewCard(cardInfo) {
-    fetch(`https://nomoreparties.co/v1/${cohortId}/cards`, {
+    return fetch(`https://nomoreparties.co/v1/${cohortId}/cards`, {
         method: 'POST',
         headers: {
             authorization: `${token}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(cardInfo)
-    });
-    getCards();
+    })
 }
 
-export { getUserProfile, editUserInfo, getCards, makeNewCard }
+function deleteCard(item) {
+    return fetch(`https://nomoreparties.co/v1/${cohortId}/cards/${item}`, {
+        method: 'DELETE',
+        headers: {
+            authorization: `${token}`
+        }
+    })
+}
+
+function addLike(item) {
+    return fetch(`https://nomoreparties.co/v1/${cohortId}/cards/likes/${item}`, {
+        method: 'PUT',
+        headers: {
+            authorization: `${token}`
+        }
+    })
+}
+
+function deleteLike(item) {
+    return fetch(`https://nomoreparties.co/v1/${cohortId}/cards/likes/${item}`, {
+        method: 'DELETE',
+        headers: {
+            authorization: `${token}`
+        }
+    })
+}
+
+function editAvatar(item) {
+    return fetch(`https://nomoreparties.co/v1/${cohortId}/users/me/${item}`, {
+        method: 'PATCH',
+        headers: {
+            authorization: `${token}`
+        }
+    })
+}
+
+export { userId, getUserProfile, editUserInfo, getCards, makeNewCard, deleteCard, addLike, deleteLike, editAvatar }

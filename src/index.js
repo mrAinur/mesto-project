@@ -1,6 +1,9 @@
 import "./index.css";
 
-import { popups, popupNewCard, popupProfile, popupProfileOpen, userName, userJob, popupCardAddOpen, formElement, userNameProfile, userJobProfile, openPopup, closePopup, handleFormSubmit} from "./components/modal.js";
+import {
+  popups, popupNewCard, popupProfile, popupProfileOpen, userName, userJob, popupCardAddOpen, formElement,
+  userNameProfile, userJobProfile, popupAvatar, popupAvatarOpen, openPopup, closePopup, handleFormSubmit, makeNewAvatar
+} from "./components/modal.js";
 import { newCardForm, namePlaceInput, linkPlaceInput, renderCard } from "./components/card.js";
 import { enableValidation, settings } from "./components/validate.js";
 import { getUserProfile, getCards } from "./components/api.js";
@@ -21,7 +24,13 @@ popupCardAddOpen.addEventListener("click", function () {
   openPopup(popupNewCard);
 });
 
+popupAvatarOpen.addEventListener("click", function () {
+  openPopup(popupAvatar);
+})
+
 formElement.addEventListener("submit", handleFormSubmit);
+
+popupAvatar.addEventListener("submit", makeNewAvatar);
 
 /*Добавляем реализацию закрытия попапов (и вправду удобно)*/
 popups.forEach((popup) => {

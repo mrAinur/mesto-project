@@ -1,40 +1,5 @@
 import { openPopup } from "./modal.js";
-import { makeNewCard } from "./api.js";
-
-import Arxyz from "../images/arkhyz.jpg";
-import Elbrus from "../images/elbrus.jpg";
-import Dombay from "../images/dombay.jpg";
-import Ivanovo from "../images/ivanovo.jpg";
-import Karachaevsk from "../images/karachaevsk.jpg";
-import Baikal from "../images/baikal.jpg";
-
-
-const initialCards = [
-    {
-        name: "Архыз",
-        link: Arxyz,
-    },
-    {
-        name: "Эльбрус",
-        link: Elbrus,
-    },
-    {
-        name: "Домбай",
-        link: Dombay,
-    },
-    {
-        name: "Иваново",
-        link: Ivanovo,
-    },
-    {
-        name: "Карачаевск",
-        link: Karachaevsk,
-    },
-    {
-        name: "Байкал",
-        link: Baikal,
-    },
-];
+import { makeNewCard, deleteCard, userId, addLike, deleteLike, getCards } from "./api.js";
 
 const placeCard = document.querySelector(".popup__card"); //Открытие фотокарточки
 const popupImg = placeCard.querySelector(".popup__image"); //находим в попапе нужный нам класс
@@ -60,15 +25,60 @@ function createCard(item) {
     card
         .querySelector(".element__heart")
         .addEventListener("click", function (evt) {
-            evt.target.classList.toggle("element__heart_active");
+            const idCard = `${item._id}`;
+            if (evt.target.classList === `element__heart_active`) {
+                deleteLike(idCard)
+                    .then((res) => {
+                        console.log(res => res.json());
+                    })
+                    .then((obj) => {
+                        console.log(obj);
+                        createCard(obj);
+                        evt.target.classList.toggle("element__heart_active");
+                    })
+                    .catch((rej) => {
+                        console.log(`Ошибка вот такая ${rej.status}`);
+                    });
+            } else {
+                addLike(idCard)
+                    .then((res) => {
+                        res = res.json();
+                        console.log(res);
+                    })
+                    .then((obj) => {
+                        createCard(obj);
+                        evt.target.classList.toggle("element__heart_active");
+                    })
+                    .catch((rej) => {
+                        console.log(`Ошибка вот такая ${rej.status}`);
+                    });
+            }
         });
+
+    /*Проверяем лайкал ли ранее пользователь данную карту*/
+    item.likes.forEach((user) => {
+        if (user._id === userId) {
+            const heart = card.querySelector(".element__heart");
+            heart.classList.add("element__heart_active");
+        }
+    })
 
     /*Реализация удаления карты*/
     const cardDel = card.querySelector(".element__delete");
-    cardDel.addEventListener("click", function () {
-        const cardItem = cardDel.closest(".element");
-        cardItem.remove();
-    });
+    if (item.owner._id === userId) {
+        cardDel.addEventListener("click", () => {
+            const idCard = `${item._id}`;
+            deleteCard(idCard)
+                .then((res) => {
+                    getCards();
+                })
+                .catch((rej) => {
+                    console.log(`Ошибка ${rej.status}`);
+                })
+        });
+    } else {
+        cardDel.remove();
+    }
 
     /*Реализация открытия карточки*/
     card
@@ -95,7 +105,13 @@ function renderCard(item) {
     cards.forEach((item) => {
         item.remove();
     });
-    makeNewCard(item);
+    makeNewCard(item)
+        .then((res) => {
+            getCards()
+        })
+        .catch((rej) => {
+            console.log(`Ошибка ${rej.status}`);
+        });
 }
 
-export { newCardForm, namePlaceInput, linkPlaceInput, makeCards, renderCard };
+export { newCardForm, namePlaceInput, linkPlaceInput, makeCards, renderCard, createCard };

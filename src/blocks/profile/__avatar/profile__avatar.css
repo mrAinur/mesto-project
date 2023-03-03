@@ -1,17 +1,9 @@
-.profile__avatar {
-  margin: 0 12px 0 0;
-  padding: 0;
-  max-height: 120px;
-  max-width: 120px;
-  border-radius: 50%;
-  grid-area: photo;
-  justify-content: center;
-}
-
-@media screen and (max-width: 767px) {
-  .profile__avatar {
-    font-size: 14px;
-    line-height: 17px;
-    margin: 0 auto 12px auto;
-  }
+.profile__avatar{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    grid-area: photo;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }

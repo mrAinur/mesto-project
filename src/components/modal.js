@@ -1,15 +1,18 @@
-import { editUserInfo } from "./api.js";
+import { editUserInfo, getUserProfile, editAvatar } from "./api.js";
 
 /*Реализация открытия попапов*/
 const popups = document.querySelectorAll(".popup");
 const popupProfile = document.querySelector(".popup__edit-profile");
 const popupNewCard = document.querySelector(".popup__new-place");
+const popupAvatar = document.querySelector(".popup__avatar");
 
 const popupProfileOpen = document.querySelector(".profile__edit-button"); //Конпка для открытия попапа профиля
 const userName = popupProfile.querySelector(".popup__name-info"); //Находим инпуты
 const userJob = popupProfile.querySelector(".popup__job-info");
 
 const popupCardAddOpen = document.querySelector(".profile__add-button"); //Конпка для открытия попапа добавления элемента
+
+const popupAvatarOpen = document.querySelector(".profile__avatar-btn");
 
 //Находим форму в DOM
 const formElement = document.querySelector(".popup__form-profile");
@@ -21,7 +24,7 @@ const jobValue = formElement.querySelector(".popup__job-info");
 //Получите значение полей jobInput и nameInput из свойства value
 const userNameProfile = document.querySelector(".profile__user-name");
 const userJobProfile = document.querySelector(".profile__user-job");
-const userAvatar = document.querySelector(".profile__avatar");
+const userAvatar = document.querySelector(".profile__avatar-img");
 
 /*Открытие попапов*/
 function openPopup(item) {
@@ -51,9 +54,28 @@ function handleFormSubmit(evt) {
         name: nameValue.value,
         about: jobValue.value
     }
-    editUserInfo(userInfo);
+    editUserInfo(userInfo)
+        .then((res) => {
+            getUserProfile();
+        })
+        .catch((rej) => {
+            console.log(`Ошибка ${rej.status}`);
+        });
     closePopup(popupProfile);
-
 }
 
-export { popups, popupNewCard, popupProfile, popupProfileOpen, userName, userJob, popupCardAddOpen, formElement, userNameProfile, userJobProfile, userAvatar, openPopup, closePopup, handleFormSubmit, closeByEscape };
+function makeNewAvatar(evt) {
+    evt.preventDefault();
+    const avtarUrl = popupAvatar.querySelector(".popup__input").value;
+    editAvatar(avtarUrl)
+        .then((res) => {
+            getUserProfile();
+        })
+        .catch((rej) => {
+            console.log(`Ошибка ${rej.status}`);
+        });
+    closePopup(popupAvatar);
+    evt.target.reset();
+}
+
+export { popups, popupNewCard, popupProfile, popupProfileOpen, userName, userJob, popupCardAddOpen, formElement, userNameProfile, userJobProfile, userAvatar, popupAvatar, popupAvatarOpen, openPopup, closePopup, handleFormSubmit, closeByEscape, makeNewAvatar };
