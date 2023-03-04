@@ -2,14 +2,20 @@ import "./index.css";
 
 import {
   popups, popupNewCard, popupProfile, popupProfileOpen, userName, userJob, popupCardAddOpen, formElement,
-  userNameProfile, userJobProfile, popupAvatar, popupAvatarOpen, openPopup, closePopup, handleFormSubmit, makeNewAvatar
+  userNameProfile, userJobProfile, popupAvatar, popupAvatarOpen, openPopup, closePopup, handleFormSubmit, makeNewAvatar, userAvatar
 } from "./components/modal.js";
-import { newCardForm, namePlaceInput, linkPlaceInput, renderCard } from "./components/card.js";
+import { newCardForm, namePlaceInput, linkPlaceInput, renderCard, makeCards, getUserId } from "./components/card.js";
 import { enableValidation, settings } from "./components/validate.js";
 import { getUserProfile, getCards } from "./components/api.js";
 
-getUserProfile();
-getCards();
+Promise.all([getUserProfile(), getCards()])
+  .then(([userInfo, cardsInfo]) => {
+    userNameProfile.textContent = userInfo.name;
+    userJobProfile.textContent = userInfo.about;
+    userAvatar.src = `${userInfo.avatar}`;
+    getUserId(`${userInfo._id}`);
+    makeCards(cardsInfo);
+  });
 enableValidation(settings);
 
 /*Добавляем работу кнопки для открытия попапа профиля*/

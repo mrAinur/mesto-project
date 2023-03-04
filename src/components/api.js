@@ -3,20 +3,17 @@ import { makeCards } from "./card.js";
 
 const cohortId = "plus-cohort-20";
 const token = "a6c9ce5b-7a95-47f3-900e-0e9cffd9e4f4";
-let userId = "id";
 
 function getUserProfile() {
-    fetch(`https://nomoreparties.co/v1/${cohortId}/users/me`, {
+    return fetch(`https://nomoreparties.co/v1/${cohortId}/users/me`, {
         headers: {
             authorization: `${token}`
         }
     })
-        .then(res => res.json())
-        .then((obj) => {
-            userNameProfile.textContent = obj.name;
-            userJobProfile.textContent = obj.about;
-            userAvatar.src = `${obj.avatar}`;
-            userId = `${obj._id}`;
+        .then(res => {
+            if (res.ok) {
+                return res = res.json();
+            }
         })
         .catch((rej) => {
             console.log(`Ошибка ${rej.status}`);
@@ -24,14 +21,15 @@ function getUserProfile() {
 };
 
 function getCards() {
-    fetch(`https://nomoreparties.co/v1/${cohortId}/cards`, {
+    return fetch(`https://nomoreparties.co/v1/${cohortId}/cards`, {
         headers: {
             authorization: `${token}`
         }
     })
-        .then(res => res.json())
-        .then((obj) => {
-            makeCards(obj);
+        .then(res => {
+            if (res.ok) {
+                return res = res.json();
+            }
         })
         .catch((rej) => {
             console.log(`Ошибка ${rej.status}`);
@@ -88,12 +86,14 @@ function deleteLike(item) {
 }
 
 function editAvatar(item) {
-    return fetch(`https://nomoreparties.co/v1/${cohortId}/users/me/${item}`, {
+    return fetch(`https://nomoreparties.co/v1/${cohortId}/users/me/avatar`, {
         method: 'PATCH',
         headers: {
-            authorization: `${token}`
-        }
+            authorization: `${token}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(item)
     })
 }
 
-export { userId, getUserProfile, editUserInfo, getCards, makeNewCard, deleteCard, addLike, deleteLike, editAvatar }
+export { getUserProfile, editUserInfo, getCards, makeNewCard, deleteCard, addLike, deleteLike, editAvatar }

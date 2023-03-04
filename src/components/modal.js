@@ -66,10 +66,18 @@ function handleFormSubmit(evt) {
 
 function makeNewAvatar(evt) {
     evt.preventDefault();
-    const avtarUrl = popupAvatar.querySelector(".popup__input").value;
-    editAvatar(avtarUrl)
-        .then((res) => {
-            getUserProfile();
+    const avatar = popupAvatar.querySelector(".popup__input").value;
+    const avatarUrl = {
+        avatar: avatar
+    };
+    editAvatar(avatarUrl)
+        .then(res => {
+            if (res.ok) {
+                return res = res.json();
+            }
+        })
+        .then((obj) => {
+            userAvatar.src = `${obj.avatar}`;
         })
         .catch((rej) => {
             console.log(`Ошибка ${rej.status}`);

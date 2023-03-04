@@ -5,6 +5,8 @@
   max-width: 120px;
   border-radius: 50%;
   justify-content: center;
+  object-fit: cover;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 767px) {
