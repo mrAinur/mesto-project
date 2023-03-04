@@ -7,6 +7,8 @@ import {
 import { newCardForm, namePlaceInput, linkPlaceInput, renderCard, makeCards, getUserId } from "./components/card.js";
 import { enableValidation, settings } from "./components/validate.js";
 import { getUserProfile, getCards } from "./components/api.js";
+import { renderInfo } from "./components/utils.js";
+
 
 Promise.all([getUserProfile(), getCards()])
   .then(([userInfo, cardsInfo]) => {
@@ -15,7 +17,10 @@ Promise.all([getUserProfile(), getCards()])
     userAvatar.src = `${userInfo.avatar}`;
     getUserId(`${userInfo._id}`);
     makeCards(cardsInfo);
-  });
+  })
+  .catch((rej) => {
+    console.log(`Ошибка ${rej.status}`);
+  });;
 enableValidation(settings);
 
 /*Добавляем работу кнопки для открытия попапа профиля*/
@@ -51,6 +56,7 @@ popups.forEach((popup) => {
 });
 
 newCardForm.addEventListener("submit", function (evt) {
+  renderInfo(true, evt.target);
   evt.preventDefault();
   const newCard = {
     name: `${namePlaceInput.value}`,
@@ -59,4 +65,5 @@ newCardForm.addEventListener("submit", function (evt) {
   renderCard(newCard);
   closePopup(popupNewCard);
   evt.target.reset();
+  renderInfo(false, evt.target);
 });

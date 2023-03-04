@@ -40,7 +40,7 @@ function createCard(item) {
         .querySelector(".element__heart")
         .addEventListener("click", function (evt) {
             const idCard = `${item._id}`;
-            if (!(evt.target.classList === `element__heart_active`)) {
+            if (!(evt.target.classList.contains(`element__heart_active`))) {
                 addLike(idCard)
                     .then(res => {
                         if (res.ok) {
