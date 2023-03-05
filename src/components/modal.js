@@ -1,4 +1,5 @@
 import { editUserInfo, getUserProfile, editAvatar } from "./api.js";
+import { renderInfo } from "./utils.js";
 
 /*Реализация открытия попапов*/
 const popups = document.querySelectorAll(".popup");
@@ -27,18 +28,18 @@ const userJobProfile = document.querySelector(".profile__user-job");
 const userAvatar = document.querySelector(".profile__avatar-img");
 
 /*Открытие попапов*/
-function openPopup(item) {
+const openPopup = (item) => {
     item.classList.add("popup_opened");
     document.addEventListener("keydown", closeByEscape);
 }
 
 /*Закртыие попапов*/
-function closePopup(item) {
+const closePopup = (item) => {
     item.classList.remove("popup_opened");
     document.removeEventListener("keydown", closeByEscape);
 }
 
-function closeByEscape(evt) {
+const closeByEscape = (evt) => {
     if (evt.key === "Escape") {
         const openPopup = document.querySelector(".popup_opened");
         closePopup(openPopup);
@@ -47,7 +48,7 @@ function closeByEscape(evt) {
 
 // Обработчик «отправки» формы, хотя пока она никуда отправляться не будет
 // редактирование профиля
-function handleFormSubmit(evt) {
+const handleFormSubmit = (evt) => {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
     // Выберите элементы, куда должны быть вставлены значения полей
     const userInfo = {
@@ -55,8 +56,14 @@ function handleFormSubmit(evt) {
         about: jobValue.value
     }
     editUserInfo(userInfo)
-        .then((res) => {
-            getUserProfile();
+        .then(res => {
+            if (res.ok) {
+                return res = res.json();
+            }
+        })
+        .then((obj) => {
+            userNameProfile.textContent = obj.name;
+            userJobProfile.textContent = obj.about;;
         })
         .catch((rej) => {
             console.log(`Ошибка ${rej.status}`);
@@ -64,7 +71,8 @@ function handleFormSubmit(evt) {
     closePopup(popupProfile);
 }
 
-function makeNewAvatar(evt) {
+const makeNewAvatar = (evt) => {
+    renderInfo(true, evt.target);
     evt.preventDefault();
     const avatar = popupAvatar.querySelector(".popup__input").value;
     const avatarUrl = {
@@ -84,6 +92,7 @@ function makeNewAvatar(evt) {
         });
     closePopup(popupAvatar);
     evt.target.reset();
+    renderInfo(false, evt.target);
 }
 
 export { popups, popupNewCard, popupProfile, popupProfileOpen, userName, userJob, popupCardAddOpen, formElement, userNameProfile, userJobProfile, userAvatar, popupAvatar, popupAvatarOpen, openPopup, closePopup, handleFormSubmit, closeByEscape, makeNewAvatar };

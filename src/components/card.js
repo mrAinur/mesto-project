@@ -19,7 +19,7 @@ const getUserId = (id) => {
     userId = id;
 }
 
-function createCard(item) {
+const createCard = (item) => {
     const card = cardElement.querySelector(".element").cloneNode(true);
     card.querySelector(".element__place-img").src = item.link;
     card.querySelector(".element__place-img").alt = item.name;
@@ -104,14 +104,14 @@ function createCard(item) {
 }
 
 /*Добавление карточек*/
-function makeCards(obj) {
+const makeCards = (obj) => {
     obj.forEach(function (item) {
         cards.append(createCard(item))
     });
 }
 
 /*Вставка новой карточки в Дом*/
-function renderCard(item) {
+const renderCard = (item) => {
     const cards = Array.from(document.querySelectorAll(".element"));
     cards.forEach((item) => {
         item.remove();

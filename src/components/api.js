@@ -1,10 +1,7 @@
-import { userNameProfile, userJobProfile, userAvatar } from "./modal.js";
-import { makeCards } from "./card.js";
-
 const cohortId = "plus-cohort-20";
 const token = "a6c9ce5b-7a95-47f3-900e-0e9cffd9e4f4";
 
-function getUserProfile() {
+const getUserProfile = () => {
     return fetch(`https://nomoreparties.co/v1/${cohortId}/users/me`, {
         headers: {
             authorization: `${token}`
@@ -20,7 +17,7 @@ function getUserProfile() {
         });
 };
 
-function getCards() {
+const getCards = () => {
     return fetch(`https://nomoreparties.co/v1/${cohortId}/cards`, {
         headers: {
             authorization: `${token}`
@@ -36,7 +33,7 @@ function getCards() {
         })
 }
 
-function editUserInfo(userInfo) {
+const editUserInfo = (userInfo) => {
     return fetch(`https://nomoreparties.co/v1/${cohortId}/users/me`, {
         method: 'PATCH',
         headers: {
@@ -47,7 +44,7 @@ function editUserInfo(userInfo) {
     })
 }
 
-function makeNewCard(cardInfo) {
+const makeNewCard = (cardInfo) => {
     return fetch(`https://nomoreparties.co/v1/${cohortId}/cards`, {
         method: 'POST',
         headers: {
@@ -58,7 +55,7 @@ function makeNewCard(cardInfo) {
     })
 }
 
-function deleteCard(item) {
+const deleteCard = (item) => {
     return fetch(`https://nomoreparties.co/v1/${cohortId}/cards/${item}`, {
         method: 'DELETE',
         headers: {
@@ -67,7 +64,7 @@ function deleteCard(item) {
     })
 }
 
-function addLike(item) {
+const addLike = (item) => {
     return fetch(`https://nomoreparties.co/v1/${cohortId}/cards/likes/${item}`, {
         method: 'PUT',
         headers: {
@@ -76,7 +73,7 @@ function addLike(item) {
     })
 }
 
-function deleteLike(item) {
+const deleteLike = (item) => {
     return fetch(`https://nomoreparties.co/v1/${cohortId}/cards/likes/${item}`, {
         method: 'DELETE',
         headers: {
@@ -85,7 +82,7 @@ function deleteLike(item) {
     })
 }
 
-function editAvatar(item) {
+const editAvatar = (item) => {
     return fetch(`https://nomoreparties.co/v1/${cohortId}/users/me/avatar`, {
         method: 'PATCH',
         headers: {
