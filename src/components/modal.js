@@ -1,4 +1,4 @@
-import { editUserInfo, getUserProfile, editAvatar } from "./api.js";
+import { editUserInfo, editAvatar } from "./api.js";
 import { renderInfo } from "./utils.js";
 
 /*Реализация открытия попапов*/
