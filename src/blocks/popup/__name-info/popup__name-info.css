@@ -28,7 +28,7 @@
 
 @media screen and (max-width: 767px) {
   .popup__name-info {
-    padding-top: 75px;
+    padding-top: 40px;
     padding-bottom: 10px;
     min-width: 238px;
   }

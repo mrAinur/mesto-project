@@ -1,5 +1,6 @@
 import { openPopup } from "./modal.js";
 import { makeNewCard, deleteCard, addLike, deleteLike, getCards } from "./api.js";
+import { getResponseData } from "./utils";
 
 const placeCard = document.querySelector(".popup__card"); //Открытие фотокарточки
 const popupImg = placeCard.querySelector(".popup__image"); //находим в попапе нужный нам класс
@@ -42,10 +43,8 @@ const createCard = (item) => {
             const idCard = `${item._id}`;
             if (!(evt.target.classList.contains(`element__heart_active`))) {
                 addLike(idCard)
-                    .then(res => {
-                        if (res.ok) {
-                            return res = res.json();
-                        }
+                    .then((res) => {
+                        return getResponseData(res);
                     })
                     .then((obj) => {
                         numLikes.textContent = obj.likes.length;
@@ -56,10 +55,8 @@ const createCard = (item) => {
                     });
             } else {
                 deleteLike(idCard)
-                    .then(res => {
-                        if (res.ok) {
-                            return res = res.json();
-                        }
+                    .then((res) => {
+                        return getResponseData(res);
                     })
                     .then((obj) => {
                         console.log(obj);
@@ -112,24 +109,12 @@ const makeCards = (obj) => {
 
 /*Вставка новой карточки в Дом*/
 const renderCard = (item) => {
-    const cards = Array.from(document.querySelectorAll(".element"));
-    cards.forEach((item) => {
-        item.remove();
-    });
     makeNewCard(item)
-        .then(res => {
-            if (res.ok) {
-                return res = res.json();
-            }
+        .then((res) => {
+            return getResponseData(res);
         })
         .then((res) => {
-            getCards()
-                .then((res) => {
-                    makeCards(res)
-                })
-                .catch((rej) => {
-                    console.log(`Ошибка ${rej.status}`);
-                })
+            return cards.prepend(createCard(res));
         })
         .catch((rej) => {
             console.log(`Ошибка ${rej.status}`);

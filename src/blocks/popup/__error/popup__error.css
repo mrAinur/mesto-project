@@ -1,5 +1,5 @@
 .popup__error {
-    margin: 5px 0 0 36px;
+    margin: 0;
     padding: 0;
     font-family: "Inter", "Arial", "Helvetica", sans-serif;
     font-style: normal;
@@ -9,18 +9,35 @@
     color: #FF0000;
     display: none;
     max-width: 358px;
+    position: absolute;
+    top: 145px;
+    left: 36px;
+}
+
+.popup__error:last-of-type {
+    top: 203px
 }
 
 @media screen and (max-width: 1023px) {
     .popup__error {
-        margin-left: 30px;
+        top: 130px;
+        left: 30px;
         max-width: 290px;
+    }
+
+    .popup__error:last-of-type {
+        top: 189px
     }
 }
 
 @media screen and (max-width: 767px) {
     .popup__error {
-        margin-left: 22px;
+        top: 118px;
+        left: 22px;
         max-width: 238px;
+    }
+
+    .popup__error:last-of-type {
+        top: 195px
     }
 }

@@ -1,5 +1,5 @@
 import { editUserInfo, editAvatar } from "./api.js";
-import { renderInfo } from "./utils.js";
+import { renderInfo, getResponseData, checkInputs } from "./utils.js";
 
 /*Реализация открытия попапов*/
 const popups = document.querySelectorAll(".popup");
@@ -16,11 +16,11 @@ const popupCardAddOpen = document.querySelector(".profile__add-button"); //Ко�
 const popupAvatarOpen = document.querySelector(".profile__avatar-btn");
 
 //Находим форму в DOM
-const formElement = document.querySelector(".popup__form-profile");
+const profileFormElement = document.querySelector(".popup__form-profile");
 
 /*Находим нужные значения форм*/
-const nameValue = formElement.querySelector(".popup__name-info");
-const jobValue = formElement.querySelector(".popup__job-info");
+const nameValue = profileFormElement.querySelector(".popup__name-info");
+const jobValue = profileFormElement.querySelector(".popup__job-info");
 
 //Получите значение полей jobInput и nameInput из свойства value
 const userNameProfile = document.querySelector(".profile__user-name");
@@ -35,8 +35,11 @@ const openPopup = (item) => {
 
 /*Закртыие попапов*/
 const closePopup = (item) => {
+    checkInputs(item);
+    const form = item.querySelector(".form");
     item.classList.remove("popup_opened");
     document.removeEventListener("keydown", closeByEscape);
+    form.reset();
 }
 
 const closeByEscape = (evt) => {
@@ -48,7 +51,7 @@ const closeByEscape = (evt) => {
 
 // Обработчик «отправки» формы, хотя пока она никуда отправляться не будет
 // редактирование профиля
-const handleFormSubmit = (evt) => {
+const profileHandleFormSubmit = (evt) => {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
     // Выберите элементы, куда должны быть вставлены значения полей
     const userInfo = {
@@ -56,19 +59,17 @@ const handleFormSubmit = (evt) => {
         about: jobValue.value
     }
     editUserInfo(userInfo)
-        .then(res => {
-            if (res.ok) {
-                return res = res.json();
-            }
+        .then((res) => {
+            return getResponseData(res)
         })
         .then((obj) => {
             userNameProfile.textContent = obj.name;
-            userJobProfile.textContent = obj.about;;
+            userJobProfile.textContent = obj.about;
+            closePopup(popupProfile);
         })
         .catch((rej) => {
             console.log(`Ошибка ${rej.status}`);
         });
-    closePopup(popupProfile);
 }
 
 const makeNewAvatar = (evt) => {
@@ -79,20 +80,20 @@ const makeNewAvatar = (evt) => {
         avatar: avatar
     };
     editAvatar(avatarUrl)
-        .then(res => {
-            if (res.ok) {
-                return res = res.json();
-            }
+        .then((res) => {
+            return getResponseData(res)
         })
         .then((obj) => {
             userAvatar.src = `${obj.avatar}`;
+            closePopup(popupAvatar);
+            evt.target.reset();
         })
         .catch((rej) => {
             console.log(`Ошибка ${rej.status}`);
+        })
+        .finally(() => {
+            renderInfo(false, evt.target);
         });
-    closePopup(popupAvatar);
-    evt.target.reset();
-    renderInfo(false, evt.target);
 }
 
-export { popups, popupNewCard, popupProfile, popupProfileOpen, userName, userJob, popupCardAddOpen, formElement, userNameProfile, userJobProfile, userAvatar, popupAvatar, popupAvatarOpen, openPopup, closePopup, handleFormSubmit, closeByEscape, makeNewAvatar };
+export { popups, popupNewCard, popupProfile, popupProfileOpen, userName, userJob, popupCardAddOpen, profileFormElement, userNameProfile, userJobProfile, userAvatar, popupAvatar, popupAvatarOpen, openPopup, closePopup, profileHandleFormSubmit, closeByEscape, makeNewAvatar };

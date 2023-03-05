@@ -9,7 +9,7 @@ const settings = {
 
 const showInputError = (formElement, inputElement, errorMessage, settings) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.add(settings["inputErrorClass"]); //понял как надо, спасибо!
+    inputElement.classList.add(settings["inputErrorClass"]); 
     errorElement.textContent = errorMessage;
     errorElement.classList.add(settings["errorClass"]);
 };

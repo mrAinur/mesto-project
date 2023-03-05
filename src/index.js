@@ -1,13 +1,13 @@
 import "./index.css";
 
 import {
-  popups, popupNewCard, popupProfile, popupProfileOpen, userName, userJob, popupCardAddOpen, formElement,
-  userNameProfile, userJobProfile, popupAvatar, popupAvatarOpen, openPopup, closePopup, handleFormSubmit, makeNewAvatar, userAvatar
+  popups, popupNewCard,  popupProfileOpen, popupCardAddOpen, profileFormElement,
+  userNameProfile, userJobProfile, popupAvatar, popupAvatarOpen, openPopup, closePopup, profileHandleFormSubmit, makeNewAvatar, userAvatar
 } from "./components/modal.js";
-import { newCardForm, namePlaceInput, linkPlaceInput, renderCard, makeCards, getUserId } from "./components/card.js";
+import { newCardForm, makeCards, getUserId } from "./components/card.js";
 import { enableValidation, settings } from "./components/validate.js";
 import { getUserProfile, getCards } from "./components/api.js";
-import { renderInfo } from "./components/utils.js";
+import { getUserInfo, makeCardForm } from "./components/utils.js";
 
 
 Promise.all([getUserProfile(), getCards()])
@@ -20,30 +20,26 @@ Promise.all([getUserProfile(), getCards()])
   })
   .catch((rej) => {
     console.log(`Ошибка ${rej.status}`);
-  });;
+  });
 enableValidation(settings);
 
 /*Добавляем работу кнопки для открытия попапа профиля*/
-popupProfileOpen.addEventListener("click", function () {
-  userName.value = userNameProfile.textContent;
-  userJob.value = userJobProfile.textContent;
-  openPopup(popupProfile);
-});
+popupProfileOpen.addEventListener("click", getUserInfo);
 
 /*Добавляем работу кнопки для открытия попапа новой карты места*/
-popupCardAddOpen.addEventListener("click", function () {
+popupCardAddOpen.addEventListener("click", () => {
   openPopup(popupNewCard);
 });
 
-popupAvatarOpen.addEventListener("click", function () {
+popupAvatarOpen.addEventListener("click", () => {
   openPopup(popupAvatar);
 })
 
-formElement.addEventListener("submit", handleFormSubmit);
+profileFormElement.addEventListener("submit", profileHandleFormSubmit);
 
 popupAvatar.addEventListener("submit", makeNewAvatar);
 
-/*Добавляем реализацию закрытия попапов (и вправду удобно)*/
+/*Добавляем реализацию закрытия попапов*/
 popups.forEach((popup) => {
   popup.addEventListener("mousedown", (evt) => {
     if (evt.target.classList.contains("popup_opened")) {
@@ -55,15 +51,4 @@ popups.forEach((popup) => {
   });
 });
 
-newCardForm.addEventListener("submit", function (evt) {
-  renderInfo(true, evt.target);
-  evt.preventDefault();
-  const newCard = {
-    name: `${namePlaceInput.value}`,
-    link: `${linkPlaceInput.value}`
-  };
-  renderCard(newCard);
-  closePopup(popupNewCard);
-  evt.target.reset();
-  renderInfo(false, evt.target);
-});
+newCardForm.addEventListener("submit", makeCardForm);
