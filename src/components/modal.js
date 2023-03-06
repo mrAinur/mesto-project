@@ -1,11 +1,14 @@
 import { editUserInfo, editAvatar } from "./api.js";
-import { renderInfo, getResponseData, checkInputs } from "./utils.js";
+import { renderInfo, getResponseData } from "./utils.js";
 
 /*Реализация открытия попапов*/
 const popups = document.querySelectorAll(".popup");
 const popupProfile = document.querySelector(".popup__edit-profile");
 const popupNewCard = document.querySelector(".popup__new-place");
 const popupAvatar = document.querySelector(".popup__avatar");
+
+const formAddCard = document.querySelector(".popup__form-place");
+const formAddAvatar = document.querySelector(".popup__form-avatar");
 
 const popupProfileOpen = document.querySelector(".profile__edit-button"); //Конпка для открытия попапа профиля
 const userName = popupProfile.querySelector(".popup__name-info"); //Находим инпуты
@@ -29,7 +32,6 @@ const userAvatar = document.querySelector(".profile__avatar-img");
 
 /*Открытие попапов*/
 const openPopup = (item) => {
-    checkInputs(item);
     item.classList.add("popup_opened");
     document.addEventListener("keydown", closeByEscape);
 }
@@ -94,4 +96,4 @@ const makeNewAvatar = (evt) => {
         });
 }
 
-export { popups, popupNewCard, popupProfile, popupProfileOpen, userName, userJob, popupCardAddOpen, profileFormElement, userNameProfile, userJobProfile, userAvatar, popupAvatar, popupAvatarOpen, openPopup, closePopup, profileHandleFormSubmit, closeByEscape, makeNewAvatar };
+export { popups, popupNewCard, popupProfile, popupProfileOpen, userName, userJob, popupCardAddOpen, profileFormElement, userNameProfile, userJobProfile, userAvatar, popupAvatar, popupAvatarOpen, formAddCard, formAddAvatar, openPopup, closePopup, profileHandleFormSubmit, closeByEscape, makeNewAvatar };

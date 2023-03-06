@@ -53,6 +53,7 @@
 @import url(../src/blocks/popup/__input/popup__input.css);
 @import url(../src/blocks/popup/__avatar/popup__avatar.css);
 @import url(../src/blocks/popup/__name-error/popup__name-error.css);
+@import url(../src/blocks/popup/__form-avatar/popup__form-avatar.css);
 @import url(../src/blocks/profile/__avatar-btn/profile__avatar-btn.css);
 /*импорт модификаторов*/
 @import url(../src/blocks/popup/_opened/popup_opened.css);

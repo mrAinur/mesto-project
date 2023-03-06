@@ -20,6 +20,7 @@ const getResponseData = (res) => {
 const getUserInfo = () => {
     userName.value = userNameProfile.textContent;
     userJob.value = userJobProfile.textContent;
+    checkInputs(popupProfile);
     openPopup(popupProfile);
 }
 
@@ -37,7 +38,6 @@ const makeCardForm = (evt) => {
 
 const checkInputs = (item) => {
     const form = item.querySelector(".form");
-    form.reset();
     const inupts = Array.from(form.querySelectorAll(".popup__input"));
     inupts.forEach((input) => {
         hideInputError(form, input, settings)

@@ -2,12 +2,12 @@ import "./index.css";
 
 import {
   popups, popupNewCard,  popupProfileOpen, popupCardAddOpen, profileFormElement,
-  userNameProfile, userJobProfile, popupAvatar, popupAvatarOpen, openPopup, closePopup, profileHandleFormSubmit, makeNewAvatar, userAvatar
+  userNameProfile, userJobProfile, popupAvatar, popupAvatarOpen, formAddCard, formAddAvatar, openPopup, closePopup, profileHandleFormSubmit, makeNewAvatar, userAvatar
 } from "./components/modal.js";
 import { newCardForm, makeCards, getUserId } from "./components/card.js";
 import { enableValidation, settings } from "./components/validate.js";
 import { getUserProfile, getCards } from "./components/api.js";
-import { getUserInfo, makeCardForm } from "./components/utils.js";
+import { getUserInfo, makeCardForm, checkInputs } from "./components/utils.js";
 
 
 Promise.all([getUserProfile(), getCards()])
@@ -28,10 +28,14 @@ popupProfileOpen.addEventListener("click", getUserInfo);
 
 /*Добавляем работу кнопки для открытия попапа новой карты места*/
 popupCardAddOpen.addEventListener("click", () => {
+  formAddCard.reset();
+  checkInputs(popupNewCard);
   openPopup(popupNewCard);
 });
 
 popupAvatarOpen.addEventListener("click", () => {
+  formAddAvatar.reset();
+  checkInputs(popupAvatar);
   openPopup(popupAvatar);
 })
 
