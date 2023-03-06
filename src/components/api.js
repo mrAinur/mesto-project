@@ -13,9 +13,6 @@ const getUserProfile = () => {
         .then((res) => {
             return getResponseData(res)
         })
-        .catch((rej) => {
-            console.log(`Ошибка ${rej.status}`);
-        });
 };
 
 const getCards = () => {

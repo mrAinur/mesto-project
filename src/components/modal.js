@@ -29,17 +29,15 @@ const userAvatar = document.querySelector(".profile__avatar-img");
 
 /*Открытие попапов*/
 const openPopup = (item) => {
+    checkInputs(item);
     item.classList.add("popup_opened");
     document.addEventListener("keydown", closeByEscape);
 }
 
 /*Закртыие попапов*/
 const closePopup = (item) => {
-    checkInputs(item);
-    const form = item.querySelector(".form");
     item.classList.remove("popup_opened");
     document.removeEventListener("keydown", closeByEscape);
-    form.reset();
 }
 
 const closeByEscape = (evt) => {

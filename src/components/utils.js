@@ -1,5 +1,6 @@
-import { userName, userJob, userNameProfile, userJobProfile, openPopup, popupProfile, popupNewCard, closePopup } from "./modal.js";
+import { userName, userJob, userNameProfile, userJobProfile, openPopup, popupProfile } from "./modal.js";
 import { namePlaceInput, linkPlaceInput, renderCard } from "./card.js";
+import { settings, hideInputError } from "./validate.js";
 
 const renderInfo = (isLoading, item) => {
     const loading = item.querySelector(".popup__paragraph");
@@ -30,21 +31,16 @@ const makeCardForm = (evt) => {
         link: `${linkPlaceInput.value}`
     };
     renderCard(newCard);
-    closePopup(popupNewCard);
     evt.target.reset();
     renderInfo(false, evt.target);
 }
 
 const checkInputs = (item) => {
-    const inputs = Array.from(item.querySelectorAll(".popup__input"));
-    return inputs.forEach((input) => {
-            input.classList.remove("popup__input_type_error");
-            const span = Array.from(item.querySelectorAll(".popup__error"));
-            span.forEach((err) => {
-                err.classList.remove("popup__error_active");
-                err.textContent = ""
-            })
-    })
+    const form = item.querySelector(".form");
+    form.reset();
+    const inupts = Array.from(form.querySelectorAll(".popup__input"));
+    inupts.forEach((input) => {
+        hideInputError(form, input, settings)
+    });
 }
-
 export { renderInfo, getResponseData, getUserInfo, makeCardForm, checkInputs };

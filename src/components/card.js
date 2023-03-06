@@ -1,5 +1,5 @@
-import { openPopup } from "./modal.js";
-import { makeNewCard, deleteCard, addLike, deleteLike, getCards } from "./api.js";
+import { openPopup, popupNewCard, closePopup } from "./modal.js";
+import { makeNewCard, deleteCard, addLike, deleteLike } from "./api.js";
 import { getResponseData } from "./utils";
 
 const placeCard = document.querySelector(".popup__card"); //Открытие фотокарточки
@@ -114,7 +114,8 @@ const renderCard = (item) => {
             return getResponseData(res);
         })
         .then((res) => {
-            return cards.prepend(createCard(res));
+            cards.prepend(createCard(res));
+            return closePopup(popupNewCard);
         })
         .catch((rej) => {
             console.log(`Ошибка ${rej.status}`);
