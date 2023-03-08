@@ -17,6 +17,5 @@
 
 .profile__avatar-btn:hover {
     transition: 0.3s;
-    display: flex;
     opacity: 1;
 }
