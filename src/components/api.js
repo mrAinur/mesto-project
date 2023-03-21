@@ -28,7 +28,6 @@ export default class Api {
             headers: this._headers
         })
             .then((res) => {
-                console.log("Запрос успешен");
                 return getResponseData(res)
             })
     };
