@@ -5,10 +5,9 @@ import {
     userNameProfile,
     userJobProfile,
     namePlaceInput,
-    linkPlaceInput
+    linkPlaceInput,
+    settings
 } from "./Constants.js";
-
-import { settings } from "./Constants.js"
 
 import { openPopup } from "./modal.js";
 

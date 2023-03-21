@@ -13,7 +13,8 @@ import {
   popupAvatar,
   profileFormElement,
   popups,
-  newCardForm
+  newCardForm,
+  settings
 } from "./components/Constants.js";
 
 import {
@@ -22,8 +23,6 @@ import {
   profileHandleFormSubmit,
   makeNewAvatar,
 } from "./components/modal.js";
-
-import { settings } from "./components/Constants.js"
 
 import { makeCards, getUserId } from "./components/Card.js";
 
