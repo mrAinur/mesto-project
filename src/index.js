@@ -1,5 +1,6 @@
 import "./index.css";
 
+//debugger;
 import {
   userNameProfile,
   userJobProfile,
@@ -24,13 +25,11 @@ import {
   makeNewAvatar,
 } from "./components/modal.js";
 
-import { makeCards, getUserId } from "./components/Card.js";
-
 import { enableValidation } from "./components/FormValidator.js";
 
 import { api } from "./components/Api.js";
 
-import { getUserInfo, makeCardForm, checkInputs } from "./utils/Utils.js";
+import { getUserInfo, makeCardForm, checkInputs, getUserId, makeCards } from "./utils/Utils.js";
 
 Promise.all([api.getUserProfile(), api.getCards()])
   .then(([userInfo, cardsInfo]) => {

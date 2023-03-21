@@ -6,14 +6,29 @@ import {
     userJobProfile,
     namePlaceInput,
     linkPlaceInput,
-    settings
+    settings,
+    cards
 } from "./Constants.js";
 
 import { openPopup } from "../components/modal.js";
 
-import { renderCard } from "../components/Card.js";
+import { renderCard, createCard, card } from "../components/Card.js";
 
 import { hideInputError } from "../components/FormValidator.js";
+
+let userId; //Получаем id пользователя для дальнейшей реализации удаления своих карточек, а так же нахождения ранее лайкнутых фото или удаления лайков
+const getUserId = function (id) {
+    userId = id;
+}
+
+/*Добавление карточек*/
+const makeCards = (obj) => {
+    debugger;
+    obj.forEach((item) => {
+        console.log(item);
+        cards.append(createCard(item))
+    });
+}
 
 const renderInfo = (isLoading, item) => {
     const loading = item.querySelector(".popup__paragraph");
@@ -56,4 +71,4 @@ const checkInputs = (item) => {
         hideInputError(form, input, settings)
     });
 }
-export { renderInfo, getResponseData, getUserInfo, makeCardForm, checkInputs };
+export { renderInfo, getResponseData, getUserInfo, makeCardForm, checkInputs, userId, getUserId, makeCards };
