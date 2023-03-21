@@ -15,7 +15,7 @@ import {
   popups,
   newCardForm,
   settings
-} from "./components/Constants.js";
+} from "./utils/Constants.js";
 
 import {
   openPopup,
@@ -28,11 +28,11 @@ import { makeCards, getUserId } from "./components/Card.js";
 
 import { enableValidation } from "./components/FormValidator.js";
 
-import { getUserProfile, getCards } from "./components/Api.js";
+import { api } from "./components/Api.js";
 
-import { getUserInfo, makeCardForm, checkInputs } from "./components/Utils.js";
+import { getUserInfo, makeCardForm, checkInputs } from "./utils/Utils.js";
 
-Promise.all([getUserProfile(), getCards()])
+Promise.all([api.getUserProfile(), api.getCards()])
   .then(([userInfo, cardsInfo]) => {
     userNameProfile.textContent = userInfo.name;
     userJobProfile.textContent = userInfo.about;

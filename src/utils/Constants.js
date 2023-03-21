@@ -40,6 +40,8 @@ const newCardForm = document.querySelector(".popup__form-place");
 const namePlaceInput = newCardForm.querySelector(".popup__place-info");
 const linkPlaceInput = newCardForm.querySelector(".popup__place-link");
 
+const cohortId = "plus-cohort-20";
+
 const settings = {
     formSelector: '.form',
     inputSelector: '.popup__input',
@@ -75,5 +77,6 @@ export {
     newCardForm,
     namePlaceInput,
     linkPlaceInput,
-    settings
-}
+    settings,
+    cohortId
+};

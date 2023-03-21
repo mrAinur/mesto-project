@@ -5,13 +5,13 @@ import {
     popupName,
     placeCard,
     cards,
-} from "./Constants.js";
+} from "../utils/Constants.js";
 
 import { openPopup, closePopup } from "./modal.js";
 
-import { makeNewCard, deleteCard, addLike, deleteLike } from "./Api.js";
+import { api } from "./Api.js";
 
-import { getResponseData } from "./Utils";
+import { getResponseData } from "../utils/Utils";
 
 let userId; //Получаем id пользователя для дальнейшей реализации удаления своих карточек, а так же нахождения ранее лайкнутых фото или удаления лайков
 const getUserId = function(id) {
@@ -40,7 +40,7 @@ const createCard = (item) => {
         .addEventListener("click", function (evt) {
             const idCard = `${item._id}`;
             if (!(evt.target.classList.contains(`element__heart_active`))) {
-                addLike(idCard)
+                api.addLike(idCard)
                     .then((res) => {
                         return getResponseData(res);
                     })
@@ -52,7 +52,7 @@ const createCard = (item) => {
                         console.log(`Ошибка ${rej.status}`);
                     });
             } else {
-                deleteLike(idCard)
+                api.deleteLike(idCard)
                     .then((res) => {
                         return getResponseData(res);
                     })
@@ -72,7 +72,7 @@ const createCard = (item) => {
     if (item.owner._id === userId) {
         cardDel.addEventListener("click", (evt) => {
             const idCard = `${item._id}`;
-            deleteCard(idCard)
+            api.deleteCard(idCard)
                 .then(res => {
                     if (res.ok) {
                         evt.target.parentElement.remove();
@@ -107,7 +107,7 @@ const makeCards = (obj) => {
 
 /*Вставка новой карточки в Дом*/
 const renderCard = (item) => {
-    makeNewCard(item)
+    api.makeNewCard(item)
         .then((res) => {
             return getResponseData(res);
         })

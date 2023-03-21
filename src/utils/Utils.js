@@ -9,11 +9,11 @@ import {
     settings
 } from "./Constants.js";
 
-import { openPopup } from "./modal.js";
+import { openPopup } from "../components/modal.js";
 
-import { renderCard } from "./Card.js";
+import { renderCard } from "../components/Card.js";
 
-import { hideInputError } from "./FormValidator.js";
+import { hideInputError } from "../components/FormValidator.js";
 
 const renderInfo = (isLoading, item) => {
     const loading = item.querySelector(".popup__paragraph");

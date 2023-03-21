@@ -6,11 +6,11 @@ import {
     userAvatar,
     popupProfile,
     popupAvatar
-} from "./Constants.js"
+} from "../utils/Constants.js"
 
-import { editUserInfo, editAvatar } from "./Api.js";
+import { api } from "./Api.js";
 
-import { renderInfo, getResponseData } from "./Utils.js";
+import { renderInfo, getResponseData } from "../utils/Utils.js";
 
 /*Открытие попапов*/
 const openPopup = (item) => {
@@ -40,7 +40,7 @@ const profileHandleFormSubmit = (evt) => {
         name: nameValue.value,
         about: jobValue.value
     }
-    editUserInfo(userInfo)
+    api.editUserInfo(userInfo)
         .then((res) => {
             return getResponseData(res)
         })
@@ -61,7 +61,7 @@ const makeNewAvatar = (evt) => {
     const avatarUrl = {
         avatar: avatar
     };
-    editAvatar(avatarUrl)
+    api.editAvatar(avatarUrl)
         .then((res) => {
             return getResponseData(res)
         })
