@@ -23,7 +23,7 @@ const getUserId = function (id) {
 
 /*Добавление карточек*/
 const makeCards = (obj) => {
-    debugger;
+    //debugger;
     obj.forEach((item) => {
         console.log(item);
         cards.append(createCard(item))
