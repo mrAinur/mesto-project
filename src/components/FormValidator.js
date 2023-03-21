@@ -1,12 +1,3 @@
-const settings = {
-    formSelector: '.form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__submit',
-    inactiveButtonClass: 'popup__submit_inactive',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_active'
-};
-
 const showInputError = (formElement, inputElement, errorMessage, settings) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(settings["inputErrorClass"]); 
@@ -82,4 +73,4 @@ const enableValidation = (settings) => {
     });
 };
 
-export { enableValidation, settings, hideInputError }
+export { enableValidation, hideInputError }

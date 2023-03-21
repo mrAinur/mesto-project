@@ -1,14 +1,37 @@
 import "./index.css";
 
 import {
-  popups, popupNewCard,  popupProfileOpen, popupCardAddOpen, profileFormElement,
-  userNameProfile, userJobProfile, popupAvatar, popupAvatarOpen, formAddCard, formAddAvatar, openPopup, closePopup, profileHandleFormSubmit, makeNewAvatar, userAvatar
-} from "./components/modal.js";
-import { newCardForm, makeCards, getUserId } from "./components/card.js";
-import { enableValidation, settings } from "./components/validate.js";
-import { getUserProfile, getCards } from "./components/api.js";
-import { getUserInfo, makeCardForm, checkInputs } from "./components/utils.js";
+  userNameProfile,
+  userJobProfile,
+  userAvatar,
+  popupProfileOpen,
+  popupCardAddOpen,
+  formAddCard,
+  popupNewCard,
+  popupAvatarOpen,
+  formAddAvatar,
+  popupAvatar,
+  profileFormElement,
+  popups,
+  newCardForm
+} from "./components/Constants.js";
 
+import {
+  openPopup,
+  closePopup,
+  profileHandleFormSubmit,
+  makeNewAvatar,
+} from "./components/modal.js";
+
+import { settings } from "./components/Constants.js"
+
+import { makeCards, getUserId } from "./components/Card.js";
+
+import { enableValidation } from "./components/FormValidator.js";
+
+import { getUserProfile, getCards } from "./components/Api.js";
+
+import { getUserInfo, makeCardForm, checkInputs } from "./components/Utils.js";
 
 Promise.all([getUserProfile(), getCards()])
   .then(([userInfo, cardsInfo]) => {

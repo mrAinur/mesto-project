@@ -1,22 +1,20 @@
-import { openPopup, popupNewCard, closePopup } from "./modal.js";
-import { makeNewCard, deleteCard, addLike, deleteLike } from "./api.js";
-import { getResponseData } from "./utils";
+import {
+    popupNewCard,
+    cardElement,
+    popupImg,
+    popupName,
+    placeCard,
+    cards,
+} from "./Constants.js";
 
-const placeCard = document.querySelector(".popup__card"); //Открытие фотокарточки
-const popupImg = placeCard.querySelector(".popup__image"); //находим в попапе нужный нам класс
-const popupName = placeCard.querySelector(".popup__place-name"); //находим в попапе элемент для записи названия
+import { openPopup, closePopup } from "./modal.js";
 
-//Находим форму карточек и копируем в переменную
-const cards = document.querySelector(".elements");
-const cardElement = document.querySelector("#element").content;
+import { makeNewCard, deleteCard, addLike, deleteLike } from "./Api.js";
 
-/*Реализация добавления новых карточек*/
-const newCardForm = document.querySelector(".popup__form-place");
-const namePlaceInput = newCardForm.querySelector(".popup__place-info");
-const linkPlaceInput = newCardForm.querySelector(".popup__place-link");
+import { getResponseData } from "./Utils";
 
 let userId; //Получаем id пользователя для дальнейшей реализации удаления своих карточек, а так же нахождения ранее лайкнутых фото или удаления лайков
-const getUserId = (id) => {
+const getUserId = function(id) {
     userId = id;
 }
 
@@ -122,4 +120,4 @@ const renderCard = (item) => {
         });
 }
 
-export { userId, newCardForm, namePlaceInput, linkPlaceInput, makeCards, renderCard, createCard, getUserId };
+export { makeCards, renderCard, createCard, getUserId };

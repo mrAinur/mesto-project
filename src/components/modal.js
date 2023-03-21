@@ -1,34 +1,16 @@
-import { editUserInfo, editAvatar } from "./api.js";
-import { renderInfo, getResponseData } from "./utils.js";
+import {
+    nameValue,
+    jobValue,
+    userNameProfile,
+    userJobProfile,
+    userAvatar,
+    popupProfile,
+    popupAvatar
+} from "./Constants.js"
 
-/*Реализация открытия попапов*/
-const popups = document.querySelectorAll(".popup");
-const popupProfile = document.querySelector(".popup__edit-profile");
-const popupNewCard = document.querySelector(".popup__new-place");
-const popupAvatar = document.querySelector(".popup__avatar");
+import { editUserInfo, editAvatar } from "./Api.js";
 
-const formAddCard = document.querySelector(".popup__form-place");
-const formAddAvatar = document.querySelector(".popup__form-avatar");
-
-const popupProfileOpen = document.querySelector(".profile__edit-button"); //Конпка для открытия попапа профиля
-const userName = popupProfile.querySelector(".popup__name-info"); //Находим инпуты
-const userJob = popupProfile.querySelector(".popup__job-info");
-
-const popupCardAddOpen = document.querySelector(".profile__add-button"); //Конпка для открытия попапа добавления элемента
-
-const popupAvatarOpen = document.querySelector(".profile__avatar-btn");
-
-//Находим форму в DOM
-const profileFormElement = document.querySelector(".popup__form-profile");
-
-/*Находим нужные значения форм*/
-const nameValue = profileFormElement.querySelector(".popup__name-info");
-const jobValue = profileFormElement.querySelector(".popup__job-info");
-
-//Получите значение полей jobInput и nameInput из свойства value
-const userNameProfile = document.querySelector(".profile__user-name");
-const userJobProfile = document.querySelector(".profile__user-job");
-const userAvatar = document.querySelector(".profile__avatar-img");
+import { renderInfo, getResponseData } from "./Utils.js";
 
 /*Открытие попапов*/
 const openPopup = (item) => {
@@ -96,4 +78,4 @@ const makeNewAvatar = (evt) => {
         });
 }
 
-export { popups, popupNewCard, popupProfile, popupProfileOpen, userName, userJob, popupCardAddOpen, profileFormElement, userNameProfile, userJobProfile, userAvatar, popupAvatar, popupAvatarOpen, formAddCard, formAddAvatar, openPopup, closePopup, profileHandleFormSubmit, closeByEscape, makeNewAvatar };
+export { openPopup, closePopup, profileHandleFormSubmit, closeByEscape, makeNewAvatar };

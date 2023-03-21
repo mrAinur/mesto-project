@@ -1,4 +1,4 @@
-import { getResponseData } from "./utils";
+import { getResponseData } from "./Utils";
 
 const cohortId = "plus-cohort-20";
 const token = "a6c9ce5b-7a95-47f3-900e-0e9cffd9e4f4";

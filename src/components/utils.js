@@ -1,6 +1,20 @@
-import { userName, userJob, userNameProfile, userJobProfile, openPopup, popupProfile } from "./modal.js";
-import { namePlaceInput, linkPlaceInput, renderCard } from "./card.js";
-import { settings, hideInputError } from "./validate.js";
+import {
+    userName,
+    userJob,
+    popupProfile,
+    userNameProfile,
+    userJobProfile,
+    namePlaceInput,
+    linkPlaceInput
+} from "./Constants.js";
+
+import { settings } from "./Constants.js"
+
+import { openPopup } from "./modal.js";
+
+import { renderCard } from "./Card.js";
+
+import { hideInputError } from "./FormValidator.js";
 
 const renderInfo = (isLoading, item) => {
     const loading = item.querySelector(".popup__paragraph");
