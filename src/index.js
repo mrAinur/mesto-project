@@ -1,5 +1,4 @@
 import "./index.css";
-
 //debugger;
 import {
   userNameProfile,
@@ -17,19 +16,20 @@ import {
   newCardForm,
   settings
 } from "./utils/Constants.js";
-
 import {
   openPopup,
   closePopup,
   profileHandleFormSubmit,
   makeNewAvatar,
 } from "./components/modal.js";
-
 import { enableValidation } from "./components/FormValidator.js";
-
 import { api } from "./components/Api.js";
-
 import { getUserInfo, makeCardForm, checkInputs, getUserId, makeCards } from "./utils/Utils.js";
+import { PopupWithForm } from "./components/PopupWithForm.js";
+import { PopupWithImage } from "./components/PopupWithImage.js";
+import { Section } from "./components/Section.js";
+import { UserInfo } from "./components/UserInfo.js";
+
 
 Promise.all([api.getUserProfile(), api.getCards()])
   .then(([userInfo, cardsInfo]) => {
