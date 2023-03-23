@@ -1,5 +1,3 @@
-import { debug } from "webpack";
-
 export default class FormValidator {
     constructor({ formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass }, selector) {
         this._formSelector = formSelector;
@@ -18,7 +16,7 @@ export default class FormValidator {
     };
 
     _toggleButtonState(inputList, buttonElement) {
-        const buttonText = buttonElement.querySelector(".popup__paragraph")
+        const buttonText = buttonElement.querySelector(".popup__paragraph");
         if (this._hasInvalidInput(inputList)) {
             buttonText.classList.add("popup__paragraph_inactive");
             buttonElement.disabled = true;
@@ -61,7 +59,6 @@ export default class FormValidator {
     _setEventListeners(formElement) {
         const inputList = Array.from(formElement.querySelectorAll(this._inputSelector));
         const buttonElement = formElement.querySelector(this._submitButtonSelector);
-        console.log(buttonElement);
         this._toggleButtonState(inputList, buttonElement);
         inputList.forEach((inputElement) => {
             inputElement.addEventListener('input', () => {
@@ -83,7 +80,6 @@ export default class FormValidator {
 
     enableValidation() {
         this._formElement = this._getForm()
-        console.log(this._formElement);
         this._formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
         });
