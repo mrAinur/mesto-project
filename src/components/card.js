@@ -15,36 +15,45 @@ import { getResponseData, userId } from "../utils/Utils";
 
 export default class Card {
 
-    constructor(item) {
-        this._card = cardElement.querySelector(".element").cloneNode(true);
-        this._numLikes = this._card.querySelector(".element__num-likes");
-        this._cardDel = this._card.querySelector(".element__delete");
-        this._item = item;
+    constructor({ likes, link, name, _id, owner }, selector) {
+        this._likes = likes;
+        this._link = link;
+        this._name = name;
+        this._id = _id;
+        this._ownerId = owner._id;
+        this._selector = selector;
     }
 
-    _createCard() {
-        this._card.querySelector(".element__place-img").src = this._item.link;
-        this._card.querySelector(".element__place-img").alt = this._item.name;
-        this._card.querySelector(".element__place-name").textContent = this._item.name;
-        this._numLikes.textContent = this._item.likes.length;
+    _getCard() {
+        const cardElement = document.querySelector(this._selector).content.cloneNode(true);
+        return cardElement;
+    }
+
+    _makeCard() {
+        this._card.querySelector(".element__place-img").src = this._link;
+        this._card.querySelector(".element__place-img").alt = this._name;
+        this._card.querySelector(".element__place-name").textContent = this._name;
+        this._numLikes = this._card.querySelector(".element__num-likes");
+        this._numLikes.textContent = this._likes.length;
 
         /*Проверяем лайкал ли ранее пользователь данную карту*/
-        this._item.likes.forEach((user) => {
+        this._likes.forEach((user) => {
             if (user._id === userId) {
-                const heart = this._card.querySelector(".element__heart");
-                heart.classList.add("element__heart_active");
+                this._heart = this._card.querySelector(".element__heart");
+                this._heart.classList.add("element__heart_active");
             }
         })
+        return this._card;
     }
 
-    _heartEventListener() {
-        /*Реализация кнопки лайка*/
+    _likesEventListeners() {
+        this._numLikes = this._card.querySelector(".element__num-likes");
         this._card
             .querySelector(".element__heart")
-            .addEventListener("click", function (evt) {
-                const idCard = `${this._item._id}`;
+            .addEventListener("click", (evt) => {
+                this._idCard = `${this._id}`;
                 if (!(evt.target.classList.contains(`element__heart_active`))) {
-                    api.addLike(idCard)
+                    api.addLike(this._idCard)
                         .then((res) => {
                             return getResponseData(res);
                         })
@@ -56,11 +65,12 @@ export default class Card {
                             console.log(`Ошибка ${rej.status}`);
                         });
                 } else {
-                    api.deleteLike(idCard)
+                    api.deleteLike(this._idCard)
                         .then((res) => {
                             return getResponseData(res);
                         })
                         .then((obj) => {
+                            console.log(obj);
                             evt.target.classList.remove("element__heart_active");
                             this._numLikes.textContent = obj.likes.length;
                         })
@@ -72,10 +82,12 @@ export default class Card {
     }
 
     _cardDelEventListener() {
-        if (this._item.owner._id === userId) {
-            cardDel.addEventListener("click", (evt) => {
-                const idCard = `${this._item._id}`;
-                api.deleteCard(idCard)
+        this._cardDel = this._card.querySelector(".element__delete");
+        
+        if (this._ownerId === userId) {
+            this._cardDel.addEventListener("click", (evt) => {
+                this._idCard = `${this._id}`;
+                api.deleteCard(this._idCard)
                     .then(res => {
                         if (res.ok) {
                             evt.target.parentElement.remove();
@@ -86,32 +98,31 @@ export default class Card {
                     });
             });
         } else {
-            cardDel.remove();
+            this._cardDel.remove();
         }
     }
 
-    _openCardEventListener(){
+    _cardOpenEventListener() {
         this._card
-        .querySelector(".element__place-img")
-        .addEventListener("click", function () {
-            popupImg.src = this._item.link;
-            popupImg.alt = this._item.name;
-            popupName.textContent = this._item.name;
-            openPopup(placeCard);
-        });
+            .querySelector(".element__place-img")
+            .addEventListener("click", () => {
+                popupImg.src = this._link;
+                popupImg.alt = this._name;
+                popupName.textContent = this._name;
+                openPopup(placeCard);
+            });
     }
 
-    makeCard(){
-        this._createCard(this._item);
-        this._heartEventListener(this._item);
-        this._cardDelEventListener(this._item);
-        this._openCardEventListener(this._item);
+    generate() {
+        this._card = this._getCard();
+        this._makeCard();
+        this._likesEventListeners();
+        this._cardDelEventListener();
+        this._cardOpenEventListener();
         return this._card;
     }
 
 }
-
-const card = new Card();
 
 const createCard = (item) => {
     const card = cardElement.querySelector(".element").cloneNode(true);
@@ -140,7 +151,7 @@ const createCard = (item) => {
                         return getResponseData(res);
                     })
                     .then((obj) => {
-                        numLikes.textContent = obj.likes.length;
+                        this._numLikes.textContent = obj.likes.length;
                         evt.target.classList.add("element__heart_active");
                     })
                     .catch((rej) => {
@@ -154,7 +165,7 @@ const createCard = (item) => {
                     .then((obj) => {
                         console.log(obj);
                         evt.target.classList.remove("element__heart_active");
-                        numLikes.textContent = obj.likes.length;
+                        this._numLikes.textContent = obj.likes.length;
                     })
                     .catch((rej) => {
                         console.log(`Ошибка ${rej.status}`);
@@ -210,4 +221,4 @@ const renderCard = (item) => {
         });
 }
 
-export { renderCard, createCard, card};
+export { renderCard, createCard };

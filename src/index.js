@@ -1,5 +1,4 @@
 import "./index.css";
-//debugger;
 import {
   userNameProfile,
   userJobProfile,
@@ -14,6 +13,7 @@ import {
   profileFormElement,
   popups,
   newCardForm,
+  cards,
   settings
 } from "./utils/Constants.js";
 import {
@@ -22,13 +22,14 @@ import {
   profileHandleFormSubmit,
   makeNewAvatar,
 } from "./components/modal.js";
-import { enableValidation } from "./components/FormValidator.js";
+import FormValidator from "./components/FormValidator.js";
 import { api } from "./components/Api.js";
-import { getUserInfo, makeCardForm, checkInputs, getUserId, makeCards } from "./utils/Utils.js";
+import { getUserInfo, makeCardForm, checkInputs, getUserId, makeCards, items } from "./utils/Utils.js";
 import { PopupWithForm } from "./components/PopupWithForm.js";
 import { PopupWithImage } from "./components/PopupWithImage.js";
-import { Section } from "./components/Section.js";
 import { UserInfo } from "./components/UserInfo.js";
+import Card from "./components/Card.js";
+import Section from "./components/Section.js";
 
 
 Promise.all([api.getUserProfile(), api.getCards()])
@@ -38,11 +39,12 @@ Promise.all([api.getUserProfile(), api.getCards()])
     userAvatar.src = `${userInfo.avatar}`;
     getUserId(`${userInfo._id}`);
     makeCards(cardsInfo);
+    cardsList.rendererItems();
   })
   .catch((rej) => {
     console.log(`Ошибка ${rej.status}`);
   });
-enableValidation(settings);
+//enableValidation(settings);
 
 /*Добавляем работу кнопки для открытия попапа профиля*/
 popupProfileOpen.addEventListener("click", getUserInfo);
@@ -77,3 +79,27 @@ popups.forEach((popup) => {
 });
 
 newCardForm.addEventListener("submit", makeCardForm);
+
+
+
+
+/*Экзепляр карточек*/
+const cardsList = new Section({
+  items: items, renderer: (item) => {
+      const card = new Card(item, "#element");
+      const cardElement = card.generate();
+      cardsList.setItem(cardElement);
+  }
+}, cards);
+
+/*Экземпляр формы реадкирования профиля*/
+const formEditProfile = new FormValidator(settings, ".popup__form-profile");
+formEditProfile.enableValidation()
+
+/*Экземпляр формы добавления карточки*/
+const formNewPlace = new FormValidator(settings, ".popup__form-place");
+formNewPlace.enableValidation()
+
+/*Экземпляр добавления фотографии пользователя*/
+const formEditAvatar = new FormValidator(settings, ".popup__form-avatar");
+formEditAvatar.enableValidation()

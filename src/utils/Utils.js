@@ -12,7 +12,7 @@ import {
 
 import { openPopup } from "../components/modal.js";
 
-import { renderCard, createCard, card } from "../components/Card.js";
+import { renderCard } from "../components/Card.js";
 
 import { hideInputError } from "../components/FormValidator.js";
 
@@ -22,11 +22,10 @@ const getUserId = function (id) {
 }
 
 /*Добавление карточек*/
+const items = [];
 const makeCards = (obj) => {
-    //debugger;
     obj.forEach((item) => {
-        console.log(item);
-        cards.append(createCard(item))
+        items.push(item);
     });
 }
 
@@ -71,4 +70,4 @@ const checkInputs = (item) => {
         hideInputError(form, input, settings)
     });
 }
-export { renderInfo, getResponseData, getUserInfo, makeCardForm, checkInputs, userId, getUserId, makeCards };
+export { renderInfo, getResponseData, getUserInfo, makeCardForm, checkInputs, userId, getUserId, makeCards, items };

@@ -1,31 +1,22 @@
-export class Section {
-  constructor({ items = [], renderer }, selector) {
+export default class Section {
+  constructor({ items, renderer }, selector) {
     this._items = items;
-    this.selector = selector;
     this._renderer = renderer;
-    this.container = document.querySelector(selector);
+    this._container = document.querySelector(selector);
   }
 
-  //добавляет все карточки в контейнер
-  renderAll(cards, userId) {
-    this.container.innerHTML = "";
-    cards.forEach((element) => {
-      this.container.append(this._renderer(element, userId));
+  setItem(element) {
+    this._container.append(element);
+  }
+
+  clear() {
+    this._container.innerHTML = '';
+  }
+
+  rendererItems() { 
+    this.clear();
+    this._items.forEach(item => {
+      this._renderer(item);
     });
-  }
-
-  //Добавляет дом-элемент в контейнер
-  addItem(element, userId) {
-    this.container.prepend(this._renderer(element, userId));
-  }
-
-  //Добавлят информацию о карточках
-  setItems(info) {
-    return this._items = Array.from(info);
-  }
-
-  //Покажет итемы в консоль
-  showItems() {
-    console.log(this._items);
   }
 }

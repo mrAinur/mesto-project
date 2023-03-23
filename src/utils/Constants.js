@@ -32,7 +32,7 @@ const popupImg = placeCard.querySelector(".popup__image"); //находим в �
 const popupName = placeCard.querySelector(".popup__place-name"); //находим в попапе элемент для записи названия
 
 //Находим форму карточек и копируем в переменную
-const cards = document.querySelector(".elements");
+const cards = ".elements";
 const cardElement = document.querySelector("#element").content;
 
 /*Реализация добавления новых карточек*/
