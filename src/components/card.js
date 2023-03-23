@@ -9,7 +9,7 @@ import {
 
 import { openPopup, closePopup } from "./modal.js";
 
-import { api } from "./Api.js";
+import { api } from "../index.js";
 
 import { getResponseData, userId } from "../utils/Utils";
 

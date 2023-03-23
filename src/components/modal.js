@@ -8,7 +8,7 @@ import {
     popupAvatar
 } from "../utils/Constants.js"
 
-import { api } from "./Api.js";
+import { api } from "../index.js";
 
 import { renderInfo, getResponseData } from "../utils/Utils.js";
 

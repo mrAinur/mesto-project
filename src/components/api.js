@@ -2,7 +2,7 @@ import { getResponseData } from "../utils/Utils.js";
 import { cohortId } from "../utils/Constants.js";
 
 
-class Api {
+export default class Api {
 
     constructor(options) {
         this._baseUrl = options.baseUrl;
@@ -78,13 +78,3 @@ class Api {
     }
 
 }
-
-const api = new Api({
-    baseUrl: 'https://nomoreparties.co/v1/',
-    headers: {
-        authorization: "a6c9ce5b-7a95-47f3-900e-0e9cffd9e4f4",
-        "Content-Type": "application/json"
-    }
-});
-
-export { api }
