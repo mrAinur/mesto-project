@@ -5,22 +5,21 @@ import { checkInputs } from "../utils/Utils.js";
 
 
 export default class PopupWithForm extends Popup {
+
   constructor(popupUserInfo, popupUserAvatar, popupUserCard) {
-    /*Данные формы изменения данных профиля*/
+    super();
     this._popupUserInfo = popupUserInfo;
-    this._popupNameValue = this._popupUserInfo.querySelector(".popup__name-info").value;
-    this._popupJobValue = this._popupUserInfo.querySelector(".popup__job-info").value;
+    this._popupNameValue = this._popupUserInfo.querySelector(".popup__name-info");
+    this._popupJobValue = this._popupUserInfo.querySelector(".popup__job-info");
     this._popupSubmitBtnUser = this._popupUserInfo.querySelector(".popup__submit");
 
-    /*Данные добавления новой карточки*/
     this._popupNewCard = popupUserCard;
-    this._popupNameValue = this._popupNewCard.querySelector(".popup__name-info").value;
-    this._popupJobValue = this._popupNewCard.querySelector(".popup__job-info").value;
+    this._popupNameValue = this._popupNewCard.querySelector(".popup__name-info");
+    this._popupJobValue = this._popupNewCard.querySelector(".popup__job-info");
     this._popupSubmitBtnCard = this._popupNewCard.querySelector(".popup__submit");
 
-    /*Данные формы изменения данных аватара*/
     this._popupUserAvatar = popupUserAvatar;
-    this._popupAvatarValue = this._popupUserAvatar.querySelector(".popup__place-link").value;
+    this._popupAvatarValue = this._popupUserAvatar.querySelector(".popup__place-link");
     this._popupSubmitBtnAvatar = this._popupUserAvatar.querySelector(".popup__submit");
 
   }

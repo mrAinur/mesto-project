@@ -167,7 +167,7 @@ const userInfo = new UserInfo({
     .editUserInfo(objInputs.userName, objInputs.userJob)
     .then((result) => {
       infoUser.setUserInfo(result);
-      popupFormProfile.close();
+      popupWithForm.close();
     })
     .catch((err) => console.log(`Ошибка: ${err}`))
     .finally(() => {
@@ -175,9 +175,8 @@ const userInfo = new UserInfo({
     });
 });
 
+/*Экземпляр работы попапов*/
 const popupWithForm = new PopupWithForm(popupProfile, popupNewCard, popupAvatar);
-
-
 
 
 
