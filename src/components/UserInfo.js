@@ -1,22 +1,15 @@
 export class UserInfo {
-  constructor({ nameSelector, aboutSelector, avatarSelector }) {
-    this._name = document.querySelector(nameSelector);
-    this._about = document.querySelector(aboutSelector);
-    this._avatar = document.querySelector(avatarSelector);
+  constructor({ userNameProfile, userJobProfile, userAvatar }) {
+    /*Информация о пользователе, лежащая в HTML*/
+    this._name = userNameProfile;
+    this._about = userJobProfile;
+    this._avatar = userAvatar;
   }
-  getUserInfo() {
-    return {
-      id: this._id,
-      name: this._name.textContent,
-      about: this._about.textContent,
-      avatar: this._avatar.src,
-    };
-  }
-  setUserInfo({ name, about, avatar, _id }) {
-    //деструктурируем полученный объект
-    this._id = _id;
-    this._name.textContent = name;
-    this._about.textContent = about;
-    this._avatar.src = avatar;
-  }
+
+  getUserInfo({name, about, avatar}){
+    this._name = name,
+    this._about = about,
+    this._avatar = `${avatar}`
+  }  
+
 }

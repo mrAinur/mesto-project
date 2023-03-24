@@ -1,25 +1,26 @@
-export class Popup {
+export default class Popup {
   constructor(popupSelector) {
     this.popupSelector = popupSelector;
     this.popup = document.querySelector(this.popupSelector);
   }
-  
+
   //метод для открытия попапа
   open() {
     this.popup.classList.add("popup_opened");
-    window.addEventListener("click", this._handleEscClose);
+    document.addEventListener("click", this._handleEscClose);
   }
 
   //метод для закрытия попапа
   close() {
     this.popup.classList.remove("popup_opened");
-    window.removeEventListener("click", this._handleEscClose);
+    document.removeEventListener("click", this._handleEscClose);
   }
 
   //метод для закрытия попапа при нажатии ESC
   _handleEscClose = (event) => {
     if (event.key === "Escape") {
-      this.close();
+      this._openPopup = document.querySelector(".popup_opened");
+      this.close(this._openPopup);
     }
   };
 

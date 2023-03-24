@@ -1,11 +1,28 @@
-import { Popup } from "./Popup.js";
-export class PopupWithForm extends Popup {
-  constructor(popupSelector, handleFormSubmit) {
-    super(popupSelector);
-    this._handleFormSubmit = handleFormSubmit;
-    this._form = this.popup.querySelector(".form");
-    this._submitButton = this._form.querySelector(".popup__paragraph");
-    this._inputList = this._form.querySelectorAll(".popup__input");
+import Popup from "./Popup.js";
+import { formAddAvatar, popupImg, popupName } from "../utils/Constants.js"
+import { formEditAvatar, popupUserInfo } from "../index.js";
+import { checkInputs } from "../utils/Utils.js";
+
+
+export default class PopupWithForm extends Popup {
+  constructor(popupUserInfo, popupUserAvatar, popupUserCard) {
+    /*Данные формы изменения данных профиля*/
+    this._popupUserInfo = popupUserInfo;
+    this._popupNameValue = this._popupUserInfo.querySelector(".popup__name-info").value;
+    this._popupJobValue = this._popupUserInfo.querySelector(".popup__job-info").value;
+    this._popupSubmitBtnUser = this._popupUserInfo.querySelector(".popup__submit");
+
+    /*Данные добавления новой карточки*/
+    this._popupNewCard = popupUserCard;
+    this._popupNameValue = this._popupNewCard.querySelector(".popup__name-info").value;
+    this._popupJobValue = this._popupNewCard.querySelector(".popup__job-info").value;
+    this._popupSubmitBtnCard = this._popupNewCard.querySelector(".popup__submit");
+
+    /*Данные формы изменения данных аватара*/
+    this._popupUserAvatar = popupUserAvatar;
+    this._popupAvatarValue = this._popupUserAvatar.querySelector(".popup__place-link").value;
+    this._popupSubmitBtnAvatar = this._popupUserAvatar.querySelector(".popup__submit");
+
   }
 
   //собирает данные импутов формы
@@ -24,9 +41,59 @@ export class PopupWithForm extends Popup {
       this._handleFormSubmit(this._getInputValues()); // исполняет функцию сохранения, взяв данные, которые ввели в инпуты формы
     });
   }
-  
+
   close() {
     super.close();
     this._form.reset();
+  }
+
+  _handleFormProfile() {
+    popupProfileOpen.addEventListener("mousedown", function () {
+      this._popupNameValue = infoUser.getUserInfo().name;
+      this._popupJobValue = infoUser.getUserInfo().about;
+    });
+  }
+
+  _popupClose(popup) {
+    popup.addEventListener("mousedown", (evt) => {
+      if (evt.target.classList.contains("popup_opened")) {
+        close(popup);
+      }
+      if (evt.target.classList.contains("popup__close")) {
+        close(popup);
+      }
+    });
+  }
+
+  _popupOpen() {
+    this._popupUserAvatar.addEventListener("click", () => {
+      formAddAvatar.reset();
+      checkInputs(this._popupUserAvatar, formEditAvatar);
+      open(this._popupUserAvatar);
+    })
+  }
+
+  popupsEventListeners() {
+    this._popupClose(this._popupUserInfo);
+    this._popupClose(this._popupUserAvatar);
+    this.__popupOpen(this._popupUserInfo);
+    this.__popupOpen(this._popupUserAvatar);
+  }
+
+  getUserInfo() {
+    return {
+      id: this._id,
+      name: this._name,
+      about: this._about,
+      avatar: this._avatar,
+    };
+  }
+
+  setUserInfo({ name, about, avatar, _id }) {
+    //деструктурируем полученный объект
+    this._id = _id;
+    this._name = name;
+    this._about = about;
+    this._avatar = avatar;
   }
 }

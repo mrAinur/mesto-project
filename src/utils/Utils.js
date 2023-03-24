@@ -69,7 +69,7 @@ const checkInputs = (item, popupClass) => {
     const form = item.querySelector(".form");
     const inupts = Array.from(form.querySelectorAll(".popup__input"));
     inupts.forEach((input) => {
-        popupClass._hideInputError(form, input);
+        popupClass.hideInputError(form, input);
     });
 }
 export { renderInfo, getResponseData, getUserInfo, makeCardForm, checkInputs, userId, getUserId, makeCards, items };
