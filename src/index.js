@@ -55,8 +55,8 @@ const formEditProfile = new FormValidator(settings, ".popup__form-profile");
 formEditProfile.enableValidation()
 
 /*Экземпляр формы добавления карточки*/
-const formNewPlace = new FormValidator(settings, ".popup__form-place");
-formNewPlace.enableValidation()
+const formNewCard = new FormValidator(settings, ".popup__form-place");
+formNewCard.enableValidation()
 
 /*Экземпляр добавления фотографии пользователя*/
 const formEditAvatar = new FormValidator(settings, ".popup__form-avatar");
@@ -83,13 +83,13 @@ popupProfileOpen.addEventListener("click", getUserInfo);
 /*Добавляем работу кнопки для открытия попапа новой карты места*/
 popupCardAddOpen.addEventListener("click", () => {
   formAddCard.reset();
-  checkInputs(popupNewCard);
+  checkInputs(popupNewCard, formNewCard);
   openPopup(popupNewCard);
 });
 
 popupAvatarOpen.addEventListener("click", () => {
   formAddAvatar.reset();
-  checkInputs(popupAvatar);
+  checkInputs(popupAvatar, formEditAvatar);
   openPopup(popupAvatar);
 })
 
@@ -111,4 +111,4 @@ popups.forEach((popup) => {
 
 newCardForm.addEventListener("submit", makeCardForm);
 
-export { api }
+export { api, formEditProfile }

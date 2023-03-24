@@ -16,6 +16,8 @@ import { renderCard } from "../components/Card.js";
 
 import { hideInputError } from "../components/FormValidator.js";
 
+import { formEditProfile } from "../index.js";
+
 let userId; //Получаем id пользователя для дальнейшей реализации удаления своих карточек, а так же нахождения ранее лайкнутых фото или удаления лайков
 const getUserId = function (id) {
     userId = id;
@@ -47,7 +49,7 @@ const getResponseData = (res) => {
 const getUserInfo = () => {
     userName.value = userNameProfile.textContent;
     userJob.value = userJobProfile.textContent;
-    checkInputs(popupProfile);
+    checkInputs(popupProfile, formEditProfile);
     openPopup(popupProfile);
 }
 
@@ -63,11 +65,11 @@ const makeCardForm = (evt) => {
     renderInfo(false, evt.target);
 }
 
-const checkInputs = (item) => {
+const checkInputs = (item, popupClass) => {
     const form = item.querySelector(".form");
     const inupts = Array.from(form.querySelectorAll(".popup__input"));
     inupts.forEach((input) => {
-        hideInputError(form, input, settings)
+        popupClass._hideInputError(form, input);
     });
 }
 export { renderInfo, getResponseData, getUserInfo, makeCardForm, checkInputs, userId, getUserId, makeCards, items };

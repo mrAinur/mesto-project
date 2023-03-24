@@ -68,7 +68,7 @@ export default class FormValidator {
         });
         formElement.addEventListener('reset', () => {
             setTimeout(() => {
-                this._toggleButtonState(this._inputList, this._buttonElement), 0
+                this._toggleButtonState(inputList, buttonElement), 0
             })
         })
     }
@@ -84,6 +84,7 @@ export default class FormValidator {
             evt.preventDefault();
         });
         this._setEventListeners(this._formElement);
+        return this._formElement;
     }
 
 }
