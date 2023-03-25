@@ -177,6 +177,7 @@ const userInfo = new UserInfo({
 
 /*Экземпляр работы попапов*/
 const popupWithForm = new PopupWithForm(popupProfile, popupNewCard, popupAvatar);
+popupWithForm.getInfo();
 
 
 

@@ -14,14 +14,29 @@ export default class PopupWithForm extends Popup {
     this._popupSubmitBtnUser = this._popupUserInfo.querySelector(".popup__submit");
 
     this._popupNewCard = popupUserCard;
-    this._popupNameValue = this._popupNewCard.querySelector(".popup__name-info");
-    this._popupJobValue = this._popupNewCard.querySelector(".popup__job-info");
+    this._popupNameCardValue = this._popupNewCard.querySelector(".popup__place-info");
+    this._popupJobCardValue = this._popupNewCard.querySelector(".popup__place-link");
     this._popupSubmitBtnCard = this._popupNewCard.querySelector(".popup__submit");
 
     this._popupUserAvatar = popupUserAvatar;
     this._popupAvatarValue = this._popupUserAvatar.querySelector(".popup__place-link");
     this._popupSubmitBtnAvatar = this._popupUserAvatar.querySelector(".popup__submit");
 
+  }
+
+    /*Проверка полученных в конструкторе данных*/
+  getInfo(){
+    //console.log(this._popupUserInfo)
+    //console.log(this._popupNameValue)
+    //console.log(this._popupJobValue)
+    //console.log(this._popupSubmitBtnUser)
+    //console.log(this._popupNewCard)
+    console.log(this._popupNameCardValue)
+    console.log(this._popupJobCardValue)
+    console.log(this._popupSubmitBtnCard)
+    //console.log(this._popupUserAvatar)
+    //console.log(this._popupAvatarValue)
+    //console.log(this._popupSubmitBtnAvatar)
   }
 
   //собирает данные импутов формы
