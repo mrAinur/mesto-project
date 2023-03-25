@@ -67,9 +67,28 @@ const formEditAvatar = new FormValidator(settings, ".popup__form-avatar");
 formEditAvatar.enableValidation();
 
 
+const userInformation = new UserInfo({
+  userNameProfile: ".profile__user-name",
+  userJobProfile: ".profile__user-job",
+  userAvatar: ".profile__avatar-img",
+}, (objInputs) => {                  // активировать попап для редактирования профиля
+  renderInfo(true, popupProfileOpen);
+  api
+    .editUserInfo(objInputs.userName, objInputs.userJob)
+    .then((result) => {
+      infoUser.setUserInfo(result);
+      popupWithForm.close();
+    })
+    .catch((err) => console.log(`Ошибка: ${err}`))
+    .finally(() => {
+      renderInfo(false, popupProfileOpen);
+    });
+});
+
+
 Promise.all([api.getUserProfile(), api.getCards()])
   .then(([userInfo, cardsInfo]) => {
-    infoUser.getUserInfo(userInfo);
+    userInformation.getUserInfo(userInfo);
     getUserId(`${userInfo._id}`);
 
     /*makeCards(cardsInfo);*/
@@ -134,7 +153,7 @@ newCardForm.addEventListener("submit", makeCardForm);
 
 
 
-const infoUser = new UserInfo(profileSelectors);
+//const infoUser = new UserInfo(profileSelectors);
 //экземпляр класса для открытия попапа аватара
 // const popupImage = new PopupWithImage(".popup__card");
 // const popupFormAvatar = new PopupWithForm(".popup__avatar", (objInputs) => {
@@ -157,27 +176,11 @@ const infoUser = new UserInfo(profileSelectors);
 //   formEditAvatar.enableValidation();
 // });
 
-const userInfo = new UserInfo({
-  userNameProfile: userNameProfile,
-  userJobProfile: userJobProfile,
-  userAvatar: userAvatar,
-}, (objInputs) => {                  // активировать попап для редактирования профиля
-  renderInfo(true, popupProfileOpen);
-  api
-    .editUserInfo(objInputs.userName, objInputs.userJob)
-    .then((result) => {
-      infoUser.setUserInfo(result);
-      popupWithForm.close();
-    })
-    .catch((err) => console.log(`Ошибка: ${err}`))
-    .finally(() => {
-      renderInfo(false, popupProfileOpen);
-    });
-});
+
 
 /*Экземпляр работы попапов*/
 const popupWithForm = new PopupWithForm(popupProfile, popupNewCard, popupAvatar);
-popupWithForm.getInfo();
+
 
 
 

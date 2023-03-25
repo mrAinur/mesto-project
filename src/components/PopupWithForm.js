@@ -6,7 +6,7 @@ import { checkInputs } from "../utils/Utils.js";
 
 export default class PopupWithForm extends Popup {
 
-  constructor(popupUserInfo, popupUserAvatar, popupUserCard) {
+  constructor(popupUserInfo, popupUserCard, popupUserAvatar ) {
     super();
     this._popupUserInfo = popupUserInfo;
     this._popupNameValue = this._popupUserInfo.querySelector(".popup__name-info");
@@ -22,21 +22,6 @@ export default class PopupWithForm extends Popup {
     this._popupAvatarValue = this._popupUserAvatar.querySelector(".popup__place-link");
     this._popupSubmitBtnAvatar = this._popupUserAvatar.querySelector(".popup__submit");
 
-  }
-
-    /*Проверка полученных в конструкторе данных*/
-  getInfo(){
-    //console.log(this._popupUserInfo)
-    //console.log(this._popupNameValue)
-    //console.log(this._popupJobValue)
-    //console.log(this._popupSubmitBtnUser)
-    //console.log(this._popupNewCard)
-    console.log(this._popupNameCardValue)
-    console.log(this._popupJobCardValue)
-    console.log(this._popupSubmitBtnCard)
-    //console.log(this._popupUserAvatar)
-    //console.log(this._popupAvatarValue)
-    //console.log(this._popupSubmitBtnAvatar)
   }
 
   //собирает данные импутов формы
@@ -88,10 +73,14 @@ export default class PopupWithForm extends Popup {
   }
 
   popupsEventListeners() {
+    this._popupOpen(this._popupUserInfo);
+    this._popupOpen(this._popupNewCard)
+    this._popupOpen(this._popupUserAvatar);
+
     this._popupClose(this._popupUserInfo);
+    this._popupClose(this._popupNewCard)
     this._popupClose(this._popupUserAvatar);
-    this.__popupOpen(this._popupUserInfo);
-    this.__popupOpen(this._popupUserAvatar);
+
   }
 
   getUserInfo() {

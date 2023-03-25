@@ -23,9 +23,9 @@ const nameValue = profileFormElement.querySelector(".popup__name-info");
 const jobValue = profileFormElement.querySelector(".popup__job-info");
 
 //Получите значение полей jobInput и nameInput из свойства value
-const userNameProfile = document.querySelector(".profile__user-name").textContent;
-const userJobProfile = document.querySelector(".profile__user-job").textContent;
-const userAvatar = document.querySelector(".profile__avatar-img").src;
+const userNameProfile = document.querySelector(".profile__user-name");
+const userJobProfile = document.querySelector(".profile__user-job");
+const userAvatar = document.querySelector(".profile__avatar-img");
 
 const placeCard = document.querySelector(".popup__card"); //Открытие фотокарточки
 const popupImg = placeCard.querySelector(".popup__image"); //находим в попапе нужный нам класс
