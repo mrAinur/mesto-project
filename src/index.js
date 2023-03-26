@@ -78,6 +78,7 @@ popupUserInfo.setEventListeners();
 /*Экземпляр работы попапа добавления новой карточки*/
 const popupNewPlace = new PopupWithForm({
   selector: ".popup__new-place", renderer: (item) => {
+    renderInfo(true, popupNewCard);
     api.makeNewCard(item)
       .then((res) => {
         return getResponseData(res);
@@ -95,6 +96,9 @@ const popupNewPlace = new PopupWithForm({
       })
       .catch((rej) => {
         console.log(`Ошибка ${rej.status}`);
+      })
+      .finally(() => {
+        renderLoading(false, popupNewCard);
       });
   }
 });
@@ -111,7 +115,7 @@ popupUserAvatar.setEventListeners();
 
 const userInformation = new UserInfo({
   name: ".profile__user-name", about: ".profile__user-job", avatar: ".profile__avatar-img", rendererUser: (item) => {
-    
+    renderInfo(true, popupProfile);
     api.editUserInfo(item)
       .then((res) => {
         return getResponseData(res);
@@ -121,8 +125,12 @@ const userInformation = new UserInfo({
       })
       .catch((rej) => {
         console.log(`Ошибка ${rej.status}`);
+      })
+      .finally(() => {
+        renderLoading(false, popupProfile);
       });
   }, rendererAvatar: (item) => {
+    renderInfo(true, popupAvatar);
     api.editAvatar(item)
       .then((res) => {
         return getResponseData(res);
@@ -132,6 +140,9 @@ const userInformation = new UserInfo({
       })
       .catch((rej) => {
         console.log(`Ошибка ${rej.status}`);
+      })
+      .finally(() => {
+        renderLoading(false, popupAvatar);
       });
   }
 })

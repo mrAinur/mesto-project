@@ -80,7 +80,7 @@ export {
     linkPlaceInput,
     settings,
     cohortId,
-    cardsContainer
+    cardsContainer,
 };
 
 
