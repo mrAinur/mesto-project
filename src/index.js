@@ -98,7 +98,7 @@ const popupNewPlace = new PopupWithForm({
         console.log(`Ошибка ${rej.status}`);
       })
       .finally(() => {
-        renderLoading(false, popupNewCard);
+        renderInfo(false, popupNewCard);
       });
   }
 });
@@ -142,7 +142,7 @@ const userInformation = new UserInfo({
         console.log(`Ошибка ${rej.status}`);
       })
       .finally(() => {
-        renderLoading(false, popupAvatar);
+        renderInfo(false, popupAvatar);
       });
   }
 })
