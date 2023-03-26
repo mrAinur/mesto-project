@@ -91,9 +91,9 @@ const popupUserAvatar = new PopupWithForm({
 popupUserAvatar.setEventListeners();
 
 
-
 const userInformation = new UserInfo({
   name: ".profile__user-name", about: ".profile__user-job", avatar: ".profile__avatar-img", rendererUser: (item) => {
+    
     api.editUserInfo(item)
       .then((res) => {
         return getResponseData(res);
