@@ -66,7 +66,7 @@ formNewCard.enableValidation()
 const formEditAvatar = new FormValidator(settings, ".popup__form-avatar");
 formEditAvatar.enableValidation();
 
-/*Экземпляр работы попапов*/
+/*Экземпляр работы попапа изменения данных пользователя*/
 const popupUserInfo = new PopupWithForm({
   selector: ".popup__edit-profile", renderer: (item) => {
     userInformation.setUserInfo(item)
@@ -74,12 +74,21 @@ const popupUserInfo = new PopupWithForm({
 });
 popupUserInfo.setEventListeners();
 
-
-const popupUserAvatar = new PopupWithForm({
-  selector: ".popup__avatar", renderer: (item) => {
+/*Экземпляр работы попапа добавления новой карточки*/
+const popupNewPlace = new PopupWithForm({
+  selector: ".popup__new-place", renderer: (item) => {
     userInformation.setUserInfo(item)
   }
 });
+popupNewPlace.setEventListeners();
+
+/*Экземпляр работы попапа изменения аватара пользователя*/
+const popupUserAvatar = new PopupWithForm({
+  selector: ".popup__avatar", renderer: (item) => {
+    userInformation.setUserAvatar(item)
+  }
+});
+popupUserAvatar.setEventListeners();
 
 
 
@@ -90,7 +99,7 @@ const userInformation = new UserInfo({
         return getResponseData(res);
       })
       .then((res) => {
-        userInformation.startUserInfo(res);
+        userInformation.setUserInfo(res);
       })
       .catch((rej) => {
         console.log(`Ошибка ${rej.status}`);
@@ -98,7 +107,10 @@ const userInformation = new UserInfo({
   }, rendererAvatar: (item) => {
     api.editAvatar(item)
       .then((res) => {
-        return getResponseData(res)
+        return getResponseData(res);
+      })
+      .then((res) => {
+        userInformation.getUserAvatar(res);
       })
       .catch((rej) => {
         console.log(`Ошибка ${rej.status}`);
@@ -109,7 +121,8 @@ const userInformation = new UserInfo({
 
 Promise.all([api.getUserProfile(), api.getCards()])
   .then(([userInfo, cardsInfo]) => {
-    userInformation.startUserInfo(userInfo);
+    userInformation.getUserInfo(userInfo);
+    userInformation.getUserAvatar(userInfo);
 
     /*makeCards(cardsInfo);*/
 
@@ -132,10 +145,10 @@ Promise.all([api.getUserProfile(), api.getCards()])
 popupProfileOpen.addEventListener("click", () => popupUserInfo.open(popupProfile));
 
 /*Добавляем работу кнопки для открытия попапа новой карты места*/
-popupCardAddOpen.addEventListener("click", () => {
-  formAddCard.reset();
-  checkInputs(popupNewCard, formNewCard);
-  openPopup(popupNewCard);
+popupCardAddOpen.addEventListener("click", () => { popupNewPlace.open(popupNewCard)
+  // formAddCard.reset();
+  // checkInputs(popupNewCard, formNewCard);
+  // openPopup(popupNewCard);
 });
 
 popupAvatarOpen.addEventListener("click", () => popupUserAvatar.open(popupAvatar)
