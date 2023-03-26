@@ -15,13 +15,16 @@ import { getResponseData, userId } from "../utils/Utils";
 
 export default class Card {
 
-    constructor({ likes, link, name, _id, owner }, selector) {
+    constructor({ likes, link, name, _id, owner }, selector, addLike, deleteLike, deleteCard) {
         this._likes = likes;
         this._link = link;
         this._name = name;
         this._id = _id;
         this._ownerId = owner._id;
         this._selector = selector;
+        this._addLike = addLike;
+        this._deleteLike = deleteLike;
+        this._deleteCard = deleteCard;
     }
 
     _getCard() {
@@ -53,29 +56,9 @@ export default class Card {
             .addEventListener("click", (evt) => {
                 this._idCard = `${this._id}`;
                 if (!(evt.target.classList.contains(`element__heart_active`))) {
-                    api.addLike(this._idCard)
-                        .then((res) => {
-                            return getResponseData(res);
-                        })
-                        .then((obj) => {
-                            this._numLikes.textContent = obj.likes.length;
-                            evt.target.classList.add("element__heart_active");
-                        })
-                        .catch((rej) => {
-                            console.log(`Ошибка ${rej.status}`);
-                        });
+                    this._addLike(this._idCard, this._card);
                 } else {
-                    api.deleteLike(this._idCard)
-                        .then((res) => {
-                            return getResponseData(res);
-                        })
-                        .then((obj) => {
-                            evt.target.classList.remove("element__heart_active");
-                            this._numLikes.textContent = obj.likes.length;
-                        })
-                        .catch((rej) => {
-                            console.log(`Ошибка ${rej.status}`);
-                        });
+                    this._deleteLike(this._idCard, this._card);
                 }
             });
     }
@@ -86,15 +69,7 @@ export default class Card {
         if (this._ownerId === userId) {
             this._cardDel.addEventListener("click", (evt) => {
                 this._idCard = `${this._id}`;
-                api.deleteCard(this._idCard)
-                    .then(res => {
-                        if (res.ok) {
-                            evt.target.parentElement.remove();
-                        }
-                    })
-                    .catch((rej) => {
-                        console.log(`Ошибка ${rej.status}`);
-                    });
+                this._deleteCard(this._idCard, this._card);
             });
         } else {
             this._cardDel.remove();
