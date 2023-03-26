@@ -1,6 +1,3 @@
-import { api } from "../index.js";
-import { getResponseData } from "../utils/Utils.js";
-import popupWithForm from "./PopupWithForm.js";
 export class UserInfo {
   constructor({ name, about, avatar, rendererUser, rendererAvatar }) {
 
@@ -11,12 +8,11 @@ export class UserInfo {
     this._rendererAvatar = rendererAvatar;
   }
 
-  getUserInfo(item) {
-    this._rendererUser(item);
+  async getUserInfo(item) {
+    await this._rendererUser(item);
   }
 
   setUserInfo(item) {
-    console.log(item);
     this._userInfo = this.getUserInfo(item);
     this._name.textContent = this._userInfo.name;
     this._about.textContent = this._userInfo.about;

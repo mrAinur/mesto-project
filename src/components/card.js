@@ -70,7 +70,6 @@ export default class Card {
                             return getResponseData(res);
                         })
                         .then((obj) => {
-                            console.log(obj);
                             evt.target.classList.remove("element__heart_active");
                             this._numLikes.textContent = obj.likes.length;
                         })

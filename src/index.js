@@ -28,7 +28,7 @@ import {
 } from "./components/modal.js";
 import FormValidator from "./components/FormValidator.js";
 import Api from "./components/Api.js";
-import { getUserInfo, makeCardForm, checkInputs, getUserId, makeCards, items, renderInfo } from "./utils/Utils.js";
+import { getUserInfo, makeCardForm, checkInputs, getUserId, makeCards, items, renderInfo, getResponseData } from "./utils/Utils.js";
 import PopupWithForm from "./components/PopupWithForm.js";
 import { PopupWithImage } from "./components/PopupWithImage.js";
 import { UserInfo } from "./components/UserInfo.js";
@@ -72,7 +72,6 @@ const popupUserInfo = new PopupWithForm({
     userInformation.setUserInfo(item)
   }
 });
-
 popupUserInfo.setEventListeners();
 
 
@@ -86,14 +85,15 @@ const popupUserAvatar = new PopupWithForm({
 
 const userInformation = new UserInfo({
   name: ".profile__user-name", about: ".profile__user-job", avatar: ".profile__avatar-img", rendererUser: (item) => {
-    api.editUserInfo(item)
+     api.editUserInfo(item)
       .then((res) => {
-        return getResponseData(res)
+        return getResponseData(res);
       })
       .catch((rej) => {
         console.log(`Ошибка ${rej.status}`);
       })
       .finally(() => {
+        console.log("Не дождались ответа")
         renderInfo(false, evt.target);
       });
   }, rendererAvatar: (item) => {
@@ -142,7 +142,7 @@ popupCardAddOpen.addEventListener("click", () => {
   openPopup(popupNewCard);
 });
 
-popupAvatarOpen.addEventListener("click", () =>  popupUserAvatar.open(popupAvatar)
+popupAvatarOpen.addEventListener("click", () => popupUserAvatar.open(popupAvatar)
   /*formAddAvatar.reset();
   checkInputs(popupAvatar, formEditAvatar);
   openPopup(popupAvatar);*/
