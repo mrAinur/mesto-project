@@ -29,7 +29,7 @@ import {
 import FormValidator from "./components/FormValidator.js";
 import Api from "./components/Api.js";
 import { getUserInfo, makeCardForm, checkInputs, getUserId, makeCards, items, renderInfo } from "./utils/Utils.js";
-import  PopupWithForm  from "./components/PopupWithForm.js";
+import PopupWithForm from "./components/PopupWithForm.js";
 import { PopupWithImage } from "./components/PopupWithImage.js";
 import { UserInfo } from "./components/UserInfo.js";
 import Card from "./components/Card.js";
@@ -66,30 +66,54 @@ formNewCard.enableValidation()
 const formEditAvatar = new FormValidator(settings, ".popup__form-avatar");
 formEditAvatar.enableValidation();
 
+/*Экземпляр работы попапов*/
+const popupUserInfo = new PopupWithForm({
+  selector: ".popup__edit-profile", renderer: (item) => {
+    userInformation.setUserInfo(item)
+  }
+});
+
+popupUserInfo.setEventListeners();
+
+
+const popupUserAvatar = new PopupWithForm({
+  selector: ".popup__avatar", renderer: (item) => {
+    userInformation.setUserInfo(item)
+  }
+});
+
+
 
 const userInformation = new UserInfo({
-  userNameProfile: ".profile__user-name",
-  userJobProfile: ".profile__user-job",
-  userAvatar: ".profile__avatar-img",
-}, (objInputs) => {                  // активировать попап для редактирования профиля
-  renderInfo(true, popupProfileOpen);
-  api
-    .editUserInfo(objInputs.userName, objInputs.userJob)
-    .then((result) => {
-      infoUser.setUserInfo(result);
-      popupWithForm.close();
-    })
-    .catch((err) => console.log(`Ошибка: ${err}`))
-    .finally(() => {
-      renderInfo(false, popupProfileOpen);
-    });
-});
+  name: ".profile__user-name", about: ".profile__user-job", avatar: ".profile__avatar-img", rendererUser: (item) => {
+    api.editUserInfo(item)
+      .then((res) => {
+        return getResponseData(res)
+      })
+      .catch((rej) => {
+        console.log(`Ошибка ${rej.status}`);
+      })
+      .finally(() => {
+        renderInfo(false, evt.target);
+      });
+  }, rendererAvatar: (item) => {
+    api.editAvatar(item)
+      .then((res) => {
+        return getResponseData(res)
+      })
+      .catch((rej) => {
+        console.log(`Ошибка ${rej.status}`);
+      })
+      .finally(() => {
+        renderInfo(false, evt.target);
+      });
+  }
+})
 
 
 Promise.all([api.getUserProfile(), api.getCards()])
   .then(([userInfo, cardsInfo]) => {
-    userInformation.getUserInfo(userInfo);
-    getUserId(`${userInfo._id}`);
+    userInformation.startUserInfo(userInfo);
 
     /*makeCards(cardsInfo);*/
 
@@ -109,7 +133,7 @@ Promise.all([api.getUserProfile(), api.getCards()])
 //enableValidation(settings);
 
 /*Добавляем работу кнопки для открытия попапа профиля*/
-//popupProfileOpen.addEventListener("click", getUserInfo);         поправил сейчас
+popupProfileOpen.addEventListener("click", () => popupUserInfo.open(popupProfile));
 
 /*Добавляем работу кнопки для открытия попапа новой карты места*/
 popupCardAddOpen.addEventListener("click", () => {
@@ -118,18 +142,14 @@ popupCardAddOpen.addEventListener("click", () => {
   openPopup(popupNewCard);
 });
 
-popupAvatarOpen.addEventListener("click", () => {
-  formAddAvatar.reset();
+popupAvatarOpen.addEventListener("click", () =>  popupUserAvatar.open(popupAvatar)
+  /*formAddAvatar.reset();
   checkInputs(popupAvatar, formEditAvatar);
-  openPopup(popupAvatar);
-});
-
-profileFormElement.addEventListener("submit", profileHandleFormSubmit);
-
-popupAvatar.addEventListener("submit", makeNewAvatar);
+  openPopup(popupAvatar);*/
+);
 
 /*Добавляем реализацию закрытия попапов*/
-popups.forEach((popup) => {
+/*popups.forEach((popup) => {
   popup.addEventListener("mousedown", (evt) => {
     if (evt.target.classList.contains("popup_opened")) {
       closePopup(popup);
@@ -139,7 +159,7 @@ popups.forEach((popup) => {
     }
   });
 });
-
+*/
 newCardForm.addEventListener("submit", makeCardForm);
 
 
@@ -178,8 +198,7 @@ newCardForm.addEventListener("submit", makeCardForm);
 
 
 
-/*Экземпляр работы попапов*/
-const popupWithForm = new PopupWithForm(popupProfile, popupNewCard, popupAvatar);
+
 
 
 

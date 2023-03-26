@@ -1,31 +1,40 @@
-import { api } from "../index.js"
+import { api } from "../index.js";
+import { getResponseData } from "../utils/Utils.js";
+import popupWithForm from "./PopupWithForm.js";
 export class UserInfo {
-  constructor({ userNameProfile, userJobProfile, userAvatar }) {
-    /*Информация о пользователе, лежащая в HTML*/
-    this._name = document.querySelector(userNameProfile);
-    this._about = document.querySelector(userJobProfile);
-    this._avatar = document.querySelector(userAvatar);
+  constructor({ name, about, avatar, rendererUser, rendererAvatar }) {
+
+    this._name = document.querySelector(name);
+    this._about = document.querySelector(about);
+    this._avatar = document.querySelector(avatar);
+    this._rendererUser = rendererUser;
+    this._rendererAvatar = rendererAvatar;
   }
 
-  setUserInfo(userInfo) {
-    api.editUserInfo(userInfo)
-      .then((res) => {
-        return getResponseData(res)
-      })
-      .then((obj) => {
-        this._name.textContent = obj.name;
-        this._about.textContent = obj.about;
-        closePopup(popupProfile);
-      })
-      .catch((rej) => {
-        console.log(`Ошибка ${rej.status}`);
-      });
+  getUserInfo(item) {
+    this._rendererUser(item);
   }
 
-  getUserInfo({ name, about, avatar }) {
-      this._name.textContent = name,
-      this._about.textContent = about,
-      this._avatar.src = `${avatar}`
+  setUserInfo(item) {
+    console.log(item);
+    this._userInfo = this.getUserInfo(item);
+    this._name.textContent = this._userInfo.name;
+    this._about.textContent = this._userInfo.about;
   }
 
+  getUserAvatar(item) {
+    this._rendererAvatar(item);
+  }
+
+  setUserAvatar(item) {
+    this._userAvatar = this.getUserAvatar(item);
+    this._avatar.src = `${this._userAvatar.avatar}`
+  }
+
+  startUserInfo(item) {
+    this._userInfo = item;
+    this._name.textContent = this._userInfo.name,
+    this._about.textContent = this._userInfo.about,
+    this._avatar.src = `${this._userInfo.avatar}`
+  }
 }

@@ -1,33 +1,31 @@
 export default class Popup {
-  constructor() {
-    
-    
-    
+  constructor(selector) {
+    this._popup = document.querySelector(selector);
   }
 
   //метод для открытия попапа
   open() {
-    this.popup.classList.add("popup_opened");
-    document.addEventListener("click", this._handleEscClose);
+    this._popup.classList.add("popup_opened");
+    document.addEventListener("keydown", this._handleEscClose);
   }
 
   //метод для закрытия попапа
   close() {
-    this.popup.classList.remove("popup_opened");
-    document.removeEventListener("click", this._handleEscClose);
+    this._popup.classList.remove("popup_opened");
+    document.removeEventListener("keydown", this._handleEscClose);
   }
 
   //метод для закрытия попапа при нажатии ESC
-  _handleEscClose = (event) => {
-    if (event.key === "Escape") {
+  _handleEscClose(evt){
+    if (evt.key === "Escape") {
       this._openPopup = document.querySelector(".popup_opened");
       this.close(this._openPopup);
     }
   };
 
   //метод для навешивания слушателей
-  setEventListeners() {
-    this.popup.addEventListener("click", (event) => {
+  setEventListeners(item) {
+    item.addEventListener("click", (event) => {
       if (event.target.classList.contains("popup_opened")) {
         this.close();
       }
@@ -36,4 +34,5 @@ export default class Popup {
       }
     });
   }
+
 }
