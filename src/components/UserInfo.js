@@ -8,8 +8,8 @@ export class UserInfo {
     this._rendererAvatar = rendererAvatar;
   }
 
-  async getUserInfo(item) {
-    await this._rendererUser(item);
+  getUserInfo(item) {
+    this._rendererUser(item);
   }
 
   setUserInfo(item) {

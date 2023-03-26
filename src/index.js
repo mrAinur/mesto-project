@@ -85,16 +85,15 @@ const popupUserAvatar = new PopupWithForm({
 
 const userInformation = new UserInfo({
   name: ".profile__user-name", about: ".profile__user-job", avatar: ".profile__avatar-img", rendererUser: (item) => {
-     api.editUserInfo(item)
+    api.editUserInfo(item)
       .then((res) => {
         return getResponseData(res);
       })
+      .then((res) => {
+        userInformation.startUserInfo(res);
+      })
       .catch((rej) => {
         console.log(`Ошибка ${rej.status}`);
-      })
-      .finally(() => {
-        console.log("Не дождались ответа")
-        renderInfo(false, evt.target);
       });
   }, rendererAvatar: (item) => {
     api.editAvatar(item)
@@ -103,9 +102,6 @@ const userInformation = new UserInfo({
       })
       .catch((rej) => {
         console.log(`Ошибка ${rej.status}`);
-      })
-      .finally(() => {
-        renderInfo(false, evt.target);
       });
   }
 })
