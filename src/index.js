@@ -19,6 +19,7 @@ import {
   userJob,
   profileSelectors,
   popupProfile,
+  cardsContainer
 } from "./utils/Constants.js";
 import {
   openPopup,
@@ -77,7 +78,24 @@ popupUserInfo.setEventListeners();
 /*Экземпляр работы попапа добавления новой карточки*/
 const popupNewPlace = new PopupWithForm({
   selector: ".popup__new-place", renderer: (item) => {
-    userInformation.setUserInfo(item)
+    api.makeNewCard(item)
+      .then((res) => {
+        return getResponseData(res);
+      })
+      .then((res) => {
+        const arr = [res];
+        const cardsList = new Section({
+          items: arr, renderer: (item) => {
+            const card = new Card(item, "#element");
+            const cardElement = card.generate();
+            cardsContainer.prepend(cardElement);
+          }
+        }, cards);
+        cardsList.rendererItems();
+      })
+      .catch((rej) => {
+        console.log(`Ошибка ${rej.status}`);
+      });
   }
 });
 popupNewPlace.setEventListeners();
@@ -123,6 +141,7 @@ Promise.all([api.getUserProfile(), api.getCards()])
   .then(([userInfo, cardsInfo]) => {
     userInformation.getUserInfo(userInfo);
     userInformation.getUserAvatar(userInfo);
+    getUserId(`${userInfo._id}`)
 
     /*makeCards(cardsInfo);*/
 
@@ -145,7 +164,8 @@ Promise.all([api.getUserProfile(), api.getCards()])
 popupProfileOpen.addEventListener("click", () => popupUserInfo.open(popupProfile));
 
 /*Добавляем работу кнопки для открытия попапа новой карты места*/
-popupCardAddOpen.addEventListener("click", () => { popupNewPlace.open(popupNewCard)
+popupCardAddOpen.addEventListener("click", () => {
+  popupNewPlace.open(popupNewCard)
   // formAddCard.reset();
   // checkInputs(popupNewCard, formNewCard);
   // openPopup(popupNewCard);
@@ -169,7 +189,7 @@ popupAvatarOpen.addEventListener("click", () => popupUserAvatar.open(popupAvatar
   });
 });
 */
-newCardForm.addEventListener("submit", makeCardForm);
+//newCardForm.addEventListener("submit", makeCardForm);
 
 
 

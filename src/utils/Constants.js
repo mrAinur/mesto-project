@@ -33,6 +33,7 @@ const popupName = placeCard.querySelector(".popup__place-name"); //находи�
 
 //Находим форму карточек и копируем в переменную
 const cards = ".elements";
+const cardsContainer = document.querySelector(".elements");
 const cardElement = document.querySelector("#element").content;
 
 /*Реализация добавления новых карточек*/
@@ -78,7 +79,8 @@ export {
     namePlaceInput,
     linkPlaceInput,
     settings,
-    cohortId
+    cohortId,
+    cardsContainer
 };
 
 
