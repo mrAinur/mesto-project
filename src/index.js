@@ -123,7 +123,7 @@ const userInformation = new UserInfo({
         return getResponseData(res);
       })
       .then((res) => {
-        userInformation.setUserInfo(res);
+        userInformation.getUserInfo(res);
       })
       .catch((rej) => {
         console.log(`Ошибка ${rej.status}`);
@@ -206,7 +206,6 @@ Promise.all([api.getUserProfile(), api.getCards()])
   .catch((rej) => {
     console.log(`Ошибка ${rej.status}`);
   });
-//enableValidation(settings);
 
 /*Добавляем работу кнопки для открытия попапа профиля*/
 popupProfileOpen.addEventListener("click", () => popupUserInfo.open(popupProfile));
