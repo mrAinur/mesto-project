@@ -38,11 +38,11 @@ export default class Card {
         this._card.querySelector(".element__place-name").textContent = this._name;
         this._numLikes = this._card.querySelector(".element__num-likes");
         this._numLikes.textContent = this._likes.length;
+        this._heart = this._card.querySelector(".element__heart");
 
         /*Проверяем лайкал ли ранее пользователь данную карту*/
         this._likes.forEach((user) => {
             if (user._id === userId) {
-                this._heart = this._card.querySelector(".element__heart");
                 this._heart.classList.add("element__heart_active");
             }
         })
@@ -56,21 +56,21 @@ export default class Card {
             .addEventListener("click", (evt) => {
                 this._idCard = `${this._id}`;
                 if (!(evt.target.classList.contains(`element__heart_active`))) {
-                    this._addLike(this._idCard, this._card);
+                    this._addLike(this._idCard);
                 } else {
-                    this._deleteLike(this._idCard, this._card);
+                    this._deleteLike(this._idCard);
                 }
             });
     }
 
     putLike(obj) {
         this._numLikes.textContent = obj.likes.length;
-        this._card.querySelector(".element__heart").classList.add("element__heart_active");
+        this._heart.classList.add("element__heart_active");
     }
 
     removeLike(obj){
         this._numLikes.textContent = obj.likes.length;
-        this._card.querySelector(".element__heart").classList.remove("element__heart_active");
+        this._heart.classList.remove("element__heart_active");
     }
 
     _cardDelEventListener() {
