@@ -75,7 +75,7 @@ export default class Card {
     }
 
     removeCard(){
-        this._card.remove();
+        this._cardDel.parentElement.remove();
     }
 
     _cardDelEventListener() {

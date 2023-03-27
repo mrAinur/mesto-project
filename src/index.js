@@ -87,7 +87,42 @@ const popupNewPlace = new PopupWithForm({
         const arr = [res];
         const cardsList = new Section({
           items: arr, renderer: (item) => {
-            const card = new Card(item, "#element");
+            const card = new Card(item, "#element",
+              function addLike(id) {
+                api.addLike(id)
+                  .then((res) => {
+                    return getResponseData(res);
+                  })
+                  .then((obj) => {
+                    card.putLike(obj);
+                  })
+                  .catch((rej) => {
+                    console.log(`Ошибка ${rej.status}`);
+                  });
+              },
+              function deleteCard(id) {
+                api.deleteLike(id)
+                  .then((res) => {
+                    return getResponseData(res);
+                  })
+                  .then((obj) => {
+                    card.removeLike(obj);
+                  })
+                  .catch((rej) => {
+                    console.log(`Ошибка ${rej.status}`);
+                  });
+              },
+              function deleteCard(id) {
+                api.deleteCard(id)
+                  .then(res => {
+                    if (res.ok) {
+                      card.removeCard();
+                    }
+                  })
+                  .catch((rej) => {
+                    console.log(`Ошибка ${rej.status}`);
+                  });
+              });
             const cardElement = card.generate();
             cardsContainer.prepend(cardElement);
           }
@@ -99,7 +134,7 @@ const popupNewPlace = new PopupWithForm({
       })
       .finally(() => {
         renderInfo(false, popupNewCard);
-        
+
       });
   }
 });
@@ -189,7 +224,6 @@ Promise.all([api.getUserProfile(), api.getCards()])
             api.deleteCard(id)
               .then(res => {
                 if (res.ok) {
-                  debugger
                   card.removeCard();
                 }
               })
