@@ -40,6 +40,7 @@ export default class Card {
         this._numLikes.textContent = this._likes.length;
         this._heart = this._card.querySelector(".element__heart");
 
+
         /*Проверяем лайкал ли ранее пользователь данную карту*/
         this._likes.forEach((user) => {
             if (user._id === userId) {
@@ -73,13 +74,17 @@ export default class Card {
         this._heart.classList.remove("element__heart_active");
     }
 
+    removeCard(){
+        this._card.remove();
+    }
+
     _cardDelEventListener() {
         this._cardDel = this._card.querySelector(".element__delete");
 
         if (this._ownerId === userId) {
             this._cardDel.addEventListener("click", (evt) => {
                 this._idCard = `${this._id}`;
-                this._deleteCard(this._idCard, this._card);
+                this._deleteCard(this._idCard);
             });
         } else {
             this._cardDel.remove();

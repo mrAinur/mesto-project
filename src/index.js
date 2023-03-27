@@ -185,11 +185,12 @@ Promise.all([api.getUserProfile(), api.getCards()])
                 console.log(`Ошибка ${rej.status}`);
               });
           },
-          function deleteCard(id, card) {
+          function deleteCard(id) {
             api.deleteCard(id)
               .then(res => {
                 if (res.ok) {
-                  card.remove();
+                  debugger
+                  card.removeCard();
                 }
               })
               .catch((rej) => {
