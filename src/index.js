@@ -59,7 +59,6 @@ const api = new Api({
 const formEditProfile = new FormValidator(settings, ".popup__form-profile");
 formEditProfile.enableValidation();
 
-
 /*Экземпляр формы добавления карточки*/
 const formNewCard = new FormValidator(settings, ".popup__form-place");
 formNewCard.enableValidation();
@@ -129,7 +128,7 @@ const userInformation = new UserInfo({
         console.log(`Ошибка ${rej.status}`);
       })
       .finally(() => {
-        renderLoading(false, popupProfile);
+        renderInfo(false, popupProfile);
       });
   }, rendererAvatar: (item) => {
     renderInfo(true, popupAvatar);
