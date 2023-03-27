@@ -8,6 +8,7 @@ export default class PopupWithForm extends Popup {
 
   constructor({selector, renderer}) {
     super(selector);
+    
     this._renderer = renderer;
   }
 
@@ -32,6 +33,7 @@ export default class PopupWithForm extends Popup {
 
   close(item){
     super.close(item);
+    this._popup.querySelector(".form").reset();
   }
 
 }
