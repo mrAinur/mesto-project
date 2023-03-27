@@ -160,31 +160,25 @@ Promise.all([api.getUserProfile(), api.getCards()])
     const cardsList = new Section({
       items: cardsInfo, renderer: (item) => {
         const card = new Card(item, "#element",
-          function addLike(id, card) {
-            const numLikes = card.querySelector(".element__num-likes");
-            const heart = card.querySelector(".element__heart");
+          function addLike(id) {
             api.addLike(id)
               .then((res) => {
                 return getResponseData(res);
               })
               .then((obj) => {
-                numLikes.textContent = obj.likes.length;
-                heart.classList.add("element__heart_active");
+                card.putLike(obj);
               })
               .catch((rej) => {
                 console.log(`Ошибка ${rej.status}`);
               });
           },
-          function deleteCard(id, card) {
-            const numLikes = card.querySelector(".element__num-likes");
-            const heart = card.querySelector(".element__heart");
+          function deleteCard(id) {
             api.deleteLike(id)
               .then((res) => {
                 return getResponseData(res);
               })
               .then((obj) => {
-                heart.classList.remove("element__heart_active");
-                numLikes.textContent = obj.likes.length;
+                card.removeLike(obj);
               })
               .catch((rej) => {
                 console.log(`Ошибка ${rej.status}`);

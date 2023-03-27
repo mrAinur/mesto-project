@@ -63,9 +63,19 @@ export default class Card {
             });
     }
 
+    putLike(obj) {
+        this._numLikes.textContent = obj.likes.length;
+        this._card.querySelector(".element__heart").classList.add("element__heart_active");
+    }
+
+    removeLike(obj){
+        this._numLikes.textContent = obj.likes.length;
+        this._card.querySelector(".element__heart").classList.remove("element__heart_active");
+    }
+
     _cardDelEventListener() {
         this._cardDel = this._card.querySelector(".element__delete");
-        
+
         if (this._ownerId === userId) {
             this._cardDel.addEventListener("click", (evt) => {
                 this._idCard = `${this._id}`;
