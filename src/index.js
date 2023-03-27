@@ -57,11 +57,12 @@ const api = new Api({
 
 /*Экземпляр формы реадкирования профиля*/
 const formEditProfile = new FormValidator(settings, ".popup__form-profile");
-formEditProfile.enableValidation()
+formEditProfile.enableValidation();
+
 
 /*Экземпляр формы добавления карточки*/
 const formNewCard = new FormValidator(settings, ".popup__form-place");
-formNewCard.enableValidation()
+formNewCard.enableValidation();
 
 /*Экземпляр добавления фотографии пользователя*/
 const formEditAvatar = new FormValidator(settings, ".popup__form-avatar");
@@ -99,6 +100,7 @@ const popupNewPlace = new PopupWithForm({
       })
       .finally(() => {
         renderInfo(false, popupNewCard);
+        
       });
   }
 });
