@@ -148,7 +148,10 @@ const popupUserAvatar = new PopupWithForm({
 });
 popupUserAvatar.setEventListeners();
 
+/*Экзепляр попапа открытия карточки*/
+const openCardPopup = new PopupWithImage(".popup__card");
 
+/*Работа с изменениями данных пользователя*/
 const userInformation = new UserInfo({
   name: ".profile__user-name", about: ".profile__user-job", avatar: ".profile__avatar-img", rendererUser: (item) => {
     renderInfo(true, popupProfile);
@@ -229,6 +232,9 @@ Promise.all([api.getUserProfile(), api.getCards()])
               .catch((rej) => {
                 console.log(`Ошибка ${rej.status}`);
               });
+          },
+          function openCard(name, link){
+            openCardPopup.open(name, link)
           });
         const cardElement = card.generate();
         cardsList.setItem(cardElement);

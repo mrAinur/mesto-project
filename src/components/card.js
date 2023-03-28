@@ -15,7 +15,7 @@ import { getResponseData, userId } from "../utils/Utils";
 
 export default class Card {
 
-    constructor({ likes, link, name, _id, owner }, selector, addLike, deleteLike, deleteCard) {
+    constructor({ likes, link, name, _id, owner }, selector, addLike, deleteLike, deleteCard, openCard) {
         this._likes = likes;
         this._link = link;
         this._name = name;
@@ -25,6 +25,7 @@ export default class Card {
         this._addLike = addLike;
         this._deleteLike = deleteLike;
         this._deleteCard = deleteCard;
+        this._openCard = openCard;
     }
 
     _getCard() {
@@ -95,10 +96,11 @@ export default class Card {
         this._card
             .querySelector(".element__place-img")
             .addEventListener("click", () => {
-                popupImg.src = this._link;
-                popupImg.alt = this._name;
-                popupName.textContent = this._name;
-                openPopup(placeCard);
+                this._openCard(this._name, this._link)
+                // popupImg.src = this._link;
+                // popupImg.alt = this._name;
+                // popupName.textContent = this._name;
+                // openPopup(placeCard);
             });
     }
 
