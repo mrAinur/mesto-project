@@ -1,32 +1,32 @@
 import "./index.css";
 import {
-  userNameProfile,
-  userJobProfile,
-  userAvatar,
+//  userNameProfile,
+//  userJobProfile,
+//  userAvatar,
   popupProfileOpen,
   popupCardAddOpen,
-  formAddCard,
+//  formAddCard,
   popupNewCard,
   popupAvatarOpen,
-  formAddAvatar,
+//  formAddAvatar,
   popupAvatar,
-  profileFormElement,
-  popups,
-  newCardForm,
+//  profileFormElement,
+//  popups,
+//  newCardForm,
   cards,
   settings,
-  userName,
-  userJob,
-  profileSelectors,
+//  userName,
+//  userJob,
+//  profileSelectors,
   popupProfile,
   cardsContainer
 } from "./utils/Constants.js";
-import {
-  openPopup,
-  closePopup,
-  profileHandleFormSubmit,
-  makeNewAvatar,
-} from "./components/modal.js";
+// import {
+//   openPopup,
+//   closePopup,
+//   profileHandleFormSubmit,
+//   makeNewAvatar,
+// } from "./components/modal.js";
 import FormValidator from "./components/FormValidator.js";
 import Api from "./components/Api.js";
 import { getUserInfo, makeCardForm, checkInputs, getUserId, makeCards, items, renderInfo, getResponseData } from "./utils/Utils.js";
@@ -186,7 +186,6 @@ const userInformation = new UserInfo({
       });
   }
 })
-
 
 Promise.all([api.getUserProfile(), api.getCards()])
   .then(([userInfo, cardsInfo]) => {
