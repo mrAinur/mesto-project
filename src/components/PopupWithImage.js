@@ -1,6 +1,6 @@
 import Popup from "./Popup.js";
 
-export class PopupWithImage extends Popup {
+export default class PopupWithImage extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
     this._image = this._popup.querySelector(".popup__image"); //изображение в попапе, определенном по селектору из Popup
@@ -17,5 +17,4 @@ export class PopupWithImage extends Popup {
   setEventListeners() {
     super.setEventListeners(this._popup);
     }
-
 }

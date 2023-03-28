@@ -3,7 +3,6 @@ import { cohortId } from "../utils/Constants.js";
 
 
 export default class Api {
-
     constructor(options) {
         this._baseUrl = options.baseUrl;
         this._headers = options.headers;
@@ -76,5 +75,4 @@ export default class Api {
             body: JSON.stringify(item)
         })
     }
-
 }
