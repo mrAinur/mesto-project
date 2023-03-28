@@ -6,20 +6,19 @@ export default class Popup {
   //метод для открытия попапа
   open() {
     this._popup.classList.add("popup_opened");
-    document.addEventListener("keydown", this._handleEscClose);
+    document.addEventListener("keydown", (evt) => { this._handleEscClose(evt) });
   }
 
   //метод для закрытия попапа
   close() {
     this._popup.classList.remove("popup_opened");
-    document.removeEventListener("keydown", this._handleEscClose);
+    document.removeEventListener("keydown", (evt) => { this._handleEscClose(evt) });
   }
 
   //метод для закрытия попапа при нажатии ESC
   _handleEscClose(evt) {
     if (evt.key === "Escape") {
-      this._openPopup = document.querySelector(".popup_opened");
-      this.close(this._openPopup);
+      this.close();
     }
   };
 
