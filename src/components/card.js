@@ -96,7 +96,7 @@ export default class Card {
         this._card
             .querySelector(".element__place-img")
             .addEventListener("click", () => {
-                this._openCard(this._link, this._name)
+                this._openCard(this._name, this._link)
                 // popupImg.src = this._link;
                 // popupImg.alt = this._name;
                 // popupName.textContent = this._name;
