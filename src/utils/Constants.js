@@ -20,8 +20,6 @@ const jobValue = profileFormElement.querySelector(".popup__job-info");
 const cards = ".elements";
 const cardsContainer = document.querySelector(".elements");
 
-const cohortId = "plus-cohort-20";
-
 const settings = {
     formSelector: '.form',
     inputSelector: '.popup__input',
@@ -43,6 +41,5 @@ export {
     jobValue,
     cards,
     settings,
-    cohortId,
     cardsContainer,
 };

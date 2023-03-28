@@ -11,10 +11,4 @@ const renderInfo = (isLoading, item) => {
     }
 }
 
-const getResponseData = (res) => {
-    if (res.ok) {
-        return res = res.json();
-    }
-}
-
-export { renderInfo, getResponseData, userId, getUserId};
+export { renderInfo, userId, getUserId};

@@ -12,7 +12,7 @@ import {
 } from "./utils/Constants.js";
 import FormValidator from "./components/FormValidator.js";
 import Api from "./components/Api.js";
-import { getUserId, renderInfo, getResponseData } from "./utils/Utils.js";
+import { getUserId, renderInfo} from "./utils/Utils.js";
 import PopupWithForm from "./components/PopupWithForm.js";
 import PopupWithImage from "./components/PopupWithImage.js";
 import UserInfo from "./components/UserInfo.js";
@@ -55,18 +55,12 @@ const popupNewPlace = new PopupWithForm({
     renderInfo(true, popupNewCard);
     api.makeNewCard(item)
       .then((res) => {
-        return getResponseData(res);
-      })
-      .then((res) => {
         const arr = [res];
         const cardsList = new Section({
           items: arr, renderer: (item) => {
             const card = new Card(item, "#element",
               function addLike(id) {
                 api.addLike(id)
-                  .then((res) => {
-                    return getResponseData(res);
-                  })
                   .then((obj) => {
                     card.putLike(obj);
                   })
@@ -76,9 +70,6 @@ const popupNewPlace = new PopupWithForm({
               },
               function deleteCard(id) {
                 api.deleteLike(id)
-                  .then((res) => {
-                    return getResponseData(res);
-                  })
                   .then((obj) => {
                     card.removeLike(obj);
                   })
@@ -132,9 +123,6 @@ const userInformation = new UserInfo({
     renderInfo(true, popupProfile);
     api.editUserInfo(item)
       .then((res) => {
-        return getResponseData(res);
-      })
-      .then((res) => {
         userInformation.getUserInfo(res);
       })
       .catch((rej) => {
@@ -146,9 +134,6 @@ const userInformation = new UserInfo({
   }, rendererAvatar: (item) => {
     renderInfo(true, popupAvatar);
     api.editAvatar(item)
-      .then((res) => {
-        return getResponseData(res);
-      })
       .then((res) => {
         userInformation.getUserAvatar(res);
       })
@@ -173,9 +158,6 @@ Promise.all([api.getUserProfile(), api.getCards()])
         const card = new Card(item, "#element",
           function addLike(id) {
             api.addLike(id)
-              .then((res) => {
-                return getResponseData(res);
-              })
               .then((obj) => {
                 card.putLike(obj);
               })
@@ -185,9 +167,6 @@ Promise.all([api.getUserProfile(), api.getCards()])
           },
           function deleteCard(id) {
             api.deleteLike(id)
-              .then((res) => {
-                return getResponseData(res);
-              })
               .then((obj) => {
                 card.removeLike(obj);
               })
@@ -196,9 +175,11 @@ Promise.all([api.getUserProfile(), api.getCards()])
               });
           },
           function deleteCard(id) {
+            debugger
             api.deleteCard(id)
               .then(res => {
                 if (res.ok) {
+                  debugger
                   card.removeCard();
                 }
               })
