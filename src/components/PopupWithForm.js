@@ -1,8 +1,7 @@
 import Popup from "./Popup.js";
-//import { formAddAvatar, popupImg, popupName } from "../utils/Constants.js"
-//import { formEditAvatar, popupUserInfo, userInformation } from "../index.js";
-//import { checkInputs } from "../utils/Utils.js";
-
+// import { formAddAvatar, popupImg, popupName } from "../utils/Constants.js"
+// import { formEditAvatar, popupUserInfo, userInformation } from "../index.js";
+// import { checkInputs } from "../utils/Utils.js";
 
 export default class PopupWithForm extends Popup {
 
