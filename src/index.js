@@ -167,8 +167,6 @@ Promise.all([api.getUserProfile(), api.getCards()])
     userInformation.getUserAvatar(userInfo);
     getUserId(`${userInfo._id}`)
 
-    /*makeCards(cardsInfo);*/
-
     /*Экзепляр карточек*/
     const cardsList = new Section({
       items: cardsInfo, renderer: (item) => {
