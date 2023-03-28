@@ -150,6 +150,7 @@ popupUserAvatar.setEventListeners();
 
 /*Экзепляр попапа открытия карточки*/
 const openCardPopup = new PopupWithImage(".popup__card");
+openCardPopup.setEventListeners();
 
 /*Работа с изменениями данных пользователя*/
 const userInformation = new UserInfo({

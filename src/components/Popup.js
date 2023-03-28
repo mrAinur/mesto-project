@@ -25,7 +25,7 @@ export default class Popup {
 
   //метод для навешивания слушателей
   setEventListeners(item) {
-    item.addEventListener("click", (event) => {
+    item.addEventListener("mousedown", (event) => {
       if (event.target.classList.contains("popup_opened")) {
         this.close();
       }
