@@ -32,7 +32,7 @@ const api = new Api({
 
 const cardsList = new Section({
   renderer: (item) => {
-    cardsContainer.append(createCard(item));
+    cardsContainer.prepend(createCard(item));
   }
 });
 
