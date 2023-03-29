@@ -1,5 +1,5 @@
 export default class FormValidator {
-    constructor({ formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass }, selector) {
+    constructor({ formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass, errorParagraph }, selector) {
         this._formSelector = formSelector;
         this._inputSelector = inputSelector;
         this._submitButtonSelector = submitButtonSelector;
@@ -7,6 +7,7 @@ export default class FormValidator {
         this._inputErrorClass = inputErrorClass;
         this._errorClass = errorClass;
         this._selector = selector;
+        this._errorParagraph = errorParagraph;
     }
 
     _hasInvalidInput(inputList) {
@@ -16,13 +17,12 @@ export default class FormValidator {
     };
 
     _toggleButtonState(inputList, buttonElement) {
-        const buttonText = buttonElement.querySelector(".popup__paragraph");
         if (this._hasInvalidInput(inputList)) {
-            buttonText.classList.add("popup__paragraph_inactive");
+            this._buttonText.classList.add(this._errorParagraph);
             buttonElement.disabled = true;
             buttonElement.classList.add(this._inactiveButtonClass);
         } else {
-            buttonText.classList.remove("popup__paragraph_inactive");
+            this._buttonText.classList.remove(this._errorParagraph);
             buttonElement.disabled = false;
             buttonElement.classList.remove(this._inactiveButtonClass);
         }
@@ -57,18 +57,20 @@ export default class FormValidator {
     };
 
     _setEventListeners(formElement) {
-        const inputList = Array.from(formElement.querySelectorAll(this._inputSelector));
-        const buttonElement = formElement.querySelector(this._submitButtonSelector);
-        this._toggleButtonState(inputList, buttonElement);
-        inputList.forEach((inputElement) => {
+        this._inputList = Array.from(formElement.querySelectorAll(this._inputSelector));
+        this._buttonElement = formElement.querySelector(this._submitButtonSelector);
+        this._buttonText = this._buttonElement.querySelector(".popup__paragraph");
+
+        this._toggleButtonState(this._inputList, this._buttonElement);
+        this._inputList.forEach((inputElement) => {
             inputElement.addEventListener('input', () => {
                 this._checkInputValidity(formElement, inputElement);
-                this._toggleButtonState(inputList, buttonElement);
+                this._toggleButtonState(this._inputList, this._buttonElement);
             });
         });
         formElement.addEventListener('reset', () => {
             setTimeout(() => {
-                this._toggleButtonState(inputList, buttonElement), 0
+                this._toggleButtonState(this._inputList, this._buttonElement), 0
             })
         })
     }

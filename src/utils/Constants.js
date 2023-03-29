@@ -26,7 +26,8 @@ const settings = {
     submitButtonSelector: '.popup__submit',
     inactiveButtonClass: 'popup__submit_inactive',
     inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_active'
+    errorClass: 'popup__error_active',
+    errorParagraph: "popup__paragraph_inactive"
 };
 
 export {

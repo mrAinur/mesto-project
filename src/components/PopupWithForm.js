@@ -1,13 +1,15 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
-  constructor({selector, renderer}) {
+  constructor({selector, renderer, hideInputError}) {
     super(selector);
     this._renderer = renderer;
+    this._hideInputError = hideInputError;
+    this._inputs = this._popup.querySelectorAll(".popup__input");
+    this._form = this._popup.querySelector(".form");
   }
 
   _getInputValues() {
-    this._inputs = this._popup.querySelectorAll(".popup__input");
     this._objInputs = {};
     this._inputs.forEach((inputElement) => {
     this._objInputs[inputElement.name] = inputElement.value;
@@ -21,12 +23,12 @@ export default class PopupWithForm extends Popup {
       event.preventDefault();
       this._inputsValuse = this._getInputValues(); // исполняет функцию сохранения, взяв данные, которые ввели в инпуты формы
       this._renderer(this._inputsValuse);
-      this.close(this._popup)
     });
   }
 
-  close(item){
-    super.close(item);
-    this._popup.querySelector(".form").reset();
+  close(){
+    super.close();
+    this._hideInputError(this._popup);
+    this._form.reset();
   }
 }

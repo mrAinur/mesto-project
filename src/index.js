@@ -12,7 +12,7 @@ import {
 } from "./utils/Constants.js";
 import FormValidator from "./components/FormValidator.js";
 import Api from "./components/Api.js";
-import { getUserId, renderInfo} from "./utils/Utils.js";
+import { getUserId, renderInfo } from "./utils/Utils.js";
 import PopupWithForm from "./components/PopupWithForm.js";
 import PopupWithImage from "./components/PopupWithImage.js";
 import UserInfo from "./components/UserInfo.js";
@@ -44,7 +44,13 @@ formEditAvatar.enableValidation();
 /*Экземпляр работы попапа изменения данных пользователя*/
 const popupUserInfo = new PopupWithForm({
   selector: ".popup__edit-profile", renderer: (item) => {
-    userInformation.setUserInfo(item)
+    userInformation.getUserInfo(item)
+  }, hideInputError: (item) => {
+    const form = item.querySelector(".form");
+    const inupts = Array.from(form.querySelectorAll(".popup__input"));
+    inupts.forEach((input) => {
+      formEditProfile.hideInputError(form, input)
+    });
   }
 });
 popupUserInfo.setEventListeners();
@@ -68,7 +74,7 @@ const popupNewPlace = new PopupWithForm({
                     console.log(`Ошибка ${rej.status}`);
                   });
               },
-              function deleteCard(id) {
+              function deleteLike(id) {
                 api.deleteLike(id)
                   .then((obj) => {
                     card.removeLike(obj);
@@ -93,6 +99,7 @@ const popupNewPlace = new PopupWithForm({
           }
         }, cards);
         cardsList.rendererItems();
+        popupNewPlace.close();
       })
       .catch((rej) => {
         console.log(`Ошибка ${rej.status}`);
@@ -101,6 +108,12 @@ const popupNewPlace = new PopupWithForm({
         renderInfo(false, popupNewCard);
 
       });
+  }, hideInputError: (item) => {
+    const form = item.querySelector(".form");
+    const inupts = Array.from(form.querySelectorAll(".popup__input"));
+    inupts.forEach((input) => {
+      formEditProfile.hideInputError(form, input)
+    });
   }
 });
 popupNewPlace.setEventListeners();
@@ -108,7 +121,14 @@ popupNewPlace.setEventListeners();
 /*Экземпляр работы попапа изменения аватара пользователя*/
 const popupUserAvatar = new PopupWithForm({
   selector: ".popup__avatar", renderer: (item) => {
-    userInformation.setUserAvatar(item)
+    userInformation.getUserAvatar(item)
+  },
+  hideInputError: (item) => {
+    const form = item.querySelector(".form");
+    const inupts = Array.from(form.querySelectorAll(".popup__input"));
+    inupts.forEach((input) => {
+      formEditProfile.hideInputError(form, input)
+    });
   }
 });
 popupUserAvatar.setEventListeners();
@@ -123,7 +143,8 @@ const userInformation = new UserInfo({
     renderInfo(true, popupProfile);
     api.editUserInfo(item)
       .then((res) => {
-        userInformation.getUserInfo(res);
+        userInformation.setUserInfo(res);
+        popupUserInfo.close()
       })
       .catch((rej) => {
         console.log(`Ошибка ${rej.status}`);
@@ -135,7 +156,8 @@ const userInformation = new UserInfo({
     renderInfo(true, popupAvatar);
     api.editAvatar(item)
       .then((res) => {
-        userInformation.getUserAvatar(res);
+        userInformation.setUserAvatar(res);
+        popupUserAvatar.close();
       })
       .catch((rej) => {
         console.log(`Ошибка ${rej.status}`);
@@ -148,8 +170,8 @@ const userInformation = new UserInfo({
 
 Promise.all([api.getUserProfile(), api.getCards()])
   .then(([userInfo, cardsInfo]) => {
-    userInformation.getUserInfo(userInfo);
-    userInformation.getUserAvatar(userInfo);
+    userInformation.setUserInfo(userInfo);
+    userInformation.setUserAvatar(userInfo);
     getUserId(`${userInfo._id}`)
 
     /*Экзепляр карточек*/
@@ -175,11 +197,9 @@ Promise.all([api.getUserProfile(), api.getCards()])
               });
           },
           function deleteCard(id) {
-            debugger
             api.deleteCard(id)
               .then(res => {
                 if (res.ok) {
-                  debugger
                   card.removeCard();
                 }
               })
@@ -187,7 +207,7 @@ Promise.all([api.getUserProfile(), api.getCards()])
                 console.log(`Ошибка ${rej.status}`);
               });
           },
-          function openCard(name, link){
+          function openCard(name, link) {
             openCardPopup.open(name, link)
           });
         const cardElement = card.generate();

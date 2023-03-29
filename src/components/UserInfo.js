@@ -8,21 +8,21 @@ export default class UserInfo {
   }
 
   getUserInfo(item) {
-    this._userInfo = item;
-    this._name.textContent = this._userInfo.name;
-    this._about.textContent = this._userInfo.about;
+    this._userInfo = this._rendererUser(item);
+    return this.setUserInfo(this._userInfo);
   }
 
   setUserInfo(item) {
-    this._rendererUser(item);
+    this._name.textContent = item.name;
+    this._about.textContent = item.about;
   }
 
   getUserAvatar(item) {
-    this._userAvatar = item;
-    this._avatar.src = `${this._userAvatar.avatar}`;
+    this._userAvatar = this._rendererAvatar(item);
+    return this.setUserAvatar(this._userAvatar);
   }
 
   setUserAvatar(item) {
-    this._rendererAvatar(item);
+    this._avatar.src = `${item.avatar}`;
   }
 }
