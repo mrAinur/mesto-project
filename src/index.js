@@ -12,7 +12,7 @@ import {
 } from "./utils/Constants.js";
 import FormValidator from "./components/FormValidator.js";
 import Api from "./components/Api.js";
-import { getUserId, renderInfo } from "./utils/Utils.js";
+import { getUserId, renderInfo, userId } from "./utils/Utils.js";
 import PopupWithForm from "./components/PopupWithForm.js";
 import PopupWithImage from "./components/PopupWithImage.js";
 import UserInfo from "./components/UserInfo.js";
@@ -86,14 +86,16 @@ const popupNewPlace = new PopupWithForm({
               function deleteCard(id) {
                 api.deleteCard(id)
                   .then(res => {
-                    if (res.ok) {
-                      card.removeCard();
-                    }
+                    card.removeCard();
                   })
                   .catch((rej) => {
                     console.log(`Ошибка ${rej.status}`);
                   });
-              });
+              },
+              function openCard(name, link) {
+                openCardPopup.open(name, link)
+              },
+              userId);
             const cardElement = card.generate();
             cardsContainer.prepend(cardElement);
           }
@@ -172,7 +174,7 @@ Promise.all([api.getUserProfile(), api.getCards()])
   .then(([userInfo, cardsInfo]) => {
     userInformation.setUserInfo(userInfo);
     userInformation.setUserAvatar(userInfo);
-    getUserId(`${userInfo._id}`)
+    getUserId(`${userInfo._id}`);
 
     /*Экзепляр карточек*/
     const cardsList = new Section({
@@ -187,7 +189,7 @@ Promise.all([api.getUserProfile(), api.getCards()])
                 console.log(`Ошибка ${rej.status}`);
               });
           },
-          function deleteCard(id) {
+          function deleteLike(id) {
             api.deleteLike(id)
               .then((obj) => {
                 card.removeLike(obj);
@@ -199,9 +201,7 @@ Promise.all([api.getUserProfile(), api.getCards()])
           function deleteCard(id) {
             api.deleteCard(id)
               .then(res => {
-                if (res.ok) {
-                  card.removeCard();
-                }
+                card.removeCard();
               })
               .catch((rej) => {
                 console.log(`Ошибка ${rej.status}`);
@@ -209,10 +209,11 @@ Promise.all([api.getUserProfile(), api.getCards()])
           },
           function openCard(name, link) {
             openCardPopup.open(name, link)
-          });
+          },
+          userId);
         const cardElement = card.generate();
         cardsList.setItem(cardElement);
-      }
+      }, userId: userId
     }, cards);
     cardsList.rendererItems();
   })

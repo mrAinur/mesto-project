@@ -1,7 +1,5 @@
-import { userId } from "../utils/Utils";
-
 export default class Card {
-    constructor({ likes, link, name, _id, owner }, selector, addLike, deleteLike, deleteCard, openCard) {
+    constructor({ likes, link, name, _id, owner }, selector, addLike, deleteLike, deleteCard, openCard, userId) {
         this._likes = likes;
         this._link = link;
         this._name = name;
@@ -12,6 +10,7 @@ export default class Card {
         this._deleteLike = deleteLike;
         this._deleteCard = deleteCard;
         this._openCard = openCard;
+        this._myId = userId;
     }
 
     _getCard() {
@@ -30,7 +29,7 @@ export default class Card {
 
         /*Проверяем лайкал ли ранее пользователь данную карту*/
         this._likes.forEach((user) => {
-            if (user._id === userId) {
+            if (user._id === this._myId) {
                 this._heart.classList.add("element__heart_active");
             }
         })
@@ -68,7 +67,7 @@ export default class Card {
     _cardDelEventListener() {
         this._cardDel = this._card.querySelector(".element__delete");
 
-        if (this._ownerId === userId) {
+        if (this._ownerId === this._myId) {
             this._cardDel.addEventListener("click", (evt) => {
                 this._idCard = `${this._id}`;
                 this._deleteCard(this._idCard);

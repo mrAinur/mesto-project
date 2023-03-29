@@ -57,6 +57,9 @@ export default class Api {
             method: 'DELETE',
             headers: this._headers
         })
+        .then((res) => {
+            return this._checkResponse(res)
+        })
     }
 
     addLike(item) {
