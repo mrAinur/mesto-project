@@ -16,8 +16,6 @@ const profileFormElement = document.querySelector(".popup__form-profile");
 const nameValue = profileFormElement.querySelector(".popup__name-info");
 const jobValue = profileFormElement.querySelector(".popup__job-info");
 
-//Находим форму карточек и копируем в переменную
-const cards = ".elements";
 const cardsContainer = document.querySelector(".elements");
 
 const settings = {
@@ -40,7 +38,6 @@ export {
     profileFormElement,
     nameValue,
     jobValue,
-    cards,
     settings,
     cardsContainer,
 };
