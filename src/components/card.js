@@ -61,11 +61,12 @@ export default class Card {
     }
 
     removeCard(){
-        this._cardDel.parentElement.remove();
+        this._cardDelItem.remove();
     }
 
     _cardDelEventListener() {
         this._cardDel = this._card.querySelector(".element__delete");
+        this._cardDelItem = this._cardDel.closest(".element");
 
         if (this._ownerId === this._myId) {
             this._cardDel.addEventListener("click", (evt) => {
