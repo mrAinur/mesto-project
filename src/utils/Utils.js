@@ -2,16 +2,7 @@ let userId; //Получаем id пользователя для дальней
 const getUserId = function (id) {
     userId = id;
 }
-// const renderInfo = (isLoading, item) => {
-//     const loading = item.querySelector(".popup__paragraph");
-//     if (isLoading) {
-//         loading.textContent = "Сохранение...";
-//     } else {
-//         loading.textContent = "Сохранить";
-//     }
-// }
 
-export { 
-    //renderInfo, 
+export {
     userId, 
     getUserId};

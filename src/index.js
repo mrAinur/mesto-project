@@ -11,9 +11,10 @@ import {
 } from "./utils/Constants.js";
 import FormValidator from "./components/FormValidator.js";
 import Api from "./components/Api.js";
-import { getUserId,
-//  renderInfo,
-  userId } from "./utils/Utils.js";
+import { 
+  getUserId,
+  userId
+} from "./utils/Utils.js";
 import PopupWithForm from "./components/PopupWithForm.js";
 import PopupWithImage from "./components/PopupWithImage.js";
 import UserInfo from "./components/UserInfo.js";
@@ -103,7 +104,6 @@ popupUserInfo.setEventListeners();
 const popupNewPlace = new PopupWithForm({
   selector: ".popup__new-place", renderer: (item) => {
     popupNewPlace.renderLoading(true);
-    //renderInfo(true, popupNewCard);
     api.makeNewCard(item)
       .then((res) => {
         const arr = [res];
@@ -115,8 +115,6 @@ const popupNewPlace = new PopupWithForm({
       })
       .finally(() => {
         popupNewPlace.renderLoading(false);
-        //renderInfo(false, popupNewCard);
-
       });
   }, hideInputError: (item) => {
     const form = item.querySelector(".form");
@@ -150,7 +148,6 @@ openCardPopup.setEventListeners();
 /*Работа с изменениями данных пользователя*/
 const userInformation = new UserInfo({
   name: ".profile__user-name", about: ".profile__user-job", avatar: ".profile__avatar-img", rendererUser: (item) => {
-    //renderInfo(true, popupProfile);
     popupUserInfo.renderLoading(true);
     api.editUserInfo(item)
       .then((res) => {
@@ -162,11 +159,9 @@ const userInformation = new UserInfo({
       })
       .finally(() => {
         popupUserInfo.renderLoading(false);
-        //renderInfo(false, popupProfile);
       });
   }, rendererAvatar: (item) => {
     popupUserAvatar.renderLoading(true);
-    //renderInfo(true, popupAvatar);
     api.editAvatar(item)
       .then((res) => {
         userInformation.setUserAvatar(res);
@@ -177,7 +172,6 @@ const userInformation = new UserInfo({
       })
       .finally(() => {
         popupUserAvatar.renderLoading(false);
-        //renderInfo(false, popupAvatar);
       });
   }
 })
