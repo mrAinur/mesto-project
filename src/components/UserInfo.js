@@ -8,8 +8,7 @@ export default class UserInfo {
   }
 
   getUserInfo(item) {
-    this._userInfo = this._rendererUser(item);
-    return this.setUserInfo(this._userInfo);
+    return this._rendererUser(item);
   }
 
   setUserInfo(item) {
@@ -18,8 +17,7 @@ export default class UserInfo {
   }
 
   getUserAvatar(item) {
-    this._userAvatar = this._rendererAvatar(item);
-    return this.setUserAvatar(this._userAvatar);
+    return this._rendererAvatar(item);
   }
 
   setUserAvatar(item) {
