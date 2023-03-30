@@ -24,12 +24,12 @@ export default class Popup {
   };
 
   //метод для навешивания слушателей
-  setEventListeners(item) {
-    item.addEventListener("mousedown", (event) => {
-      if (event.target.classList.contains("popup_opened")) {
+  setEventListeners() {
+    document.addEventListener("mousedown", () => {
+      if (this._popup.classList.contains("popup_opened")) {
         this.close();
       }
-      if (event.target.classList.contains("popup__close")) {
+      if (this._popup.classList.contains("popup__close")) {
         this.close();
       }
     });
