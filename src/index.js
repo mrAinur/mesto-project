@@ -7,7 +7,9 @@ import {
   popupAvatar,
   settings,
   popupProfile,
-  cardsContainer
+  cardsContainer,
+  nameValue,
+  jobValue
 } from "./utils/Constants.js";
 import FormValidator from "./components/FormValidator.js";
 import Api from "./components/Api.js";
@@ -189,7 +191,11 @@ Promise.all([api.getUserProfile(), api.getCards()])
   });
 
 /*Добавляем работу кнопки для открытия попапа профиля*/
-popupProfileOpen.addEventListener("click", () => popupUserInfo.open(popupProfile));
+popupProfileOpen.addEventListener("click", () => {
+  const infoObject = userInformation.setPopupValue();
+  nameValue.value = infoObject.name;
+  jobValue.value = infoObject.info;
+  popupUserInfo.open(popupProfile)});
 
 /*Добавляем работу кнопки для открытия попапа новой карты места*/
 popupCardAddOpen.addEventListener("click", () => {

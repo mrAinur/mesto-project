@@ -16,6 +16,14 @@ export default class UserInfo {
     this._about.textContent = item.about;
   }
 
+  setPopupValue() {
+    this._userInfo = {
+      name: this._name.textContent,
+      info: this._about.textContent
+    }
+    return this._userInfo
+  }
+
   getUserAvatar(item) {
     return this._rendererAvatar(item);
   }
