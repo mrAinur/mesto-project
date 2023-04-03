@@ -1,89 +1,95 @@
-import { getResponseData } from "./utils";
+export default class Api {
+    constructor(options) {
+        this._baseUrl = options.baseUrl;
+        this._headers = options.headers;
+    }
 
-const cohortId = "plus-cohort-20";
-const token = "a6c9ce5b-7a95-47f3-900e-0e9cffd9e4f4";
-const url = "https://nomoreparties.co/v1/";
-
-const getUserProfile = () => {
-    return fetch(`${url}${cohortId}/users/me`, {
-        headers: {
-            authorization: `${token}`
+    _checkResponse(res) {
+        if (res.ok) {
+            return res = res.json();
+        } else {
+            return Promise.reject(`Ошибка ${res.status}`);
         }
-    })
-        .then((res) => {
-            return getResponseData(res)
+    }
+
+    getUserProfile() {
+        return fetch(`${this._baseUrl}/plus-cohort-20/users/me`, {
+            headers: this._headers
         })
-};
+            .then((res) => {
+                return this._checkResponse(res)
+            })
+    };
 
-const getCards = () => {
-    return fetch(`${url}${cohortId}/cards`, {
-        headers: {
-            authorization: `${token}`
-        }
-    })
-        .then((res) => {
-            return getResponseData(res)
+    getCards() {
+        return fetch(`${this._baseUrl}/plus-cohort-20/cards`, {
+            headers: this._headers
         })
-}
+            .then((res) => {
+                return this._checkResponse(res)
+            })
+    };
 
-const editUserInfo = (userInfo) => {
-    return fetch(`${url}${cohortId}/users/me`, {
-        method: 'PATCH',
-        headers: {
-            authorization: `${token}`,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(userInfo)
-    })
-}
+    editUserInfo(userInfo) {
+        return fetch(`${this._baseUrl}/plus-cohort-20/users/me`, {
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify(userInfo)
+        })
+            .then((res) => {
+                return this._checkResponse(res)
+            })
+    }
 
-const makeNewCard = (cardInfo) => {
-    return fetch(`${url}${cohortId}/cards`, {
-        method: 'POST',
-        headers: {
-            authorization: `${token}`,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(cardInfo)
-    })
-}
+    makeNewCard(cardInfo) {
+        return fetch(`${this._baseUrl}/plus-cohort-20/cards`, {
+            method: 'POST',
+            headers: this._headers,
+            body: JSON.stringify(cardInfo)
+        })
+            .then((res) => {
+                return this._checkResponse(res)
+            })
+    }
 
-const deleteCard = (item) => {
-    return fetch(`${url}${cohortId}/cards/${item}`, {
-        method: 'DELETE',
-        headers: {
-            authorization: `${token}`
-        }
-    })
-}
+    deleteCard(item) {
+        return fetch(`${this._baseUrl}/plus-cohort-20/cards/${item}`, {
+            method: 'DELETE',
+            headers: this._headers
+        })
+        .then((res) => {
+            return this._checkResponse(res)
+        })
+    }
 
-const addLike = (item) => {
-    return fetch(`${url}${cohortId}/cards/likes/${item}`, {
-        method: 'PUT',
-        headers: {
-            authorization: `${token}`
-        }
-    })
-}
+    addLike(item) {
+        return fetch(`${this._baseUrl}/plus-cohort-20/cards/likes/${item}`, {
+            method: 'PUT',
+            headers: this._headers
+        })
+            .then((res) => {
+                return this._checkResponse(res)
+            })
+    }
 
-const deleteLike = (item) => {
-    return fetch(`${url}${cohortId}/cards/likes/${item}`, {
-        method: 'DELETE',
-        headers: {
-            authorization: `${token}`
-        }
-    })
-}
+    deleteLike(item) {
+        return fetch(`${this._baseUrl}/plus-cohort-20/cards/likes/${item}`, {
+            method: 'DELETE',
+            headers: this._headers
+        })
+            .then((res) => {
+                return this._checkResponse(res)
+            })
+    }
 
-const editAvatar = (item) => {
-    return fetch(`${url}${cohortId}/users/me/avatar`, {
-        method: 'PATCH',
-        headers: {
-            authorization: `${token}`,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(item)
-    })
+    editAvatar(item) {
+        return fetch(`${this._baseUrl}/plus-cohort-20/users/me/avatar`, {
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify(item)
+        })
+            .then((res) => {
+                return this._checkResponse(res)
+            })
+    }
 }
-
-export { getUserProfile, editUserInfo, getCards, makeNewCard, deleteCard, addLike, deleteLike, editAvatar }

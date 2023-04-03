@@ -1,125 +1,97 @@
-import { openPopup, popupNewCard, closePopup } from "./modal.js";
-import { makeNewCard, deleteCard, addLike, deleteLike } from "./api.js";
-import { getResponseData } from "./utils";
-
-const placeCard = document.querySelector(".popup__card"); //Открытие фотокарточки
-const popupImg = placeCard.querySelector(".popup__image"); //находим в попапе нужный нам класс
-const popupName = placeCard.querySelector(".popup__place-name"); //находим в попапе элемент для записи названия
-
-//Находим форму карточек и копируем в переменную
-const cards = document.querySelector(".elements");
-const cardElement = document.querySelector("#element").content;
-
-/*Реализация добавления новых карточек*/
-const newCardForm = document.querySelector(".popup__form-place");
-const namePlaceInput = newCardForm.querySelector(".popup__place-info");
-const linkPlaceInput = newCardForm.querySelector(".popup__place-link");
-
-let userId; //Получаем id пользователя для дальнейшей реализации удаления своих карточек, а так же нахождения ранее лайкнутых фото или удаления лайков
-const getUserId = (id) => {
-    userId = id;
-}
-
-const createCard = (item) => {
-    const card = cardElement.querySelector(".element").cloneNode(true);
-    card.querySelector(".element__place-img").src = item.link;
-    card.querySelector(".element__place-img").alt = item.name;
-    card.querySelector(".element__place-name").textContent = item.name;
-    const numLikes = card.querySelector(".element__num-likes");
-    numLikes.textContent = item.likes.length;
-
-    /*Проверяем лайкал ли ранее пользователь данную карту*/
-    item.likes.forEach((user) => {
-        if (user._id === userId) {
-            const heart = card.querySelector(".element__heart");
-            heart.classList.add("element__heart_active");
-        }
-    })
-
-    /*Реализация кнопки лайка*/
-    card
-        .querySelector(".element__heart")
-        .addEventListener("click", function (evt) {
-            const idCard = `${item._id}`;
-            if (!(evt.target.classList.contains(`element__heart_active`))) {
-                addLike(idCard)
-                    .then((res) => {
-                        return getResponseData(res);
-                    })
-                    .then((obj) => {
-                        numLikes.textContent = obj.likes.length;
-                        evt.target.classList.add("element__heart_active");
-                    })
-                    .catch((rej) => {
-                        console.log(`Ошибка ${rej.status}`);
-                    });
-            } else {
-                deleteLike(idCard)
-                    .then((res) => {
-                        return getResponseData(res);
-                    })
-                    .then((obj) => {
-                        console.log(obj);
-                        evt.target.classList.remove("element__heart_active");
-                        numLikes.textContent = obj.likes.length;
-                    })
-                    .catch((rej) => {
-                        console.log(`Ошибка ${rej.status}`);
-                    });
-            }
-        });
-
-    /*Реализация удаления карты*/
-    const cardDel = card.querySelector(".element__delete");
-    if (item.owner._id === userId) {
-        cardDel.addEventListener("click", (evt) => {
-            const idCard = `${item._id}`;
-            deleteCard(idCard)
-                .then(res => {
-                    if (res.ok) {
-                        evt.target.parentElement.remove();
-                    }
-                })
-                .catch((rej) => {
-                    console.log(`Ошибка ${rej.status}`);
-                });
-        });
-    } else {
-        cardDel.remove();
+export default class Card {
+    constructor({ likes, link, name, _id, owner }, selector, addLike, deleteLike, deleteCard, openCard, userId) {
+        this._likes = likes;
+        this._link = link;
+        this._name = name;
+        this._id = _id;
+        this._ownerId = owner._id;
+        this._selector = selector;
+        this._addLike = addLike;
+        this._deleteLike = deleteLike;
+        this._deleteCard = deleteCard;
+        this._openCard = openCard;
+        this._myId = userId;
     }
 
-    /*Реализация открытия карточки*/
-    card
-        .querySelector(".element__place-img")
-        .addEventListener("click", function () {
-            popupImg.src = item.link;
-            popupImg.alt = item.name;
-            popupName.textContent = item.name;
-            openPopup(placeCard);
-        });
-    return card;
-}
+    _getCard() {
+        const cardElement = document.querySelector(this._selector).content.cloneNode(true);
+        return cardElement;
+    }
 
-/*Добавление карточек*/
-const makeCards = (obj) => {
-    obj.forEach(function (item) {
-        cards.append(createCard(item))
-    });
-}
+    _makeCard() {
+        this._card.querySelector(".element__place-img").src = this._link;
+        this._card.querySelector(".element__place-img").alt = this._name;
+        this._card.querySelector(".element__place-name").textContent = this._name;
+        this._numLikes = this._card.querySelector(".element__num-likes");
+        this._numLikes.textContent = this._likes.length;
+        this._heart = this._card.querySelector(".element__heart");
 
-/*Вставка новой карточки в Дом*/
-const renderCard = (item) => {
-    makeNewCard(item)
-        .then((res) => {
-            return getResponseData(res);
+
+        /*Проверяем лайкал ли ранее пользователь данную карту*/
+        this._likes.forEach((user) => {
+            if (user._id === this._myId) {
+                this._heart.classList.add("element__heart_active");
+            }
         })
-        .then((res) => {
-            cards.prepend(createCard(res));
-            return closePopup(popupNewCard);
-        })
-        .catch((rej) => {
-            console.log(`Ошибка ${rej.status}`);
-        });
-}
+        return this._card;
+    }
 
-export { userId, newCardForm, namePlaceInput, linkPlaceInput, makeCards, renderCard, createCard, getUserId };
+    _likesEventListeners() {
+        this._numLikes = this._card.querySelector(".element__num-likes");
+        this._card
+            .querySelector(".element__heart")
+            .addEventListener("click", (evt) => {
+                this._idCard = `${this._id}`;
+                if (!(evt.target.classList.contains(`element__heart_active`))) {
+                    this._addLike(this._idCard);
+                } else {
+                    this._deleteLike(this._idCard);
+                }
+            });
+    }
+
+    putLike(obj) {
+        this._numLikes.textContent = obj.likes.length;
+        this._heart.classList.add("element__heart_active");
+    }
+
+    removeLike(obj){
+        this._numLikes.textContent = obj.likes.length;
+        this._heart.classList.remove("element__heart_active");
+    }
+
+    removeCard(){
+        this._cardDelItem.remove();
+    }
+
+    _cardDelEventListener() {
+        this._cardDel = this._card.querySelector(".element__delete");
+        this._cardDelItem = this._cardDel.closest(".element");
+
+        if (this._ownerId === this._myId) {
+            this._cardDel.addEventListener("click", (evt) => {
+                this._idCard = `${this._id}`;
+                this._deleteCard(this._idCard);
+            });
+        } else {
+            this._cardDel.remove();
+        }
+    }
+
+    _cardOpenEventListener() {
+        this._card
+            .querySelector(".element__place-img")
+            .addEventListener("click", () => {
+                this._openCard(this._name, this._link)
+            });
+    }
+
+    generate() {
+        this._card = this._getCard();
+        this._makeCard();
+        this._likesEventListeners();
+        this._cardDelEventListener();
+        this._cardOpenEventListener();
+        return this._card;
+    }
+}
