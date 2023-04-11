@@ -1,7 +1,7 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
-  constructor({selector, renderer, hideInputError}) {
+  constructor({ selector, renderer, hideInputError }) {
     super(selector);
     this._renderer = renderer;
     this._hideInputError = hideInputError;
@@ -15,12 +15,12 @@ export default class PopupWithForm extends Popup {
   _getInputValues() {
     this._objInputs = {};
     this._inputs.forEach((inputElement) => {
-    this._objInputs[inputElement.name] = inputElement.value;
+      this._objInputs[inputElement.name] = inputElement.value;
     });
     return this._objInputs;
   }
 
-  setEventListeners(){
+  setEventListeners() {
     super.setEventListeners();
     this._popup.addEventListener("submit", (event) => {       //обработчик клика "сохранить" в форме
       event.preventDefault();
@@ -29,7 +29,7 @@ export default class PopupWithForm extends Popup {
     });
   }
 
-  close(){
+  close() {
     super.close();
     this._hideInputError(this._popup);
     this._form.reset();
