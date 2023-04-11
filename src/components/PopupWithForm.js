@@ -21,7 +21,7 @@ export default class PopupWithForm extends Popup {
   }
 
   setEventListeners(){
-    super.setEventListeners(this._popup);
+    super.setEventListeners();
     this._popup.addEventListener("submit", (event) => {       //обработчик клика "сохранить" в форме
       event.preventDefault();
       this._inputsValuse = this._getInputValues(); // исполняет функцию сохранения, взяв данные, которые ввели в инпуты формы
